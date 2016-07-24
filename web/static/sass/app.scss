@@ -1,0 +1,101 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+$primary-color: #00539f;
+$primary-color-light: desaturate(lighten($primary-color, 10%), 15%);
+
+$secondary-color: #64b5f6;
+
+$navbar-height: 48px;
+$navbar-height-mobile: 40px;
+$navbar-brand-font-size: 1.4rem;
+
+$sidenav-item-height: 42px;
+
+@import "materialize";
+
+@import "_sticky_footer";
+@import "_svg_icons";
+@import "_form";
+@import "_btn";
+@import "_nav";
+@import "_dropzone";
+
+html {
+  font-family: "Open Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  small {
+    @extend .grey-text;
+  }
+}
+
+#sidenav-overlay {
+  z-index: 998;
+}
+
+.card-title {
+  margin: 0;
+}
+
+.card-description {
+  margin-bottom: 0;
+}
+
+.side-nav li.sidebar-header {
+  padding-left: 20px;
+  padding-right: 20px;
+
+  color: #777;
+
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.pad-sides {
+  &.large {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+footer.page-footer {
+  padding-top: 0;
+}
+
+.small-card-image {
+  @extend .card-image;
+
+  img {
+    object-fit: cover;
+    max-height: 175px
+  }
+}
+
+.parallax-container {
+  &.small {
+    height: 200px;
+  }
+
+  h3 {
+    color: white;
+    padding-top: 50px;
+    text-shadow: 1px 1px 9px #000;
+  }
+
+  .parallax {
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+  }
+}
+
+.page-nav .brand-logo.left {
+  padding-left: 10px;
+}
+
+.dropzone {
+  border-style: dashed;
+}

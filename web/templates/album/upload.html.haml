@@ -1,0 +1,10 @@
+.pad-sides.large
+  %h4 Upload Photos
+
+  = form_for @changeset, photo_path(@conn, :create), [multipart: true, class: "dropzone"], fn f ->
+    %input{type: "hidden", name: "album_id", value: "#{@album.id}"}
+    .fallback
+      %input{type: "file", name: "file", multiple: ""}
+  - end
+
+  = link "Done", to: album_path(@conn, :show, @album), class: "btn grey waves-effect waves-light right", style: "margin-top: 20px"

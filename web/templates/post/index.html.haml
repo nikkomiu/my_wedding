@@ -1,0 +1,16 @@
+.row
+  = for post <- @posts do
+    .col.sm12.m4
+      .card
+        .small-card-image
+          %img{src: "http://materializecss.com/images/parallax1.jpg"}
+          %span.card-title= post.title
+
+        .card-action
+          = link "Read", to: post_path(@conn, :show, post), class: "blue-text"
+    - end
+
+.fixed-action-btn
+  = link to: post_path(@conn, :new), class: "btn-floating btn-large red" do
+    = svg_image @conn, "add"
+  - end

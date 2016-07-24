@@ -1,0 +1,20 @@
+.input-field
+  = mtl_label @f, :title
+  = text_input @f, :title
+  = error_tag @f, :title
+
+.input-field
+  = textarea @f, :body
+  = error_tag @f, :body
+
+.input-field
+  = mtl_label @f, :order
+  = number_input @f, :order
+  = error_tag @f, :order
+
+.switch
+  %label
+    Inactive
+    %input{type: "checkbox"}
+    %span.lever
+    Active

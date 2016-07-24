@@ -1,0 +1,16 @@
+.pad-sides.large
+  %h4 New Page
+
+  = form_for @changeset, post_path(@conn, :create), fn f ->
+
+    = render WeddingWebsite.SharedView, "_form_error.html", changeset: @changeset
+
+    = render "form.html", f: f
+
+    .form-group
+      = submit "Create Page", class: "btn right"
+      = link "Back", to: post_path(@conn, :index), class: "btn grey"
+
+  - end
+
+= render WeddingWebsite.SharedView, "_simplemde.html", element: "post_body"

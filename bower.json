@@ -1,0 +1,22 @@
+{
+  "name": "wedding_website",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Nikko Miu <nikko.miu@nikkomiu.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nikkomiu/wedding_website",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Materialize": "materialize#^0.97.6",
+    "jquery": "^2.2.4"
+  }
+}

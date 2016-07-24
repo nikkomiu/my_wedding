@@ -1,0 +1,15 @@
+.pad-sides.large
+  %h4 Edit Page
+
+  = form_for @changeset, post_path(@conn, :update, @post), fn f ->
+
+    = render WeddingWebsite.SharedView, "_form_error.html", changeset: @changeset
+
+    = render "form.html", f: f
+
+    .form-group
+      = submit "Update Page", class: "btn right"
+      = link "Back", to: post_path(@conn, :show, @post), class: "btn grey"
+  - end
+
+= render WeddingWebsite.SharedView, "_simplemde.html", element: "post_body"

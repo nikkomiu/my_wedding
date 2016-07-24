@@ -1,0 +1,16 @@
+# Ignore previously built components
+_build/
+
+# Ignore Git
+.git/
+.gitignore
+
+# Ignore previously compiled assets
+priv/static/
+
+# Ignore fetched NodeJS and Bower components
+bower_components/
+node_modules/
+
+deps/
+test/
