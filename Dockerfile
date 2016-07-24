@@ -29,6 +29,8 @@ RUN chmod +x bin/run.sh
 
 # Runtime ENV
 ENV MIX_ENV=prod
+ENV GOOGLE_CLIENT_ID=someclientid.apps.googleusercontent.com
+ENV GOOGLE_CLIENT_SECRET=somesecret
 ENV SECRET_KEY_BASE=xeqWUJ03Yx7JQ+if21rLBKIZ6cZKMyp3hcJYuC3U0NDQKe1APerQ3F5rD/E3s+e1
 ENV DB_HOST=192.168.99.100
 ENV DB_BASE=wedding_website_prod

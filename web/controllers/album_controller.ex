@@ -4,7 +4,10 @@ defmodule WeddingWebsite.AlbumController do
   alias WeddingWebsite.Album
 
   def index(conn, _params) do
-    albums = Repo.all(Album)
+    albums = Repo.all(
+      from a in Album,
+        preload: [:photos]
+    )
     render(conn, "index.html", albums: albums)
   end
 

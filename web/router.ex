@@ -14,20 +14,25 @@ defmodule WeddingWebsite.Router do
   end
 
   scope "/", WeddingWebsite do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
     get "/", PostController, :index
 
     resources "/pages", PostController
 
     resources "/albums", AlbumController
-
     get "/albums/:id/upload", AlbumController, :upload
 
     resources "/photos", PhotoController, only: [:show, :delete]
   end
 
-  # Other scopes may use custom stacks.
+  scope "/auth", WeddingWebsite do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+  end
+
   scope "/api", WeddingWebsite.Api do
     pipe_through :api
 

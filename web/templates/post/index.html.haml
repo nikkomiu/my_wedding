@@ -4,10 +4,7 @@
       .card
         .small-card-image
           %img{src: "http://materializecss.com/images/parallax1.jpg"}
-          %span.card-title= post.title
-
-        .card-action
-          = link "Read", to: post_path(@conn, :show, post), class: "blue-text"
+          = link post.title, to: post_path(@conn, :show, post), class: "card-title"
     - end
 
 .fixed-action-btn

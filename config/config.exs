@@ -9,7 +9,19 @@ config :wedding_website,
 config :phoenix, :template_engines,
   haml: PhoenixHaml.Engine
 
+# Set Material Icons as Inline SVG default collection
 config :phoenix_inline_svg, default_collection: "material"
+
+config :ueberauth, Ueberauth,
+  providers: [
+    google: {Ueberauth.Strategy.Google, []}
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  client_id: "63977908379-uh874dturf2bsmcbtcgjf5joc10m950b.apps.googleusercontent.com",
+  client_secret: "oAyukfYtNEERpMnJNHCIf9Dg"
+#  client_id: "${GOOGLE_CLIENT_ID}",
+#  client_secret: "${GOOGLE_CLIENT_SECRET}"
 
 # Configures the endpoint
 config :wedding_website, WeddingWebsite.Endpoint,
