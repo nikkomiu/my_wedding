@@ -1,20 +1,23 @@
-.input-field
-  = mtl_label @f, :title
-  = text_input @f, :title
-  = error_tag @f, :title
+.row
+  .col.s12.m10
+    .input-field
+      = mtl_label @f, :title
+      = text_input @f, :title
+      = error_tag @f, :title
+
+  .col.s12.m2
+    .input-field
+      = mtl_label @f, :order
+      = number_input @f, :order
+      = error_tag @f, :order
 
 .input-field
   = textarea @f, :body
   = error_tag @f, :body
 
-.input-field
-  = mtl_label @f, :order
-  = number_input @f, :order
-  = error_tag @f, :order
-
-.switch
+.switch{style: "margin-bottom: 30px"}
   %label
     Inactive
-    %input{type: "checkbox"}
+    = checkbox @f, :is_active
     %span.lever
     Active

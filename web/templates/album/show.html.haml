@@ -8,7 +8,8 @@
       .col.s12.m3
         .card
           .card-image
-            %img.materialboxed{src: "#{photo_path(@conn, :show, photo)}"}
+            %img.materialboxed{src: "#{static_path(@conn, upload_path(photo.path))}"}
+            //%img.materialboxed{src: "#{photo_path(@conn, :show, photo)}"}
           .card-action
             = link "Download", to: photo_path(@conn, :show, photo), class: "blue-text right waves-effect"
             = link "Delete", to: photo_path(@conn, :show, photo), method: :delete, data: [confirm: "Are you sure?"], class: "red-text waves-effect"

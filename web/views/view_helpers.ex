@@ -11,4 +11,8 @@ defmodule WeddingWebsite.ViewHelpers do
       "active"
     end
   end
+
+  def upload_path(filename) do
+    "/uploads/#{filename}"
+  end
 end

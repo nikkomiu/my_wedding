@@ -1,21 +1,28 @@
 .row
+  = if length(@albums) == 0 do
+    .pad-sides
+      .card-panel.light-blue.lighten-2.white-text
+        There aren't any photo albums yet.
+  - end
+
   = for album <- @albums do
     .col.s12.m4
       .card
         .small-card-image
-          %img{src: "http://materializecss.com/images/parallax1.jpg"}
-          %span.card-title= album.title
+          = if length(album.photos) > 0 do
+            %img{src: "#{static_path(@conn, upload_path(List.first(album.photos).path))}"}
+          - else
+            %img{src: "http://materializecss.com/images/parallax1.jpg"}
+
+          = link album.title, to: album_path(@conn, :show, album), class: "card-title"
 
         = if album.description != "" do
           .card-content
             = album.description
         - end
-
-        .card-action
-          = link "View", to: album_path(@conn, :show, album), class: "blue-text"
   - end
 
 .fixed-action-btn
-  = link to: album_path(@conn, :new), class: "btn-floating btn-large red" do
+  = link to: album_path(@conn, :new), class: "btn-floating waves-effect waves-light btn-large red" do
     = svg_image @conn, "add"
   - end

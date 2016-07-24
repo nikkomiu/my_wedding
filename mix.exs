@@ -16,7 +16,7 @@ defmodule WeddingWebsite.Mixfile do
   # Configuration for the OTP application.
   def application do
     [mod: {WeddingWebsite, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger,
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :ueberauth_google,
                     :gettext, :phoenix_ecto, :postgrex, :phoenix_haml, :phoenix_inline_svg]]
   end
 
@@ -37,6 +37,7 @@ defmodule WeddingWebsite.Mixfile do
      {:phoenix_haml, "~> 0.2.1"},
      {:exrm, "~> 1.0"},
      {:earmark, "~> 1.0"},
+     {:ueberauth_google, "~> 0.2"},
      {:phoenix_inline_svg, "~> 0.2"}]
   end
 

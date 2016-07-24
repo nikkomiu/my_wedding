@@ -1,0 +1,12 @@
+.pad-sides.large
+  %h4 Edit Album
+
+  = form_for @changeset, album_path(@conn, :update, @album), fn f ->
+    = render WeddingWebsite.SharedView, "_form_error.html", changeset: @changeset
+
+    = render "form.html", f: f
+
+    .input-field
+      = link "Back", to: album_path(@conn, :show, @album), class: "btn waves-effect waves-light grey"
+      = submit "Update Album", class: "btn right"
+  - end

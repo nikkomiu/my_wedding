@@ -1,7 +1,7 @@
 .pad-sides.large
   %h4 Upload Photos
 
-  = form_for @changeset, photo_path(@conn, :create), [multipart: true, class: "dropzone"], fn f ->
+  = form_for @changeset, photo_path(@conn, :create), [multipart: true, class: "dropzone"], fn(_f) ->
     %input{type: "hidden", name: "album_id", value: "#{@album.id}"}
     .fallback
       %input{type: "file", name: "file", multiple: ""}

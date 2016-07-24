@@ -8,11 +8,11 @@
       %li= link "Photos", to: album_path(@conn, :index)
 
 - if (get_flash(@conn, :info) != nil) do
-  .card-panel.blue.lighten-1.white-text
+  .alert.card-panel.blue.lighten-1.white-text
     %b Heads Up!
     = get_flash(@conn, :info)
 
 - if (get_flash(@conn, :error) != nil) do
-  .card-panel.red.lighten-1.white-text
+  .alert.card-panel.red.lighten-1.white-text
     %b Hey!
     = get_flash(@conn, :error)

@@ -11,12 +11,12 @@ defmodule WeddingWebsite.PostController do
         order_by: p.inserted_at
     )
 
-    render(conn, "index.html", posts: posts)
+    render(conn, :index, posts: posts)
   end
 
   def new(conn, _params) do
-    changeset = Post.changeset(%Post{})
-    render(conn, "new.html", changeset: changeset)
+    changeset = Post.changeset(%Post{order: 0, is_active: true})
+    render(conn, :new, changeset: changeset)
   end
 
   def create(conn, %{"post" => post_params}) do
@@ -28,19 +28,19 @@ defmodule WeddingWebsite.PostController do
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: post_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, :new, changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
     post = Repo.get!(Post, id)
-    render(conn, "show.html", post: post)
+    render(conn, :show, post: post)
   end
 
   def edit(conn, %{"id" => id}) do
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post)
-    render(conn, "edit.html", post: post, changeset: changeset)
+    render(conn, :edit, post: post, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
@@ -53,7 +53,7 @@ defmodule WeddingWebsite.PostController do
         |> put_flash(:info, "Post updated successfully.")
         |> redirect(to: post_path(conn, :show, post))
       {:error, changeset} ->
-        render(conn, "edit.html", post: post, changeset: changeset)
+        render(conn, :edit, post: post, changeset: changeset)
     end
   end
 

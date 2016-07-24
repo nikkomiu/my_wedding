@@ -71,7 +71,7 @@ footer.page-footer {
 
   img {
     object-fit: cover;
-    max-height: 175px
+    max-height: 225px;
   }
 }
 
@@ -98,4 +98,18 @@ footer.page-footer {
 
 .dropzone {
   border-style: dashed;
+}
+
+.card .card-image img.materialboxed {
+  object-fit: cover;
+  max-height: 200px;
+}
+
+.card .card-image img.materialboxed.active {
+  object-fit: fill;
+  max-height: none;
+}
+
+.alert {
+  margin: 0;
 }
