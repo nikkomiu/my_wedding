@@ -1,0 +1,28 @@
+i.material-svgs {
+  @extend .material-icons;
+}
+
+.btn-floating i.material-svgs svg {
+  height: 20px;
+  width: 20px;
+
+  margin: 8px;
+
+  fill: white;
+}
+
+.btn-large i.material-svgs svg {
+  height: 28px;
+  width: 28px;
+
+  margin: 14px;
+}
+
+.nav-wrapper {
+  .breadcrumb i.material-svgs svg {
+    margin-top: 12px;
+    margin-bottom: 12px;
+
+    fill: white;
+  }
+}

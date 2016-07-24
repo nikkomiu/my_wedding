@@ -1,0 +1,21 @@
+.row
+  = for album <- @albums do
+    .col.s12.m4
+      .card
+        .small-card-image
+          %img{src: "http://materializecss.com/images/parallax1.jpg"}
+          %span.card-title= album.title
+
+        = if album.description != "" do
+          .card-content
+            = album.description
+        - end
+
+        .card-action
+          = link "View", to: album_path(@conn, :show, album), class: "blue-text"
+  - end
+
+.fixed-action-btn
+  = link to: album_path(@conn, :new), class: "btn-floating btn-large red" do
+    = svg_image @conn, "add"
+  - end

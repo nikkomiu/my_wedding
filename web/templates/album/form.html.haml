@@ -1,0 +1,9 @@
+.input-field
+  = mtl_label @f, :title
+  = text_input @f, :title
+  = error_tag @f, :title
+
+.input-field
+  = mtl_label @f, :description
+  = textarea @f, :description, class: "materialize-textarea"
+  = error_tag @f, :description

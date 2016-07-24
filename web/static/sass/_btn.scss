@@ -1,0 +1,20 @@
+.btn-small {
+  @extend .btn;
+
+  height: 24px;
+  line-height: 24px;
+
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.nav-wrapper {
+  .btn-small {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .btn-floating {
+    margin-top: 4px;
+  }
+}
