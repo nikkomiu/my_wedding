@@ -1,8 +1,8 @@
 image: nikkoamiu/phoenix_framework:1.0
 
 variables:
-  POSTGRES_DB: chat_up_test
-  POSTGRES_USER: chat_up_svc
+  POSTGRES_DB: my_wedding_test
+  POSTGRES_USER: my_wedding_svc
   POSTGRES_PASSWORD: postgres
   MIX_ENV: test
 
@@ -22,6 +22,7 @@ compile:
   artifacts:
     untracked: true
 
+# Run Application Tests
 test:
   stage: test
   dependencies:
@@ -38,7 +39,7 @@ artifact_build:
   artifacts:
     name: $CI_PROJECT_NAME
     paths:
-      - rel/chat_up/
+      - rel/my_wedding/
 
 # Verify a release can be merged into master
 can_be_merged:
