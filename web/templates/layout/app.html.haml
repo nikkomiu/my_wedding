@@ -10,9 +10,9 @@
 
     %title My Wedding
 
-    %link{href: "#{static_path(@conn, "/css/app.css")}", rel: "stylesheet"}
+    %link{href: "#{static_path(@conn, "/assets/css/app.css")}", rel: "stylesheet"}
   %body
-    %script{src: "#{static_path(@conn, "/js/app.js")}", async: "", defer: ""}
+    %script{src: "#{static_path(@conn, "/assets/js/app.js")}", async: "", defer: ""}
 
     = render MyWedding.SharedView, "_header.html", conn: @conn
 
