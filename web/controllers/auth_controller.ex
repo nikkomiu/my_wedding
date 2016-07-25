@@ -25,4 +25,8 @@ defmodule MyWedding.AuthController do
         |> redirect(to: "/")
     end
   end
+
+  def sign_out(conn, _params) do
+    
+  end
 end
