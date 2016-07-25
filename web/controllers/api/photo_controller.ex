@@ -1,10 +1,6 @@
 defmodule MyWedding.Api.PhotoController do
   use MyWedding.Web, :controller
 
-  require Logger
-
-  alias MyWedding.Photo
-
   def create(conn, %{"file" => file_param, "album_id" => album_id}) do
     if Regex.match?(~r/image\/.*/, file_param.content_type) do
       # Get the filename to save to
