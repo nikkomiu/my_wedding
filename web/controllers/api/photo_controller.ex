@@ -1,9 +1,9 @@
-defmodule WeddingWebsite.Api.PhotoController do
-  use WeddingWebsite.Web, :controller
+defmodule MyWedding.Api.PhotoController do
+  use MyWedding.Web, :controller
 
   require Logger
 
-  alias WeddingWebsite.Photo
+  alias MyWedding.Photo
 
   def create(conn, %{"file" => file_param, "album_id" => album_id}) do
     if Regex.match?(~r/image\/.*/, file_param.content_type) do
@@ -14,7 +14,7 @@ defmodule WeddingWebsite.Api.PhotoController do
       get_full_path(conn, filename)
       |> copy_temp_file(file_param.path)
 
-      album = Repo.get!(WeddingWebsite.Album, album_id)
+      album = Repo.get!(MyWedding.Album, album_id)
       changeset = Ecto.build_assoc(album, :photos, path: filename)
 
       case Repo.insert(changeset) do
@@ -22,16 +22,16 @@ defmodule WeddingWebsite.Api.PhotoController do
           conn
           |> put_status(:created)
           |> put_resp_header("location", photo_path(conn, :show, photo))
-          |> render(WeddingWebsite.ChangesetView, "success.json")
+          |> render(MyWedding.ChangesetView, "success.json")
         {:error, changeset} ->
           conn
           |> put_status(:unprocessable_entity)
-          |> render(WeddingWebsite.ChangesetView, "error.json", changeset: changeset)
+          |> render(MyWedding.ChangesetView, "error.json", changeset: changeset)
       end
     else
       conn
       |> put_status(:unprocessable_entity)
-      |> render(WeddingWebsite.ErrorView, "422.json")
+      |> render(MyWedding.ErrorView, "422.json")
     end
   end
 

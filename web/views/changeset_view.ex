@@ -1,5 +1,5 @@
-defmodule WeddingWebsite.ChangesetView do
-  use WeddingWebsite.Web, :view
+defmodule MyWedding.ChangesetView do
+  use MyWedding.Web, :view
 
   @doc """
   Traverses and translates changeset errors.

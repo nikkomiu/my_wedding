@@ -1,4 +1,4 @@
-defmodule WeddingWebsite.ViewHelpers do
+defmodule MyWedding.ViewHelpers do
 
   require Logger
 

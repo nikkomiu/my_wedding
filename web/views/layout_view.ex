@@ -1,3 +1,3 @@
-defmodule WeddingWebsite.LayoutView do
-  use WeddingWebsite.Web, :view
+defmodule MyWedding.LayoutView do
+  use MyWedding.Web, :view
 end

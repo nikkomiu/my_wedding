@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.MessageTest do
-  use WeddingWebsite.ModelCase
+defmodule MyWedding.MessageTest do
+  use MyWedding.ModelCase
 
-  alias WeddingWebsite.Message
+  alias MyWedding.Message
 
   @valid_attrs %{body: "some content"}
   @invalid_attrs %{}

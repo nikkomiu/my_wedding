@@ -39,8 +39,8 @@ ENV MIX_ENV=prod
 # Build app release
 RUN make release
 
-WORKDIR /usr/app/rel/wedding_website
+WORKDIR /usr/app/rel/my_wedding
 
 EXPOSE $PORT
 
-CMD ["bin/wedding_website", "start"]
+CMD ["bin/my_wedding", "start"]

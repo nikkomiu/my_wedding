@@ -1,4 +1,4 @@
-defmodule WeddingWebsite.ModelCase do
+defmodule MyWedding.ModelCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -16,20 +16,20 @@ defmodule WeddingWebsite.ModelCase do
 
   using do
     quote do
-      alias WeddingWebsite.Repo
+      alias MyWedding.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import WeddingWebsite.ModelCase
+      import MyWedding.ModelCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(WeddingWebsite.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(MyWedding.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(WeddingWebsite.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(MyWedding.Repo, {:shared, self()})
     end
 
     :ok
@@ -59,7 +59,7 @@ defmodule WeddingWebsite.ModelCase do
   """
   def errors_on(struct, data) do
     struct.__struct__.changeset(struct, data)
-    |> Ecto.Changeset.traverse_errors(&WeddingWebsite.ErrorHelpers.translate_error/1)
+    |> Ecto.Changeset.traverse_errors(&MyWedding.ErrorHelpers.translate_error/1)
     |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
   end
 end

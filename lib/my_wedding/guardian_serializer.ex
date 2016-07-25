@@ -1,8 +1,8 @@
-defmodule WeddingWebsite.GuardianSerializer do
+defmodule MyWedding.GuardianSerializer do
   @behaviour Guardian.Serializer
 
-  alias WeddingWebsite.Repo
-  alias WeddingWebsite.User
+  alias MyWedding.Repo
+  alias MyWedding.User
 
   def for_token(user = %User{}), do: { :ok, "User:#{user.id}" }
   def for_token(_), do: { :error, "Unknown resource type" }

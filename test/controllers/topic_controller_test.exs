@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.TopicControllerTest do
-  use WeddingWebsite.ConnCase
+defmodule MyWedding.TopicControllerTest do
+  use MyWedding.ConnCase
 
-  alias WeddingWebsite.Topic
+  alias MyWedding.Topic
   @valid_attrs %{audience: 42, name: "some content"}
   @invalid_attrs %{}
 

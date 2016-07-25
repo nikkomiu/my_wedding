@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.UserTest do
-  use WeddingWebsite.ModelCase
+defmodule MyWedding.UserTest do
+  use MyWedding.ModelCase
 
-  alias WeddingWebsite.User
+  alias MyWedding.User
 
   @valid_attrs %{email: "some content", name: "some content"}
   @invalid_attrs %{}

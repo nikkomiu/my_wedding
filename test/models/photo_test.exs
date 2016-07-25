@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.PhotoTest do
-  use WeddingWebsite.ModelCase
+defmodule MyWedding.PhotoTest do
+  use MyWedding.ModelCase
 
-  alias WeddingWebsite.Photo
+  alias MyWedding.Photo
 
   @valid_attrs %{path: "some content"}
   @invalid_attrs %{}

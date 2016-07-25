@@ -1,8 +1,8 @@
-defmodule WeddingWebsite.Mixfile do
+defmodule MyWedding.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :wedding_website,
+    [app: :my_wedding,
      version: "0.0.1",
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -15,7 +15,7 @@ defmodule WeddingWebsite.Mixfile do
 
   # Configuration for the OTP application.
   def application do
-    [mod: {WeddingWebsite, []},
+    [mod: {MyWedding, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :ueberauth_google,
                     :gettext, :phoenix_ecto, :postgrex, :phoenix_haml, :phoenix_inline_svg]]
   end

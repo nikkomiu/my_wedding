@@ -1,5 +1,5 @@
-defmodule WeddingWebsite.User do
-  use WeddingWebsite.Web, :model
+defmodule MyWedding.User do
+  use MyWedding.Web, :model
 
   alias Ueberauth.Auth
 
@@ -15,8 +15,8 @@ defmodule WeddingWebsite.User do
 
   def find_or_create(%Auth{provider: :google} = auth) do
     user =
-      WeddingWebsite.Repo.one(
-        from u in WeddingWebsite.User,
+      MyWedding.Repo.one(
+        from u in MyWedding.User,
           where: u.google_uid == ^auth.uid
       )
 
@@ -24,10 +24,10 @@ defmodule WeddingWebsite.User do
       {:ok, user}
     else
       new_user =
-        %WeddingWebsite.User{}
+        %MyWedding.User{}
         |> changeset(user_info(auth))
 
-      WeddingWebsite.Repo.insert(new_user)
+      MyWedding.Repo.insert(new_user)
     end
   end
 

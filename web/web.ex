@@ -1,12 +1,12 @@
-defmodule WeddingWebsite.Web do
+defmodule MyWedding.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use WeddingWebsite.Web, :controller
-      use WeddingWebsite.Web, :view
+      use MyWedding.Web, :controller
+      use MyWedding.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -30,12 +30,12 @@ defmodule WeddingWebsite.Web do
     quote do
       use Phoenix.Controller
 
-      alias WeddingWebsite.Repo
+      alias MyWedding.Repo
       import Ecto
       import Ecto.Query
 
-      import WeddingWebsite.Router.Helpers
-      import WeddingWebsite.Gettext
+      import MyWedding.Router.Helpers
+      import MyWedding.Gettext
     end
   end
 
@@ -49,13 +49,13 @@ defmodule WeddingWebsite.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import WeddingWebsite.Router.Helpers
-      import WeddingWebsite.ErrorHelpers
-      import WeddingWebsite.Gettext
+      import MyWedding.Router.Helpers
+      import MyWedding.ErrorHelpers
+      import MyWedding.Gettext
 
       import PhoenixInlineSvg.Helpers
 
-      import WeddingWebsite.ViewHelpers
+      import MyWedding.ViewHelpers
     end
   end
 
@@ -69,10 +69,10 @@ defmodule WeddingWebsite.Web do
     quote do
       use Phoenix.Channel
 
-      alias WeddingWebsite.Repo
+      alias MyWedding.Repo
       import Ecto
       import Ecto.Query
-      import WeddingWebsite.Gettext
+      import MyWedding.Gettext
     end
   end
 

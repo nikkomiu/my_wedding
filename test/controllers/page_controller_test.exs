@@ -1,5 +1,5 @@
-defmodule WeddingWebsite.PageControllerTest do
-  use WeddingWebsite.ConnCase
+defmodule MyWedding.PageControllerTest do
+  use MyWedding.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

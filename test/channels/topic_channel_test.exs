@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.TopicChannelTest do
-  use WeddingWebsite.ChannelCase
+defmodule MyWedding.TopicChannelTest do
+  use MyWedding.ChannelCase
 
-  alias WeddingWebsite.TopicChannel
+  alias MyWedding.TopicChannel
 
   setup do
     {:ok, _, socket} =

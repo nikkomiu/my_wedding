@@ -1,9 +1,9 @@
-defmodule WeddingWebsite.Photo do
-  use WeddingWebsite.Web, :model
+defmodule MyWedding.Photo do
+  use MyWedding.Web, :model
 
   schema "photos" do
     field :path, :string
-    belongs_to :album, WeddingWebsite.Album
+    belongs_to :album, MyWedding.Album
 
     timestamps()
   end

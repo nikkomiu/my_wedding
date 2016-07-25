@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.PhotoController do
-  use WeddingWebsite.Web, :controller
+defmodule MyWedding.PhotoController do
+  use MyWedding.Web, :controller
 
-  alias WeddingWebsite.Photo
+  alias MyWedding.Photo
 
   def delete(conn, %{"id" => id}) do
     photo = Repo.get!(Photo, id)

@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :wedding_website, WeddingWebsite.Endpoint,
+config :my_wedding, MyWedding.Endpoint,
   http: [port: 4001],
   server: false
 
@@ -10,10 +10,10 @@ config :wedding_website, WeddingWebsite.Endpoint,
 config :logger, level: :warn
 
 # Configure your database
-config :wedding_website, WeddingWebsite.Repo,
+config :my_wedding, MyWedding.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "wedding_website_test",
+  database: "my_wedding_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

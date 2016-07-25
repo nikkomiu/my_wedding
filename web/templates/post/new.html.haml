@@ -3,7 +3,7 @@
 
   = form_for @changeset, post_path(@conn, :create), fn f ->
 
-    = render WeddingWebsite.SharedView, "_form_error.html", changeset: @changeset
+    = render MyWedding.SharedView, "_form_error.html", changeset: @changeset
 
     = render "form.html", f: f
 
@@ -13,4 +13,4 @@
 
   - end
 
-= render WeddingWebsite.SharedView, "_simplemde.html", element: "post_body"
+= render MyWedding.SharedView, "_simplemde.html", element: "post_body"

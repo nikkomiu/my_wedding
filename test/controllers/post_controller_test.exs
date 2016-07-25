@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.PostControllerTest do
-  use WeddingWebsite.ConnCase
+defmodule MyWedding.PostControllerTest do
+  use MyWedding.ConnCase
 
-  alias WeddingWebsite.Post
+  alias MyWedding.Post
   @valid_attrs %{body: "some content", is_active: true, order: 42, title: "some content"}
   @invalid_attrs %{}
 

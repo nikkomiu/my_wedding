@@ -3,8 +3,8 @@
 use Mix.Config
 
 # General application configuration
-config :wedding_website,
-  ecto_repos: [WeddingWebsite.Repo]
+config :my_wedding,
+  ecto_repos: [MyWedding.Repo]
 
 config :phoenix, :template_engines,
   haml: PhoenixHaml.Engine
@@ -29,18 +29,18 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
 config :guardian, Guardian,
   allowed_algos: ["HS512"], # optional
   verify_module: Guardian.JWT,  # optional
-  issuer: "WeddingWebsite",
+  issuer: "MyWedding",
   ttl: { 30, :days },
   verify_issuer: true, # optional
   secret_key: "cQaNG1xMqLKv6RcXTRFQjutCb1dHoozgHeW1sDkE1lFJqWHNgad1CKpZNP5Xq5dn",
-  serializer: WeddingWebsite.GuardianSerializer
+  serializer: MyWedding.GuardianSerializer
 
 # Configures the endpoint
-config :wedding_website, WeddingWebsite.Endpoint,
+config :my_wedding, MyWedding.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "cQaNG1xMqLKv6RcXTRFQjutCb1dHoozgHeW1sDkE1lFJqWHNgad1CKpZNP5Xq5dn",
-  render_errors: [view: WeddingWebsite.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: WeddingWebsite.PubSub,
+  render_errors: [view: MyWedding.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: MyWedding.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

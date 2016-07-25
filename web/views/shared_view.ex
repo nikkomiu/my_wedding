@@ -1,3 +1,3 @@
-defmodule WeddingWebsite.SharedView do
-  use WeddingWebsite.Web, :view
+defmodule MyWedding.SharedView do
+  use MyWedding.Web, :view
 end
