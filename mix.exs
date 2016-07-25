@@ -16,8 +16,9 @@ defmodule MyWedding.Mixfile do
   # Configuration for the OTP application.
   def application do
     [mod: {MyWedding, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :ueberauth_google,
-                    :gettext, :phoenix_ecto, :postgrex, :phoenix_haml, :phoenix_inline_svg]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger,
+                    :ueberauth_google, :guardian, :phoenix_inline_svg, :earmark
+                    :gettext, :phoenix_ecto, :postgrex, :phoenix_haml]]
   end
 
   # Specifies which paths to compile per environment.
