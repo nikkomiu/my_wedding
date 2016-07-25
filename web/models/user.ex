@@ -27,7 +27,7 @@ defmodule WeddingWebsite.User do
         %WeddingWebsite.User{}
         |> changeset(user_info(auth))
 
-      {:ok, WeddingWebsite.Repo.insert!(new_user)}
+      WeddingWebsite.Repo.insert(new_user)
     end
   end
 

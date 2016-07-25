@@ -37,6 +37,7 @@ defmodule WeddingWebsite.Mixfile do
      {:phoenix_haml, "~> 0.2.1"},
      {:exrm, "~> 1.0"},
      {:earmark, "~> 1.0"},
+     {:guardian, "~> 0.12"},
      {:ueberauth_google, "~> 0.2"},
      {:phoenix_inline_svg, "~> 0.2"}]
   end
