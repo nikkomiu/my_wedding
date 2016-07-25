@@ -1,0 +1,82 @@
+image: nikkoamiu/phoenix_framework:1.0
+
+variables:
+  POSTGRES_DB: chat_up_test
+  POSTGRES_USER: chat_up_svc
+  POSTGRES_PASSWORD: postgres
+  MIX_ENV: test
+
+stages:
+  - build
+  - test
+  - release
+  - verify
+  - push image
+  - deploy
+
+compile:
+  stage: build
+  script:
+    - make build
+    - make assets
+  artifacts:
+    untracked: true
+
+test:
+  stage: test
+  dependencies:
+    - compile
+  services:
+    - postgres:latest
+  script:
+    - mix test
+
+# Create the Release Artifacts
+artifact_build:
+  stage: release
+  script: MIX_ENV=prod make release
+  artifacts:
+    name: $CI_PROJECT_NAME
+    paths:
+      - rel/chat_up/
+
+# Verify a release can be merged into master
+can_be_merged:
+  stage: verify
+  script:
+    - git checkout master
+    - git merge $CI_BUILD_REF
+  only:
+    - tags
+    - develop
+
+# Build and Deploy Docker Image
+docker_build:
+  stage: push image
+  image: docker:latest
+  dependencies:
+    - artifact_build
+  services:
+    - docker:dind
+  before_script:
+    - docker info
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker build -t registry.gitlab.com/nikko.miu/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME .
+    - docker push registry.gitlab.com/nikko.miu/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME
+  tags:
+    - shared
+
+deploy:
+  stage: deploy
+  script: deploy/deploy.sh
+  environment: production
+  only:
+    - tags
+
+deploy:
+  stage: deploy
+  script: deploy/deploy.sh
+  environment: staging
+  only:
+    - master
