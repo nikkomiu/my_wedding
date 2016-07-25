@@ -17,7 +17,7 @@ defmodule MyWedding.Mixfile do
   def application do
     [mod: {MyWedding, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger,
-                    :ueberauth_google, :guardian, :phoenix_inline_svg, :earmark
+                    :ueberauth_google, :guardian, :phoenix_inline_svg, :earmark,
                     :gettext, :phoenix_ecto, :postgrex, :phoenix_haml]]
   end
 
