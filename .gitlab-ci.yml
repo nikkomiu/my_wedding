@@ -59,8 +59,6 @@ docker_build:
     - artifact_build
   services:
     - docker:dind
-  before_script:
-    - docker info
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
     - docker build -t registry.gitlab.com/nikko.miu/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME .
