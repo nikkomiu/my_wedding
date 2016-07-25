@@ -11,7 +11,7 @@ defmodule WeddingWebsite.AuthController do
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
     conn
-    |> put_flash(:error, "Failed to authenticate.")
+    |> put_flash(:error, "Failed to log in.")
     |> redirect(to: "/")
   end
 
@@ -19,7 +19,8 @@ defmodule WeddingWebsite.AuthController do
     case User.find_or_create(auth) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, "Successfully authenticated.")
+        |> Guardian.Plug.sign_in(user)
+        |> put_flash(:info, "Successfully logged in.")
         |> put_session(:current_user, user)
         |> redirect(to: "/")
       {:error, reason} ->

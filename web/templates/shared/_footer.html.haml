@@ -4,7 +4,10 @@
       © 2016 Copyright Nikko Miu
 
     .right
-      = link to: auth_path(@conn, :request, :google), class: "btn white grey-text google-sign-in waves-effect" do
-        = svg_image @conn, "google"
-        Sign in
-      - end
+      - if current_user(@conn) do
+        %a{href: ""} Sign Out
+      - else
+        = link to: auth_path(@conn, :request, :google), class: "btn white grey-text google-sign-in waves-effect" do
+          = svg_image @conn, "google"
+          Sign in
+        - end

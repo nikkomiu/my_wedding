@@ -15,4 +15,8 @@ defmodule WeddingWebsite.ViewHelpers do
   def upload_path(filename) do
     "/uploads/#{filename}"
   end
+
+  def current_user(conn) do
+    Guardian.Plug.current_resource(conn)
+  end
 end
