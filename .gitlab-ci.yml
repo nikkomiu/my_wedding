@@ -32,6 +32,16 @@ test:
   script:
     - mix test
 
+# Verify a release can be merged into master
+can_be_merged:
+  stage: test
+  script:
+    - git checkout master
+    - git merge $CI_BUILD_REF
+  only:
+    - tags
+    - develop
+
 # Create the Release Artifacts
 artifact_build:
   stage: release
@@ -40,16 +50,6 @@ artifact_build:
     name: $CI_PROJECT_NAME
     paths:
       - rel/my_wedding/
-
-# Verify a release can be merged into master
-can_be_merged:
-  stage: verify
-  script:
-    - git checkout master
-    - git merge $CI_BUILD_REF
-  only:
-    - tags
-    - develop
 
 # Build and Deploy Docker Image
 docker_build:
