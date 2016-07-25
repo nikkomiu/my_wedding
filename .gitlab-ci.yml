@@ -70,6 +70,7 @@ deploy:
   stage: deploy
   script: deploy/deploy.sh
   environment: production
+  when: manual
   only:
     - tags
 
@@ -77,5 +78,6 @@ deploy:
   stage: deploy
   script: deploy/deploy.sh
   environment: staging
+  when: manual
   only:
     - master
