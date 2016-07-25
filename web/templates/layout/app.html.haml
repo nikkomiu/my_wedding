@@ -20,4 +20,4 @@
       = render @view_module, @view_template, assigns
 
     %footer.page-footer
-      = render WeddingWebsite.SharedView, "_footer.html"
+      = render WeddingWebsite.SharedView, "_footer.html", conn: @conn

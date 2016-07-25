@@ -113,3 +113,16 @@ footer.page-footer {
 .alert {
   margin: 0;
 }
+
+.google-sign-in {
+  margin-top: 7px;
+  text-transform: none;
+
+  line-height: 34px;
+
+  svg {
+    position: relative;
+    top: 3px;
+    right: 10px;
+  }
+}
