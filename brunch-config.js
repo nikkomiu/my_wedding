@@ -2,7 +2,7 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js"
+      joinTo: "assets/js/app.js"
 
       // joinTo: {
       //   "js/app.js": /^(web\/static\/js|node_modules\/phoenix.*)/,
@@ -18,13 +18,13 @@ exports.config = {
       //}
     },
     stylesheets: {
-      joinTo: "css/app.css",
+      joinTo: "assets/css/app.css",
       order: {
         after: ["web/static/sass/app.scss"] // concat app.css last
       }
     },
     templates: {
-      joinTo: "js/app.js"
+      joinTo: "assets/js/app.js"
     }
   },
 
