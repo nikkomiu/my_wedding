@@ -1,29 +1,25 @@
-export MIX_ENV=prod
-
-release: app assets
+# Compile app and build release
+release: build assets
 	mix release
 
+# Install Packages
 install:
 	mix local.hex --force
 	mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez --force
-	npm install -g brunch
-	npm install -g bower
+	npm install -g brunch bower
 
-assets:
+# Compile app
+build: deps
+	mix compile
+
+# Get and build assets
+assets: fetch-assets
 	brunch b
 	mix phoenix.digest
 
-app: app-build
-
-app-build:
-	mix compile
-
-deps: deps-get deps-compile
-
-deps-get:
+deps:
 	mix deps.get
+
+fetch-assets:
 	npm install
 	bower install --allow-root
-
-deps-compile:
-	mix deps.compile
