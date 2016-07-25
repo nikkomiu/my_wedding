@@ -1,3 +1,3 @@
-defmodule WeddingWebsite.PostView do
-  use WeddingWebsite.Web, :view
+defmodule MyWedding.PostView do
+  use MyWedding.Web, :view
 end

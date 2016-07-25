@@ -1,12 +1,12 @@
-defmodule WeddingWebsite.Album do
-  use WeddingWebsite.Web, :model
+defmodule MyWedding.Album do
+  use MyWedding.Web, :model
 
   schema "albums" do
     field :title, :string
     field :description, :string
     field :is_public, :boolean
 
-    has_many :photos, WeddingWebsite.Photo
+    has_many :photos, MyWedding.Photo
 
     timestamps()
   end

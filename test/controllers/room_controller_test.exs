@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.RoomControllerTest do
-  use WeddingWebsite.ConnCase
+defmodule MyWedding.RoomControllerTest do
+  use MyWedding.ConnCase
 
-  alias WeddingWebsite.Room
+  alias MyWedding.Room
   @valid_attrs %{description: "some content", name: "some content"}
   @invalid_attrs %{}
 

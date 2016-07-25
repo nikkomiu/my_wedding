@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.AlbumController do
-  use WeddingWebsite.Web, :controller
+defmodule MyWedding.AlbumController do
+  use MyWedding.Web, :controller
 
-  alias WeddingWebsite.Album
+  alias MyWedding.Album
 
   def index(conn, _params) do
     albums = Repo.all(
@@ -19,7 +19,7 @@ defmodule WeddingWebsite.AlbumController do
   def upload(conn, %{"id" => id}) do
     album = Repo.get!(Album, id)
 
-    changeset = WeddingWebsite.Photo.changeset(%WeddingWebsite.Photo{})
+    changeset = MyWedding.Photo.changeset(%MyWedding.Photo{})
 
     render(conn, :upload, album: album, changeset: changeset)
   end

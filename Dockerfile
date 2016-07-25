@@ -16,15 +16,15 @@ COPY deploy/nginx.conf /etc/nginx/nginx.conf
 ENV APP_VER=0.0.1
 
 # Copy release
-COPY rel/wedding_website/releases/$APP_VER/wedding_website.tar.gz /usr/wedding_website/app.tar.gz
-WORKDIR /usr/wedding_website
+COPY rel/my_wedding/releases/$APP_VER/my_wedding.tar.gz /usr/my_wedding/app.tar.gz
+WORKDIR /usr/my_wedding
 
 # Extract release
 RUN tar -xvf app.tar.gz
-RUN chmod +x bin/wedding_website
+RUN chmod +x bin/my_wedding
 
 # Copy start script
-COPY deploy/run.sh /usr/wedding_website/bin
+COPY deploy/run.sh /usr/my_wedding/bin
 RUN chmod +x bin/run.sh
 
 # Runtime ENV
@@ -33,9 +33,9 @@ ENV GOOGLE_CLIENT_ID=someclientid.apps.googleusercontent.com
 ENV GOOGLE_CLIENT_SECRET=somesecret
 ENV SECRET_KEY_BASE=xeqWUJ03Yx7JQ+if21rLBKIZ6cZKMyp3hcJYuC3U0NDQKe1APerQ3F5rD/E3s+e1
 ENV DB_HOST=192.168.99.100
-ENV DB_BASE=wedding_website_prod
-ENV DB_USER=wedding_website_svc
-ENV DB_PASS=WeddingWebsitepassword
+ENV DB_BASE=my_wedding_prod
+ENV DB_USER=my_wedding_svc
+ENV DB_PASS=MyWeddingpassword
 
 # Expose NGINX port
 EXPOSE 80

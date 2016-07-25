@@ -1,5 +1,5 @@
-defmodule WeddingWebsite.Router do
-  use WeddingWebsite.Web, :router
+defmodule MyWedding.Router do
+  use MyWedding.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -16,7 +16,7 @@ defmodule WeddingWebsite.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", WeddingWebsite do
+  scope "/", MyWedding do
     pipe_through :browser
 
     get "/", PostController, :index
@@ -29,14 +29,14 @@ defmodule WeddingWebsite.Router do
     resources "/photos", PhotoController, only: [:show, :delete]
   end
 
-  scope "/auth", WeddingWebsite do
+  scope "/auth", MyWedding do
     pipe_through :browser
 
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
   end
 
-  scope "/api", WeddingWebsite.Api do
+  scope "/api", MyWedding.Api do
     pipe_through :api
 
     resources "/photos", PhotoController, only: [:create]

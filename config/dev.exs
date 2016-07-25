@@ -5,7 +5,7 @@ use Mix.Config
 #
 # The watchers configuration can be used to run external
 # watchers to your application.
-config :wedding_website, WeddingWebsite.Endpoint,
+config :my_wedding, MyWedding.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -14,7 +14,7 @@ config :wedding_website, WeddingWebsite.Endpoint,
                     cd: Path.expand("../", __DIR__)]]
 
 # Watch static and templates for browser reloading.
-config :wedding_website, WeddingWebsite.Endpoint,
+config :my_wedding, MyWedding.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|scss|sass|css|png|jpeg|jpg|gif|svg)$},
@@ -31,10 +31,10 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
-config :wedding_website, WeddingWebsite.Repo,
+config :my_wedding, MyWedding.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "wedding_website_svc",
+  username: "my_wedding_svc",
   password: "weddingpassword",
-  database: "wedding_website_dev",
+  database: "my_wedding_dev",
   hostname: "192.168.99.100",
   pool_size: 10

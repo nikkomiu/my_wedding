@@ -1,4 +1,4 @@
-defmodule WeddingWebsite.Repo.Migrations.CreatePost do
+defmodule MyWedding.Repo.Migrations.CreatePost do
   use Ecto.Migration
 
   def change do

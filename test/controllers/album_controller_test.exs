@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.AlbumControllerTest do
-  use WeddingWebsite.ConnCase
+defmodule MyWedding.AlbumControllerTest do
+  use MyWedding.ConnCase
 
-  alias WeddingWebsite.Album
+  alias MyWedding.Album
   @valid_attrs %{description: "some content", title: "some content"}
   @invalid_attrs %{}
 

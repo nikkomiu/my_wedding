@@ -1,5 +1,5 @@
-defmodule WeddingWebsite.Post do
-  use WeddingWebsite.Web, :model
+defmodule MyWedding.Post do
+  use MyWedding.Web, :model
 
   schema "posts" do
     field :title, :string

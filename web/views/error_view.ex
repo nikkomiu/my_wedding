@@ -1,5 +1,5 @@
-defmodule WeddingWebsite.ErrorView do
-  use WeddingWebsite.Web, :view
+defmodule MyWedding.ErrorView do
+  use MyWedding.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

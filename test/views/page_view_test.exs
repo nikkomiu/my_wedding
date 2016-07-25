@@ -1,3 +1,3 @@
-defmodule WeddingWebsite.PageViewTest do
-  use WeddingWebsite.ConnCase, async: true
+defmodule MyWedding.PageViewTest do
+  use MyWedding.ConnCase, async: true
 end

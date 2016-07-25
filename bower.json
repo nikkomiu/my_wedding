@@ -1,12 +1,12 @@
 {
-  "name": "wedding_website",
+  "name": "my_wedding",
   "description": "",
   "main": "",
   "authors": [
     "Nikko Miu <nikko.miu@nikkomiu.com>"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/nikkomiu/wedding_website",
+  "homepage": "https://github.com/nikkomiu/my_wedding",
   "private": true,
   "ignore": [
     "**/.*",

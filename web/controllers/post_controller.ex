@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.PostController do
-  use WeddingWebsite.Web, :controller
+defmodule MyWedding.PostController do
+  use MyWedding.Web, :controller
 
-  alias WeddingWebsite.Post
+  alias MyWedding.Post
 
   def index(conn, _params) do
     posts = Repo.all(

@@ -1,14 +1,14 @@
-defmodule WeddingWebsite.Endpoint do
-  use Phoenix.Endpoint, otp_app: :wedding_website
+defmodule MyWedding.Endpoint do
+  use Phoenix.Endpoint, otp_app: :my_wedding
 
-  socket "/socket", WeddingWebsite.UserSocket
+  socket "/socket", MyWedding.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :wedding_website, gzip: true,
+    at: "/", from: :my_wedding, gzip: true,
     only: ~w(css fonts images js uploads favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -36,8 +36,8 @@ defmodule WeddingWebsite.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_wedding_website_key",
+    key: "_my_wedding_key",
     signing_salt: "Bje9rdxL"
 
-  plug WeddingWebsite.Router
+  plug MyWedding.Router
 end

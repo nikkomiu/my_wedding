@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.RoomTest do
-  use WeddingWebsite.ModelCase
+defmodule MyWedding.RoomTest do
+  use MyWedding.ModelCase
 
-  alias WeddingWebsite.Room
+  alias MyWedding.Room
 
   @valid_attrs %{description: "some content", name: "some content"}
   @invalid_attrs %{}

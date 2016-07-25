@@ -1,7 +1,7 @@
-defmodule WeddingWebsite.AuthController do
-  use WeddingWebsite.Web, :controller
+defmodule MyWedding.AuthController do
+  use MyWedding.Web, :controller
 
-  alias WeddingWebsite.User
+  alias MyWedding.User
 
   plug Ueberauth
 
