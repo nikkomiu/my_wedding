@@ -1,9 +1,6 @@
 .footer-copyright
   .container
     .left
-      © 2016 Copyright Nikko Miu
-
-    .right
       - if current_user(@conn) do
         %a{href: ""} Sign Out
       - else
@@ -11,3 +8,6 @@
           = svg_image @conn, "google"
           Sign in
         - end
+
+    .right.pad-sides.large
+      © 2016 Copyright Nikko Miu
