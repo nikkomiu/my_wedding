@@ -5,10 +5,6 @@ defmodule MyWedding.AuthController do
 
   plug Ueberauth
 
-  def request(conn, _params) do
-    render(conn, "request.html", callback_url: Helpers.callback_url(conn))
-  end
-
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
     conn
     |> put_flash(:error, "Failed to log in.")
