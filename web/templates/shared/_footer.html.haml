@@ -1,3 +1,10 @@
 .footer-copyright
   .container
-    © 2016 Copyright Nikko Miu
+    .left
+      © 2016 Copyright Nikko Miu
+
+    .right
+      = link to: auth_path(@conn, :request, :google), class: "btn white grey-text google-sign-in waves-effect" do
+        = svg_image @conn, "google"
+        Sign in
+      - end
