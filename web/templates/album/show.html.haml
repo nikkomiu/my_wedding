@@ -5,23 +5,18 @@
 
   .row
     = for photo <- @album.photos do
-      .col.s12.m3
+      .col.s12.m4.l3
         .card
           .card-image
             %img.materialboxed{src: "#{static_path(@conn, upload_path(photo.path))}"}
-            //%img.materialboxed{src: "#{photo_path(@conn, :show, photo)}"}
           .card-action
             = link "Download", to: photo_path(@conn, :show, photo), class: "blue-text right waves-effect"
-            = link "Delete", to: photo_path(@conn, :show, photo), method: :delete, data: [confirm: "Are you sure?"], class: "red-text waves-effect"
+            = button "Delete", to: photo_path(@conn, :show, photo), method: :delete, data: [confirm: "Are you sure?"], class: "btn-flat red-text waves-effect"
     - end
 
 .fixed-action-btn
   .btn-floating.btn-large.red= svg_image @conn, "more_vert"
   %ul
-    %li
-      = link to: album_path(@conn, :delete, @album), method: :delete, data: [confirm: "Are you sure?"], class: "btn-floating red tooltipped", "data-position": "left", "data-tooltip": "Delete Album" do
-        = svg_image @conn, "delete"
-      - end
     %li
       = link to: album_path(@conn, :edit, @album), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Edit Album" do
         = svg_image @conn, "mode_edit"

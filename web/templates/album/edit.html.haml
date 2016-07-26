@@ -8,5 +8,6 @@
 
     .input-field
       = link "Back", to: album_path(@conn, :show, @album), class: "btn waves-effect waves-light grey"
+      = button "Delete", to: album_path(@conn, :delete, @album), method: :delete, data: [confirm: "Are you sure?"], class: "btn red tooltipped", "data-position": "left", "data-tooltip": "Delete Album"
       = submit "Update Album", class: "btn right"
   - end
