@@ -40,6 +40,8 @@ defmodule MyWedding.Router do
   scope "/api", MyWedding.Api do
     pipe_through :api
 
+    get "/health-check", HealthController, :health_check
+
     resources "/photos", PhotoController, only: [:create]
   end
 end
