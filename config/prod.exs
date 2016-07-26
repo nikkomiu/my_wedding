@@ -1,7 +1,7 @@
 use Mix.Config
 
 config :my_wedding, MyWedding.Endpoint,
-  http: [port: 8080],
+  http: [port: {:system, "PORT"}],
   url: [host: "MyWedding.nikkomiu.com", port: 80],
   cache_static_manifest: "priv/static/manifest.json"
 
@@ -19,9 +19,9 @@ config :my_wedding, MyWedding.Endpoint,
 # Database
 config :my_wedding, MyWedding.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "${DB_USER}",
+  database: "my_wedding_prod",
+  username: "my_wedding_svc",
   password: "${DB_PASS}",
-  database: "${DB_BASE}",
   hostname: "${DB_HOST}",
   pool_size: 25
 

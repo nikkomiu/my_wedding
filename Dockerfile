@@ -27,16 +27,15 @@ RUN chmod +x bin/run.sh
 ENV GOOGLE_CLIENT_ID=someclientid.apps.googleusercontent.com
 ENV GOOGLE_CLIENT_SECRET=somesecret
 ENV SECRET_KEY_BASE=xeqWUJ03Yx7JQ+if21rLBKIZ6cZKMyp3hcJYuC3U0NDQKe1APerQ3F5rD/E3s+e1
+ENV PORT=80
 ENV DB_HOST=192.168.99.100
-ENV DB_BASE=my_wedding_prod
-ENV DB_USER=my_wedding_svc
 ENV DB_PASS=myweddingpassword
 
 # Expose NGINX port
 EXPOSE 80
 
-# Show Volumes for NGINX SSL and Uploads
-VOLUME ["/etc/nginx/ssl", "/uploads"]
+# Show Volumes for Uploads
+VOLUME ["/uploads"]
 
 # Run startup script
 CMD ["bin/run.sh"]
