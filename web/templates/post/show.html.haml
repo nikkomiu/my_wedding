@@ -12,10 +12,6 @@
   .btn-floating.btn-large.red= svg_image @conn, "more_vert"
   %ul
     %li
-      = link to: post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "btn-floating red tooltipped", "data-position": "left", "data-tooltip": "Delete Page" do
-        = svg_image @conn, "delete"
-      - end
-    %li
       = link to: post_path(@conn, :edit, @post), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Edit Page" do
         = svg_image @conn, "mode_edit"
       - end

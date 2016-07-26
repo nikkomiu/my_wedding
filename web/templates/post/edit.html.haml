@@ -10,6 +10,7 @@
     .form-group
       = submit "Update Page", class: "btn right"
       = link "Back", to: post_path(@conn, :show, @post), class: "btn grey"
+      = button "Delete", to: post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "btn red"
   - end
 
 = render MyWedding.SharedView, "_simplemde.html", element: "post_body"
