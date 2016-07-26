@@ -20,10 +20,8 @@ config :ueberauth, Ueberauth,
 
 # Configures Ueberauth OAuth Google Strategy
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
-  client_id: "63977908379-uh874dturf2bsmcbtcgjf5joc10m950b.apps.googleusercontent.com",
-  client_secret: "oAyukfYtNEERpMnJNHCIf9Dg"
-#  client_id: "${GOOGLE_CLIENT_ID}",
-#  client_secret: "${GOOGLE_CLIENT_SECRET}"
+  client_id: "${GOOGLE_CLIENT_ID}",
+  client_secret: "${GOOGLE_CLIENT_SECRET}"
 
 # Configures Guardian
 config :guardian, Guardian,
