@@ -22,6 +22,9 @@ WORKDIR /usr/my_wedding
 RUN tar -xvf app.tar.gz
 RUN chmod +x bin/my_wedding
 
+# Create Symlink for Uploads
+RUN ln -s /usr/my_wedding/lib/my_wedding-$APP_VER/priv/static/uploads /uploads
+
 # Copy start script
 COPY deploy/run.sh /usr/my_wedding/bin
 RUN chmod +x bin/run.sh
@@ -37,6 +40,9 @@ ENV DB_PASS=myweddingpassword
 
 # Expose NGINX port
 EXPOSE 80
+
+# Show Volumes for NGINX SSL and Uploads
+VOLUME ["/etc/nginx/ssl", "/uploads"]
 
 # Run startup script
 CMD ["bin/run.sh"]
