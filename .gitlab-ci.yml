@@ -66,18 +66,18 @@ docker_build:
   tags:
     - shared
 
+# Migrate database on Production
+migrate_prod_db:
+  stage: deploy
+  script: MIX_ENV=prod mix ecto.migrate
+  only:
+    - master
+
+# Deploy to Producton on master branch
 deploy:
   stage: deploy
   script: deploy/deploy.sh
   environment: production
-  when: manual
-  only:
-    - tags
-
-deploy:
-  stage: deploy
-  script: deploy/deploy.sh
-  environment: staging
   when: manual
   only:
     - master
