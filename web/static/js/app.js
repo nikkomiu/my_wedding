@@ -11,7 +11,7 @@ import "phoenix_html"
 
 // import socket from "./socket"
 
-$(document).ready(function(){
+$(document).load(function(){
   $('.parallax').parallax();
   $('.tooltipped').tooltip({delay: 50});
   $('.modal-trigger').leanModal();
