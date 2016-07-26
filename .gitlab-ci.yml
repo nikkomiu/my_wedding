@@ -69,9 +69,9 @@ docker_build:
 # Migrate database on Production
 migrate_prod_db:
   stage: deploy
+  before_script:
+    - MIX_ENV=prod make build
   script: MIX_ENV=prod mix ecto.migrate
-  dependencies:
-    - artifact_build
   only:
     - master
 
