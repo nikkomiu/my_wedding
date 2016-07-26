@@ -5,7 +5,7 @@ defmodule MyWedding.Repo.Migrations.CreatePhoto do
     create table(:photos) do
       add :path, :string
 
-      add :album_id, references(:albums, on_delete: :nothing)
+      add :album_id, references(:albums, on_delete: :delete_all)
 
       timestamps()
     end
