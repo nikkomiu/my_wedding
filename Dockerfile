@@ -4,12 +4,6 @@ FROM elixir:1.3
 
 MAINTAINER Nikko Miu <nikkoamiu@gmail.com>
 
-# Install NGINX
-RUN curl https://gist.githubusercontent.com/nikkomiu/cd15d615fc3390ebbd79e9d078458d10/raw/nginx_install.sh | bash -s 1.11.2
-
-# Move NGINX config into place
-COPY deploy/nginx.conf /etc/nginx/nginx.conf
-
 # Build Arguments
 ARG APP_VER=0.0.1
 ARG MIX_ENV=prod
