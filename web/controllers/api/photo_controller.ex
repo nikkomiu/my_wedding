@@ -60,7 +60,7 @@ defmodule MyWedding.Api.PhotoController do
       |> String.split(".")
 
     split_path
-    |> List.replace_at(length(split_path) -2, Enum.join([Enum.take(split_path, -2), size], "-"))
+    |> List.replace_at(length(split_path) -2, Enum.join([List.first(Enum.take(split_path, -2)), size], "-"))
     |> Enum.join(".")
   end
 
