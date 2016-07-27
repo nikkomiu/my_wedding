@@ -53,13 +53,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .pad-sides {
+  padding-left: 10px;
+  padding-right: 10px;
+
   &.large {
     padding-left: 20px;
     padding-right: 20px;
   }
-
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
 footer.page-footer {
@@ -98,16 +98,6 @@ footer.page-footer {
 
 .dropzone {
   border-style: dashed;
-}
-
-.card .card-image img.materialboxed {
-  object-fit: cover;
-  max-height: 200px;
-}
-
-.card .card-image img.materialboxed.active {
-  object-fit: contain;
-  max-height: none;
 }
 
 .card-action .btn-flat {
