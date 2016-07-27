@@ -28,7 +28,7 @@ defmodule MyWedding.Router do
     resources "/albums", AlbumController
     get "/albums/:id/upload", AlbumController, :upload
 
-    resources "/photos", PhotoController, only: [:show, :delete]
+    resources "/photos", PhotoController, only: [:delete]
   end
 
   scope "/auth", MyWedding do
