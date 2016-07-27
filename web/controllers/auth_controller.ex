@@ -17,6 +17,7 @@ defmodule MyWedding.AuthController do
         conn
         |> configure_session(:renew)
         |> put_flash(:info, "Successfully logged in.")
+        |> put_session(:current_user, user)
         |> Guardian.Plug.sign_in(user)
         |> redirect(to: "/")
       {:error, reason} ->
