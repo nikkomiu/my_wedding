@@ -18,7 +18,7 @@ defmodule MyWedding.Mixfile do
     [mod: {MyWedding, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger,
                     :ueberauth_google, :guardian, :phoenix_inline_svg, :earmark,
-                    :gettext, :phoenix_ecto, :postgrex, :phoenix_haml]]
+                    :gettext, :phoenix_ecto, :postgrex, :phoenix_haml, :mogrify]]
   end
 
   # Specifies which paths to compile per environment.
