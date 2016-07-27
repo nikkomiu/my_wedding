@@ -66,6 +66,15 @@ footer.page-footer {
   padding-top: 0;
 }
 
+.small-card-image {
+  @extend .card-image;
+
+  img {
+    object-fit: cover;
+    max-height: 225px;
+  }
+}
+
 .parallax-container {
   &.small {
     height: 200px;
