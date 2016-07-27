@@ -15,7 +15,7 @@ defmodule MyWedding.Api.PhotoController do
       |> copy_temp_file(file_param.path)
 
       Task.async(fn ->
-        size = "300x200"
+        size = "800x500"
 
         image =
           path
