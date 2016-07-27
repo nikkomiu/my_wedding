@@ -34,7 +34,6 @@ defmodule MyWedding.Api.PhotoController do
         {:ok, photo} ->
           conn
           |> put_status(:created)
-          |> put_resp_header("location", photo_path(conn, :show, photo))
           |> render(MyWedding.ChangesetView, "success.json")
         {:error, changeset} ->
           conn

@@ -26,8 +26,8 @@ config :my_wedding, MyWedding.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "my_wedding_prod",
   username: "my_wedding_svc",
-  password: "${DB_PASS}",
-  hostname: "${DB_HOST}",
+  password: "2JeXbN95MsNFyAnWKTB7jzN8TSm9LuhztaqmKjrB",
+  hostname: "nm.czwqwatoiwfn.us-east-1.rds.amazonaws.com",
   pool_size: 25
 
 # Import secrets config
