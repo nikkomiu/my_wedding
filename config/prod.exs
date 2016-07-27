@@ -16,6 +16,11 @@ config :my_wedding, MyWedding.Endpoint, root: "."
 config :my_wedding, MyWedding.Endpoint,
   secret_key_base: "${SECRET_KEY_BASE}"
 
+# Configures Ueberauth OAuth Google Strategy
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  client_id: "${GOOGLE_CLIENT_ID}",
+  client_secret: "${GOOGLE_CLIENT_SECRET}"
+
 # Database
 config :my_wedding, MyWedding.Repo,
   adapter: Ecto.Adapters.Postgres,
