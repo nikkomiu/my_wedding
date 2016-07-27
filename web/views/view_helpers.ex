@@ -12,6 +12,19 @@ defmodule MyWedding.ViewHelpers do
     end
   end
 
+  def upload_path(filename, size) do
+    split_path =
+      filename
+      |> String.split(".")
+
+    final_path =
+      split_path
+      |> List.replace_at(0, Enum.join([List.first(split_path), size], "-"))
+      |> Enum.join(".")
+
+    upload_path(final_path)
+  end
+
   def upload_path(filename) do
     "/uploads/#{filename}"
   end
