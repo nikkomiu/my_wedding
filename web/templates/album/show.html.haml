@@ -10,7 +10,9 @@
           .card-image
             %img.materialboxed{src: "#{static_path(@conn, upload_path(photo.path))}"}
           .card-action
-            = link "Download", to: photo_path(@conn, :show, photo), class: "blue-text right waves-effect"
+            = link to: photo_path(@conn, :show, photo), class: "blue-text right waves-effect no-pad" do
+              = svg_image(@conn, "file_download")
+            - end
             = button "Delete", to: photo_path(@conn, :show, photo), method: :delete, data: [confirm: "Are you sure?"], class: "btn-flat red-text waves-effect"
     - end
 
