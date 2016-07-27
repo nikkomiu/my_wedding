@@ -15,6 +15,7 @@ defmodule MyWedding.AuthController do
     case User.find_or_create(auth) do
       {:ok, user} ->
         conn
+        |> configure_session(:renew)
         |> Guardian.Plug.sign_in(user)
         |> put_flash(:info, "Successfully logged in.")
         |> put_session(:current_user, user)
