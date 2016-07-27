@@ -27,6 +27,8 @@ defmodule MyWedding.AuthController do
   end
 
   def sign_out(conn, _params) do
-    
+    conn
+    |> configure_session(drop: true)
+    |> redirect(to: "/")
   end
 end
