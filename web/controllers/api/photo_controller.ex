@@ -23,10 +23,10 @@ defmodule MyWedding.Api.PhotoController do
           |> open()
           |> resize_to_fill(size)
           |> save()
-      end)
 
-      image.path
-      |> File.cp!(get_size_path_from_full_path(path, size))
+        image.path
+        |> File.cp!(get_size_path_from_full_path(path, size))
+      end)
       # End Convert Image
 
       album = Repo.get!(MyWedding.Album, album_id)
