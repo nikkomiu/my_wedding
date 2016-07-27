@@ -15,13 +15,15 @@ defmodule MyWedding.Api.PhotoController do
       |> copy_temp_file(file_param.path)
 
       # Convert Image
-      size = "800x500"
+      Task.async(fn ->
+        size = "800x500"
 
-      image =
-        path
-        |> open()
-        |> resize_to_fill(size)
-        |> save()
+        image =
+          path
+          |> open()
+          |> resize_to_fill(size)
+          |> save()
+      end)
 
       image.path
       |> File.cp!(get_size_path_from_full_path(path, size))
@@ -58,7 +60,7 @@ defmodule MyWedding.Api.PhotoController do
       |> String.split(".")
 
     split_path
-    |> List.replace_at(0, Enum.join([List.first(split_path), size], "-"))
+    |> List.replace_at(0, Enum.join([Enum.take(split_path, -1), size], "-"))
     |> Enum.join(".")
   end
 
