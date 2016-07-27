@@ -37,6 +37,7 @@ defmodule MyWedding.Mixfile do
      {:cowboy, "~> 1.0"},
      {:phoenix_haml, "~> 0.2.1"},
      {:exrm, "~> 1.0"},
+     {:mogrify, "~> 0.3"},
      {:earmark, "~> 1.0"},
      {:guardian, "~> 0.12"},
      {:ueberauth_google, "~> 0.2"},
