@@ -10,22 +10,22 @@ defmodule MyWedding.Api.PhotoController do
 
       path = get_full_path(conn, filename)
 
-      # Copy the file into place
+      # Copy the full size file into place
       path
       |> copy_temp_file(file_param.path)
 
-      Task.async(fn ->
-        size = "800x500"
+      # Convert Image
+      size = "800x500"
 
-        image =
-          path
-          |> open()
-          |> resize_to_fill(size)
-          |> save()
+      image =
+        path
+        |> open()
+        |> resize_to_fill(size)
+        |> save()
 
-        image.path
-        |> File.cp!(get_size_path_from_full_path(path, size))
-      end)
+      image.path
+      |> File.cp!(get_size_path_from_full_path(path, size))
+      # End Convert Image
 
       album = Repo.get!(MyWedding.Album, album_id)
       changeset = Ecto.build_assoc(album, :photos, path: filename)
@@ -64,6 +64,5 @@ defmodule MyWedding.Api.PhotoController do
 
   defp copy_temp_file(perm_path, temp_path) do
     File.cp!(temp_path, perm_path)
-    perm_path
   end
 end
