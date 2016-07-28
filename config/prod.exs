@@ -2,7 +2,7 @@ use Mix.Config
 
 config :my_wedding, MyWedding.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "MyWedding.nikkomiu.com", port: 80],
+  url: [host: "wedding.nikkomiu.com", port: 80],
   cache_static_manifest: "priv/static/manifest.json"
 
 # Logging
@@ -20,6 +20,9 @@ config :my_wedding, MyWedding.Endpoint,
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: "${GOOGLE_CLIENT_ID}",
   client_secret: "${GOOGLE_CLIENT_SECRET}"
+
+config :my_wedding, MyWedding.Endpoint,
+  force_ssl: [hsts: true]
 
 # Database
 config :my_wedding, MyWedding.Repo,

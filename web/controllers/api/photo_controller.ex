@@ -6,7 +6,7 @@ defmodule MyWedding.Api.PhotoController do
   def create(conn, %{"file" => file_param, "album_id" => album_id}) do
     if Regex.match?(~r/image\/.*/, file_param.content_type) do
       # Get the filename to save to
-      filename = "#{Ecto.UUID.generate}.#{List.last(String.split(file_param.filename, "."))}"
+      filename = "#{String.replace(Ecto.UUID.generate, "-", "")}.#{List.last(String.split(file_param.filename, "."))}"
 
       path = get_full_path(conn, filename)
 
@@ -29,11 +29,12 @@ defmodule MyWedding.Api.PhotoController do
       end)
       # End Convert Image
 
+      # Insert Image
       album = Repo.get!(MyWedding.Album, album_id)
       changeset = Ecto.build_assoc(album, :photos, path: filename)
 
       case Repo.insert(changeset) do
-        {:ok, photo} ->
+        {:ok, _} ->
           conn
           |> put_status(:created)
           |> render(MyWedding.ChangesetView, "success.json")
