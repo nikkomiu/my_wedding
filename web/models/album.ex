@@ -6,7 +6,7 @@ defmodule MyWedding.Album do
     field :description, :string
     field :is_public, :boolean
 
-    has_many :photos, MyWedding.Photo
+    has_many :photos, MyWedding.Photo, on_delete: :delete_all
 
     timestamps()
   end
