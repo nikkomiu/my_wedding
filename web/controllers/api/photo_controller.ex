@@ -6,7 +6,12 @@ defmodule MyWedding.Api.PhotoController do
   def create(conn, %{"file" => file_param, "album_id" => album_id}) do
     if Regex.match?(~r/image\/.*/, file_param.content_type) do
       # Get the filename to save to
-      filename = "#{String.replace(Ecto.UUID.generate, "-", "")}.#{List.last(String.split(file_param.filename, "."))}"
+      uuid =
+        Ecto.UUID.generate
+        |> String.replace("-", "")
+        |> String.slice(1..10)
+
+      filename = "#{uuid}.#{List.last(String.split(file_param.filename, "."))}"
 
       path = get_full_path(conn, filename)
 
@@ -48,6 +53,15 @@ defmodule MyWedding.Api.PhotoController do
       |> put_status(:unprocessable_entity)
       |> render(MyWedding.ErrorView, "422.json")
     end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    photo = Repo.get!(MyWedding.Photo, id)
+
+    Repo.delete!(photo)
+
+    conn
+    |> redirect(to: album_path(conn, :show, photo.album_id))
   end
 
   defp get_full_path(conn, filename) do
