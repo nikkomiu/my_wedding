@@ -3,7 +3,7 @@
     .col.sm12.m4
       .card
         .small-card-image
-          %img{src: "http://materializecss.com/images/parallax1.jpg"}
+          %img{src: "#{static_path(@conn, "/images/default.jpg")}"}
           = link post.title, to: post_path(@conn, :show, post), class: "card-title"
     - end
 
