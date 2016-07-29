@@ -21,9 +21,6 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: "${GOOGLE_CLIENT_ID}",
   client_secret: "${GOOGLE_CLIENT_SECRET}"
 
-config :my_wedding, MyWedding.Endpoint,
-  force_ssl: [hsts: true]
-
 # Database
 config :my_wedding, MyWedding.Repo,
   adapter: Ecto.Adapters.Postgres,
