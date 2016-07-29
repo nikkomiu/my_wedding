@@ -12,7 +12,7 @@
           = if length(album.photos) > 0 do
             %img{src: "#{static_path(@conn, upload_path(List.first(album.photos).path, "800x500"))}"}
           - else
-            %img{src: "http://materializecss.com/images/parallax1.jpg"}
+            %img{src: "#{static_path(@conn, "/images/default.jpg")}"}
 
           = link album.title, to: album_path(@conn, :show, album), class: "card-title"
 
