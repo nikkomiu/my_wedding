@@ -64,6 +64,15 @@ h1, h2, h3, h4, h5, h6 {
 
 footer.page-footer {
   padding-top: 0;
+
+  a, a:active {
+    color: #DDD;
+  }
+
+  a:hover, a:focus {
+    color: #FFF;
+    text-decoration: underline;
+  }
 }
 
 .small-card-image {
