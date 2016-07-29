@@ -3,6 +3,9 @@ defmodule MyWedding.PostController do
 
   alias MyWedding.Post
 
+  plug :authorize_author, "user" when action in [:new, :create, :edit, :update]
+  plug :authorize_manager, "user" when action in [:delete]
+
   def index(conn, _params) do
     posts = Repo.all(
       from p in Post,
@@ -15,6 +18,8 @@ defmodule MyWedding.PostController do
   end
 
   def new(conn, _params) do
+    IO.puts "WTF!!!"
+
     changeset = Post.changeset(%Post{order: 0, is_active: true})
     render(conn, :new, changeset: changeset)
   end
@@ -23,10 +28,10 @@ defmodule MyWedding.PostController do
     changeset = Post.changeset(%Post{}, post_params)
 
     case Repo.insert(changeset) do
-      {:ok, _post} ->
+      {:ok, post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: post_path(conn, :index))
+        |> redirect(to: post_path(conn, :show, post.id))
       {:error, changeset} ->
         render(conn, :new, changeset: changeset)
     end

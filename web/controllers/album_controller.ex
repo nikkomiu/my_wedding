@@ -3,6 +3,9 @@ defmodule MyWedding.AlbumController do
 
   alias MyWedding.Album
 
+  plug :authorize_author, "user" when action in [:edit, :update]
+  plug :authorize_manager, "user" when action in [:delete]
+
   def index(conn, _params) do
     albums = Repo.all(
       from a in Album,

@@ -13,17 +13,28 @@
             = link to: "#{static_path(@conn, upload_path(photo.path))}", class: "blue-text right waves-effect no-pad", download: "#{photo.path}" do
               = svg_image(@conn, "file_download")
             - end
-            = button "Delete", to: photo_path(@conn, :delete, photo), method: :delete, data: [confirm: "Are you sure?"], class: "btn-flat red-text waves-effect"
+
+            - if is_authorized(@conn, :manager) do
+              = button "Delete", to: photo_path(@conn, :delete, photo), method: :delete, data: [confirm: "Are you sure?"], class: "btn-flat red-text waves-effect"
+
+            .clearfix
     - end
 
-.fixed-action-btn
-  .btn-floating.btn-large.red= svg_image @conn, "more_vert"
-  %ul
-    %li
-      = link to: album_path(@conn, :edit, @album), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Edit Album" do
-        = svg_image @conn, "mode_edit"
-      - end
-    %li
-      = link to: album_path(@conn, :upload, @album), class: "btn-floating green tooltipped", "data-position": "left", "data-tooltip": "Add Photos" do
+- if is_authorized(@conn, :uploader) do
+  .fixed-action-btn
+    .btn-floating.btn-large.red= svg_image @conn, "more_vert"
+    %ul
+      %li
+        = link to: album_path(@conn, :edit, @album), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Edit Album" do
+          = svg_image @conn, "mode_edit"
+        - end
+      %li
+        = link to: album_path(@conn, :upload, @album), class: "btn-floating green tooltipped", "data-position": "left", "data-tooltip": "Add Photos" do
+          = svg_image @conn, "add"
+        - end
+- else
+  .fixed-action-btn
+    .btn-floating.btn-large.green
+      = link to: album_path(@conn, :upload, @album) do
         = svg_image @conn, "add"
       - end

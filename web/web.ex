@@ -36,6 +36,8 @@ defmodule MyWedding.Web do
 
       import MyWedding.Router.Helpers
       import MyWedding.Gettext
+
+      use MyWedding.ControllerHelpers
     end
   end
 

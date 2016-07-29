@@ -32,4 +32,9 @@ defmodule MyWedding.ViewHelpers do
   def current_user(conn) do
     Guardian.Plug.current_resource(conn)
   end
+
+  def is_authorized(conn, level) do
+    current_user(conn)
+    |> MyWedding.User.is_authorized(level)
+  end
 end
