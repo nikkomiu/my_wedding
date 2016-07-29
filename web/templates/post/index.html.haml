@@ -7,7 +7,8 @@
           = link post.title, to: post_path(@conn, :show, post), class: "card-title"
     - end
 
-.fixed-action-btn
-  = link to: post_path(@conn, :new), class: "btn-floating waves-effect waves-light btn-large red" do
-    = svg_image @conn, "add"
-  - end
+- if is_authorized(@conn, :author) do
+  .fixed-action-btn
+    = link to: post_path(@conn, :new), class: "btn-floating waves-effect waves-light btn-large green" do
+      = svg_image @conn, "add"
+    - end

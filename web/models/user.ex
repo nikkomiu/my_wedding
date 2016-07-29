@@ -7,10 +7,29 @@ defmodule MyWedding.User do
     field :avatar, :string
     field :name, :string
     field :email, :string
+    field :permission_level, :integer
 
     field :google_uid, :string
 
     timestamps()
+  end
+
+  def permissions() do
+    %{
+      none: 0, # Allow creating albums, and uploading photos
+      uploader: 1, # Allow editing albums
+      author: 2, # Allow creating/editing content
+      manager: 3, # Allow deleting content
+      admin: 5
+    }
+  end
+
+  def is_authorized(user, level_requested) do
+    if user do
+      user.permission_level >= permissions[level_requested]
+    else
+      false
+    end
   end
 
   def find_or_create(%Auth{provider: :google} = auth) do
