@@ -10,9 +10,3 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
-
-$(document).load(function(){
-  $('.parallax').parallax();
-  $('.tooltipped').tooltip({delay: 50});
-  $('.modal-trigger').leanModal();
-});
