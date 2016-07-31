@@ -33,8 +33,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :my_wedding, MyWedding.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "my_wedding_svc",
-  password: "myweddingpassword",
+  username: "postgres",
+  password: "postgres",
   database: "my_wedding_dev",
   hostname: "192.168.99.100",
   pool_size: 10
