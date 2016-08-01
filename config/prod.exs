@@ -3,6 +3,7 @@ use Mix.Config
 config :my_wedding, MyWedding.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: "wedding.nikkomiu.com", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/manifest.json"
 
 # Logging
