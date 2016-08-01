@@ -2,7 +2,7 @@ use Mix.Config
 
 config :my_wedding, MyWedding.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "wedding.nikkomiu.com", port: 443],
+  url: [scheme: "https", host: "wedding.nikkomiu.com", port: 443],
   cache_static_manifest: "priv/static/manifest.json"
 
 # Logging
