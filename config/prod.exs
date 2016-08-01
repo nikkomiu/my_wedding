@@ -3,7 +3,6 @@ use Mix.Config
 config :my_wedding, MyWedding.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: "wedding.nikkomiu.com", port: 443],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/manifest.json"
 
 # Logging
@@ -20,7 +19,8 @@ config :my_wedding, MyWedding.Endpoint,
 # Configures Ueberauth OAuth Google Strategy
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: "${GOOGLE_CLIENT_ID}",
-  client_secret: "${GOOGLE_CLIENT_SECRET}"
+  client_secret: "${GOOGLE_CLIENT_SECRET}",
+  redirect_uri: "https://wedding.nikkomiu.com/auth/google/callback"
 
 # Database
 config :my_wedding, MyWedding.Repo,
