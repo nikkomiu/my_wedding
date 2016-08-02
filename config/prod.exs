@@ -24,7 +24,7 @@ config :ueberauth, Ueberauth,
 # Configures Ueberauth OAuth Google Strategy
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: "${GOOGLE_CLIENT_ID}",
-  client_secret: "${GOOGLE_CLIENT_SECRET}",
+  client_secret: "${GOOGLE_CLIENT_SECRET}"
 
 # Database
 config :my_wedding, MyWedding.Repo,
