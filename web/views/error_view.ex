@@ -1,14 +1,6 @@
 defmodule MyWedding.ErrorView do
   use MyWedding.Web, :view
 
-  def render("404.html", _assigns) do
-    "Page not found"
-  end
-
-  def render("500.html", _assigns) do
-    "Internal server error"
-  end
-
   def render("422.json", _assigns) do
     %{error: "Could not process request"}
   end
