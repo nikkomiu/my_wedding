@@ -5,17 +5,17 @@ defmodule MyWedding.ErrorViewTest do
   import Phoenix.View
 
   test "renders 404.html" do
-    assert render_to_string(MyWedding.ErrorView, "404.html", []) ==
-           "Page not found"
+    assert render_to_string(MyWedding.ErrorView, "404.html", [])
+      |> String.contains?("404")
   end
 
   test "render 500.html" do
-    assert render_to_string(MyWedding.ErrorView, "500.html", []) ==
-           "Internal server error"
+    assert render_to_string(MyWedding.ErrorView, "500.html", [])
+      |> String.contains?("500")
   end
 
   test "render any other" do
-    assert render_to_string(MyWedding.ErrorView, "505.html", []) ==
-           "Internal server error"
+    assert render_to_string(MyWedding.ErrorView, "505.html", [])
+      |> String.contains?("500")
   end
 end
