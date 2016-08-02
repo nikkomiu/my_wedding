@@ -16,11 +16,15 @@ config :my_wedding, MyWedding.Endpoint, root: "."
 config :my_wedding, MyWedding.Endpoint,
   secret_key_base: "${SECRET_KEY_BASE}"
 
+config :ueberauth, Ueberauth,
+  providers: [
+    google: {Ueberauth.Strategy.Google, [callback_url: "https://wedding.nikkomiu.com/auth/google/callback"]}
+  ]
+
 # Configures Ueberauth OAuth Google Strategy
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: "${GOOGLE_CLIENT_ID}",
   client_secret: "${GOOGLE_CLIENT_SECRET}",
-  redirect_uri: "https://wedding.nikkomiu.com/auth/google/callback"
 
 # Database
 config :my_wedding, MyWedding.Repo,
