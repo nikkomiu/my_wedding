@@ -132,7 +132,7 @@
       }
 
       .secondary-text-color {
-        color: rgba(89, 150, 205, 1) !important;
+        color: #64b5f6 !important;
       }
 
       .sign-text-color {
