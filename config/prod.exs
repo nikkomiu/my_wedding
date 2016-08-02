@@ -31,4 +31,4 @@ config :my_wedding, MyWedding.Repo,
   pool_size: 25
 
 # Import secrets config
-# import_config "prod.secret.exs"
+import_config "prod.secret.exs"
