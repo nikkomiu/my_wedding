@@ -27,12 +27,12 @@ RUN chmod +x bin/run.sh
 ENV GOOGLE_CLIENT_ID=someclientid.apps.googleusercontent.com
 ENV GOOGLE_CLIENT_SECRET=somesecret
 ENV SECRET_KEY_BASE=xeqWUJ03Yx7JQ+if21rLBKIZ6cZKMyp3hcJYuC3U0NDQKe1APerQ3F5rD/E3s+e1
-ENV PORT=80
+ENV PORT=8080
 ENV DB_HOST=192.168.99.100
 ENV DB_PASS=myweddingpassword
 
 # Expose NGINX port
-EXPOSE 80
+EXPOSE $PORT
 
 # Show Volumes for Uploads
 VOLUME ["/uploads"]
