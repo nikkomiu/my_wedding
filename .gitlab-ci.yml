@@ -67,24 +67,11 @@ docker_build:
     - docker build -t registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME .
     - docker push registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME
 
-# Migrate database on Production
-migrate_prod_db:
-  stage: deploy
-  dependencies:
-    - artifact_build
-  before_script:
-    - MIX_ENV=prod make build
-  script:
-    - sed -i "s/\${DB_HOST}/$DB_HOST/g" config/prod.exs
-    - sed -i "s/\${DB_PASS}/$DB_PASS/g" config/prod.exs
-    - MIX_ENV=prod mix ecto.migrate
-  only:
-    - production
-    - master
-
-# Deploy to Producton on master branch
+# Run Migrations and Deploy
 deploy:
   stage: deploy
+  dependencies:
+    - compile
   script: deploy/deploy.sh
   only:
     - production
