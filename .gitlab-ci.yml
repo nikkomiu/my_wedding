@@ -79,13 +79,13 @@ migrate_prod_db:
     - sed -i "s/\${DB_PASS}/$DB_PASS/g" config/prod.exs
     - MIX_ENV=prod mix ecto.migrate
   only:
+    - production
     - master
 
 # Deploy to Producton on master branch
 deploy:
   stage: deploy
   script: deploy/deploy.sh
-  environment: production
-  when: manual
   only:
+    - production
     - master
