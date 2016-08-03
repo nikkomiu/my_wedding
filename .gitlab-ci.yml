@@ -72,7 +72,9 @@ deploy:
   stage: deploy
   dependencies:
     - compile
-  script: deploy/deploy.sh
+  script:
+    - chmod +x deploy/deploy.sh
+    - deploy/deploy.sh
   only:
     - production
     - master
