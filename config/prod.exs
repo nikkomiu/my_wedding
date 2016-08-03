@@ -29,6 +29,3 @@ config :my_wedding, MyWedding.Repo,
   password: "${DB_PASS}",
   hostname: "${DB_HOST}",
   pool_size: 25
-
-# Import secrets config
-# import_config "prod.secret.exs"
