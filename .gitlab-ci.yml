@@ -35,6 +35,9 @@ test:
 # Verify a release can be merged into master
 can_be_merged:
   stage: test
+  before_script:
+    - git config --global user.email "admin@nikkomiu.com"
+    - git config --global user.name "CI"
   script:
     - git checkout master
     - git merge $CI_BUILD_REF
@@ -63,25 +66,13 @@ docker_build:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
     - docker build -t registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME .
     - docker push registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME
-  tags:
-    - shared
 
-# Migrate database on Production
-#   TODO: Replace ${} strings in PROD config with actual values
-#   for this config to work properly (before re-enabling)
-#migrate_prod_db:
-#  stage: deploy
-#  before_script:
-#    - MIX_ENV=prod make build
-#  script: MIX_ENV=prod mix ecto.migrate
-#  only:
-#    - master
-
-# Deploy to Producton on master branch
+# Run Migrations and Deploy
 deploy:
   stage: deploy
+  dependencies:
+    - compile
   script: deploy/deploy.sh
-  environment: production
-  when: manual
   only:
+    - production
     - master
