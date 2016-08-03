@@ -32,7 +32,7 @@ ENV DB_HOST=192.168.99.100
 ENV DB_PASS=myweddingpassword
 
 # Expose NGINX port
-EXPOSE 8080
+EXPOSE $PORT
 
 # Show Volumes for Uploads
 VOLUME ["/uploads"]
