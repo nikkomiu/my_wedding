@@ -37,7 +37,7 @@ defmodule MyWedding.Web do
       import MyWedding.Router.Helpers
       import MyWedding.Gettext
 
-      use MyWedding.ControllerHelpers
+      use MyWedding.AuthorizationHelpers
     end
   end
 
@@ -58,12 +58,14 @@ defmodule MyWedding.Web do
       import PhoenixInlineSvg.Helpers
 
       import MyWedding.ViewHelpers
+      import MyWedding.UserPermissionHelper
     end
   end
 
   def router do
     quote do
       use Phoenix.Router
+      use MyWedding.AuthorizationHelpers
     end
   end
 

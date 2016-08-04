@@ -56,7 +56,8 @@ defmodule MyWedding.PostController do
         |> put_flash(:info, "Post updated successfully.")
         |> redirect(to: post_path(conn, :show, post))
       {:error, changeset} ->
-        render(conn, :edit, post: post, changeset: changeset)
+        conn
+        |> render(conn, :edit, post: post, changeset: changeset)
     end
   end
 
