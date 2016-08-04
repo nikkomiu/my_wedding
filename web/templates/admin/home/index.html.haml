@@ -1,8 +1,26 @@
 .row
-  .col.s12.m4
+  .col.s12.m6
     = link to: user_path(@conn, :index) do
       .card-panel
         %h3
           = @user_count
           %small users
     - end
+
+  .col.s12.m6
+    .card-panel
+      %h3
+        = @post_count
+        %small posts
+
+  .col.s12.m6
+    .card-panel
+      %h3
+        = @album_count
+        %small albums
+
+  .col.s12.m6
+    .card-panel
+      %h3
+        = @photo_count
+        %small photos
