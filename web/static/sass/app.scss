@@ -128,3 +128,11 @@ h1, h2, h3, h4, h5, h6 {
 .card-action a.no-pad {
   margin: 0 !important;
 }
+
+.card-panel h3 {
+  margin: 0.7rem 0.2rem;
+}
+
+.collection .collection-item.avatar {
+  min-height: 62px;
+}

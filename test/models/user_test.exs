@@ -3,7 +3,7 @@ defmodule MyWedding.UserTest do
 
   alias MyWedding.User
 
-  @valid_attrs %{email: "some content", name: "some content"}
+  @valid_attrs %{email: "some content", name: "some content", google_uid: "2342351"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

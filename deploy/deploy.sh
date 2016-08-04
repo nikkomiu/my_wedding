@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set some ENV variables based on branch
-if [ "$CI_BUILD_REF" = "production" ]
+if [ "$CI_BUILD_REF_NAME" = "master" ]
 then
   echo "PROD Deploy..."
 
@@ -9,7 +9,7 @@ then
   DB_PASS=$PROD_DB_PASS
   CLUSTER="production"
 
-elif [ "$CI_BUILD_REF" = "master" ]
+elif [ "$CI_BUILD_REF_NAME" = "develop" ]
 then
   echo "STAGE Deploy..."
 
