@@ -18,8 +18,6 @@ defmodule MyWedding.PostController do
   end
 
   def new(conn, _params) do
-    IO.puts "WTF!!!"
-
     changeset = Post.changeset(%Post{order: 0, is_active: true})
     render(conn, :new, changeset: changeset)
   end
