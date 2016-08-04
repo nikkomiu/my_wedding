@@ -57,12 +57,12 @@ defmodule MyWedding.User do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:avatar, :name, :email, :google_uid])
-    |> validate_required([:email, :google_uid])
+    |> validate_required([:name, :email, :google_uid])
   end
 
   def admin_changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:avatar, :name, :email, :permission_level])
-    |> validate_required([:email, :permission_level])
+    |> validate_required([:name, :email, :permission_level])
   end
 end

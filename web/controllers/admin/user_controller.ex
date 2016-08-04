@@ -38,4 +38,13 @@ defmodule MyWedding.Admin.UserController do
         |> render(conn, :show, user: user, changeset: changeset)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    user = Repo.get!(User, id)
+
+    Repo.delete!(user)
+
+    conn
+    |> redirect(to: user_path(conn, :index))
+  end
 end
