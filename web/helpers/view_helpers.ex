@@ -37,4 +37,8 @@ defmodule MyWedding.ViewHelpers do
     current_user(conn)
     |> MyWedding.User.is_authorized(level)
   end
+
+  def user_permission_name(user) do
+    MyWedding.User.permission_name(user.permission_level)
+  end
 end

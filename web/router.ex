@@ -12,6 +12,10 @@ defmodule MyWedding.Router do
     plug Guardian.Plug.LoadResource
   end
 
+  pipeline :admin do
+    plug :authorize_admin
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -34,6 +38,15 @@ defmodule MyWedding.Router do
 
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
+  end
+
+  scope "/admin", MyWedding.Admin do
+    pipe_through :browser
+    pipe_through :admin
+
+    get "/", HomeController, :index
+
+    resources "/users", UserController, only: [:index, :show, :update, :delete]
   end
 
   scope "/api", MyWedding.Api do
