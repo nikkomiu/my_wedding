@@ -18,8 +18,6 @@ defmodule MyWedding.PostController do
   end
 
   def new(conn, _params) do
-    IO.puts "WTF!!!"
-
     changeset = Post.changeset(%Post{order: 0, is_active: true})
     render(conn, :new, changeset: changeset)
   end
@@ -58,7 +56,8 @@ defmodule MyWedding.PostController do
         |> put_flash(:info, "Post updated successfully.")
         |> redirect(to: post_path(conn, :show, post))
       {:error, changeset} ->
-        render(conn, :edit, post: post, changeset: changeset)
+        conn
+        |> render(conn, :edit, post: post, changeset: changeset)
     end
   end
 

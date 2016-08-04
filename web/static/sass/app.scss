@@ -3,6 +3,8 @@
 $primary-color: lighten(#187bd6, 4%);
 $primary-color-light: #64b5f6;
 
+$secondary-color: #64b5f6;
+
 $navbar-height: 45px;
 $navbar-height-mobile: 38px;
 $navbar-brand-font-size: 1.4rem;
@@ -125,4 +127,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .card-action a.no-pad {
   margin: 0 !important;
+}
+
+.card-panel h3 {
+  margin: 0.7rem 0.2rem;
+}
+
+.collection .collection-item.avatar {
+  min-height: 62px;
 }

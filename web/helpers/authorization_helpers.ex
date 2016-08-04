@@ -1,4 +1,4 @@
-defmodule MyWedding.ControllerHelpers do
+defmodule MyWedding.AuthorizationHelpers do
   defmacro __using__(_opts) do
     auth_functions =
       MyWedding.User.permissions
@@ -12,7 +12,7 @@ defmodule MyWedding.ControllerHelpers do
 
     # Import helpers and functions
     quote do
-      import MyWedding.ControllerHelpers
+      import MyWedding.AuthorizationHelpers
       import Plug.Conn
 
       unquote(auth_functions)

@@ -1,0 +1,8 @@
+.row
+  .col.s12.m4
+    = link to: user_path(@conn, :index) do
+      .card-panel
+        %h3
+          = @user_count
+          %small users
+    - end
