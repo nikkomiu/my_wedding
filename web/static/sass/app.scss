@@ -136,3 +136,15 @@ h1, h2, h3, h4, h5, h6 {
 .collection .collection-item.avatar {
   min-height: 62px;
 }
+
+.card .card-heading {
+  @extend .card-content;
+
+  padding: 10px 20px;
+
+  border-bottom: 1px solid lightgrey;
+
+  h4 {
+    margin: 0.42rem;
+  }
+}
