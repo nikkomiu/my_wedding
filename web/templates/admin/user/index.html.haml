@@ -1,0 +1,15 @@
+.row
+  .col.s12
+    .collection
+      = for user <- @users do
+        = link to: user_path(@conn, :show, user), class: "collection-item avatar" do
+          %img.circle{src: "#{user.avatar}"}
+          %span.badge.blue.white-text= permission_string(user.permission_level)
+          %span.title
+            = user.name
+            %small= user.email
+          %p
+            Joined
+            = user.inserted_at
+        - end
+      - end
