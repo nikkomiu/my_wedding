@@ -3,9 +3,8 @@
     %img{src: "#{static_path(@conn, "/images/default.jpg")}"}
   %h3.center= @post.title
 
-.section.white
-  .pad-sides
-    = {:safe, Earmark.to_html(@post.body)}
+.container.section
+  = {:safe, Earmark.to_html(@post.body)}
 
 - if is_authorized(@conn, :author) do
   .fixed-action-btn

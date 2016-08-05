@@ -7,10 +7,11 @@
 
     = render "form.html", f: f
 
-    .form-group
-      = submit "Update Page", class: "btn right"
-      = link "Back", to: post_path(@conn, :show, @post), class: "btn grey"
-      = button "Delete", to: post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "btn red"
+    = submit "Update Page", class: "btn right"
   - end
 
+  %a.modal-trigger.btn.red.mar-sides.waves-effect.waves-light{href: "#confirm"} Delete
+  = link "Back", to: post_path(@conn, :show, @post), class: "btn waves-effect grey left"
+
 = render MyWedding.SharedView, "_simplemde.html", element: "post_body"
+= render MyWedding.SharedView, "_confirm.html", button: button "Delete", to: post_path(@conn, :delete, @post), method: :delete, class: "btn btn-flat red-text red-outline"
