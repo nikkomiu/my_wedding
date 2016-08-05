@@ -1,4 +1,4 @@
-defmodule MyWedding.AuthorizationHelpers do
+defmodule MyWedding.UserHelper do
   defmacro __using__(_opts) do
     auth_functions =
       MyWedding.User.permissions
@@ -12,7 +12,7 @@ defmodule MyWedding.AuthorizationHelpers do
 
     # Import helpers and functions
     quote do
-      import MyWedding.AuthorizationHelpers
+      import MyWedding.UserHelper
       import Plug.Conn
 
       unquote(auth_functions)
@@ -56,5 +56,35 @@ defmodule MyWedding.AuthorizationHelpers do
 
   def current_user(conn) do
     Guardian.Plug.current_resource(conn)
+  end
+
+  def permission_string(num) do
+    MyWedding.User.permissions()
+    |> get_permission_by_num(num)
+    |> permissions_to_string()
+  end
+
+  def permission_options() do
+    MyWedding.User.permissions()
+  end
+
+  defp get_permission_by_num(permissions, num) do
+    permissions
+    |> Enum.filter(fn(x) ->
+      x |> Tuple.to_list() |> List.last() == num
+    end)
+  end
+
+  defp permissions_to_string(list) do
+    list
+    |> permissions_to_list()
+    |> Enum.join(", ")
+  end
+
+  defp permissions_to_list(list) do
+    list
+    |> Enum.map(fn(x) ->
+      x |> Tuple.to_list() |> List.first()
+    end)
   end
 end
