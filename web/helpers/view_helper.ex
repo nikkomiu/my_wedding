@@ -1,5 +1,4 @@
-defmodule MyWedding.ViewHelpers do
-
+defmodule MyWedding.ViewHelper do
   require Logger
 
   def mtl_label(form, field) do
@@ -27,14 +26,5 @@ defmodule MyWedding.ViewHelpers do
 
   def upload_path(filename) do
     "/uploads/#{filename}"
-  end
-
-  def current_user(conn) do
-    Guardian.Plug.current_resource(conn)
-  end
-
-  def is_authorized(conn, level) do
-    current_user(conn)
-    |> MyWedding.User.is_authorized(level)
   end
 end
