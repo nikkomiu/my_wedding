@@ -23,8 +23,9 @@
           = select f, :permission_level, permission_options
           = label f, :permission_level
 
-          = submit "Update User", class: "btn right"
+          = submit "Update", class: "btn right"
       - end
 
-      = button "Delete User", to: user_path(@conn, :delete, @user), method: "delete", class: "btn red"
+      = link "Cancel", to: user_path(@conn, :index), class: "btn grey left"
+      = button "Delete", to: user_path(@conn, :delete, @user), method: "delete", class: "btn red left", style: "margin: 0 10px;"
       .clearfix
