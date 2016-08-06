@@ -5,7 +5,7 @@ defmodule MyWedding.Repo.Migrations.CreateAlbum do
     create table(:albums) do
       add :title, :string
       add :description, :text
-      add :is_public, :boolean, default: false, null: false
+      add :is_public, :boolean, default: true, null: false
 
       timestamps()
     end
