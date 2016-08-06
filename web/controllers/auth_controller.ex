@@ -19,9 +19,13 @@ defmodule MyWedding.AuthController do
         |> configure_session(renew: true)
         |> Guardian.Plug.sign_in(user)
         |> redirect(to: "/")
+      {:error, "User is inactive"} ->
+        conn
+        |> put_flash(:error, "Your account is not active. Please contact the site administrator to activate your account.")
+        |> redirect(to: "/")
       {:error, reason} ->
         conn
-        |> put_flash(:error, reason)
+        |> put_flash(:error, "Could not log you in! Please contact the site admin if the problem persists.")
         |> redirect(to: "/")
     end
   end
