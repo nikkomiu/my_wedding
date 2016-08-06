@@ -14,7 +14,12 @@
           - else
             %img{src: "#{static_path(@conn, "/images/default.jpg")}"}
 
-          = link album.title, to: album_path(@conn, :show, album), class: "card-title"
+          = link to: album_path(@conn, :show, album), class: "card-title" do
+            = unless album.is_public do
+              = svg_image @conn, "visibility_off"
+            - end
+            = album.title
+          - end
 
         = if album.description != "" do
           .card-content
