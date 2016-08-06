@@ -7,10 +7,15 @@ defmodule MyWedding.AlbumController do
   plug :authorize_manager, "user" when action in [:delete]
 
   def index(conn, _params) do
-    albums = Repo.all(
+    album_query =
       from a in Album,
         preload: [:photos]
-    )
+
+    albums =
+      album_query
+      |> pub_priv_query(conn)
+      |> Repo.all()
+
     render(conn, "index.html", albums: albums)
   end
 
@@ -41,11 +46,15 @@ defmodule MyWedding.AlbumController do
   end
 
   def show(conn, %{"id" => id}) do
-    album = Repo.one!(
+    album_query =
       from a in Album,
         where: a.id == ^id,
         preload: [:photos]
-    )
+
+    album =
+      album_query
+      |> pub_priv_query(conn)
+      |> Repo.one!()
 
     render(conn, "show.html", album: album)
   end
@@ -58,7 +67,7 @@ defmodule MyWedding.AlbumController do
 
   def update(conn, %{"id" => id, "album" => album_params}) do
     album = Repo.get!(Album, id)
-    changeset = Album.changeset(album, album_params)
+    changeset = Album.admin_changeset(album, album_params)
 
     case Repo.update(changeset) do
       {:ok, album} ->
@@ -80,5 +89,15 @@ defmodule MyWedding.AlbumController do
     conn
     |> put_flash(:info, "Album deleted successfully.")
     |> redirect(to: album_path(conn, :index))
+  end
+
+  defp pub_priv_query(query, conn) do
+    cond do
+      is_authorized(conn, :uploader) ->
+        query
+      true ->
+        from a in query,
+          where: a.is_public == true
+    end
   end
 end
