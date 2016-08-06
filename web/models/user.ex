@@ -9,6 +9,8 @@ defmodule MyWedding.User do
     field :email, :string
     field :permission_level, :integer
 
+    field :can_login, :boolean
+
     field :google_uid, :string
 
     timestamps()
@@ -39,14 +41,15 @@ defmodule MyWedding.User do
           where: u.google_uid == ^auth.uid
       )
 
-    if user do
-      {:ok, user}
-    else
-      new_user =
+    cond do
+      user != nil && user.can_login == false ->
+        {:error, "User is inactive"}
+      user != nil ->
+        {:ok, user}
+      true ->
         %MyWedding.User{}
         |> changeset(user_info(auth))
-
-      MyWedding.Repo.insert(new_user)
+        |> MyWedding.Repo.insert()
     end
   end
 
@@ -62,7 +65,7 @@ defmodule MyWedding.User do
 
   def admin_changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:avatar, :name, :email, :permission_level])
+    |> cast(params, [:avatar, :name, :email, :permission_level, :can_login])
     |> validate_required([:name, :email, :permission_level])
   end
 end

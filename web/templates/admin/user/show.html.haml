@@ -23,9 +23,18 @@
           = select f, :permission_level, permission_options
           = label f, :permission_level
 
-          = submit "Update", class: "btn right"
+        .switch{style: "margin-bottom: 30px"}
+          %label
+            Inactive
+            = checkbox f, :can_login
+            %span.lever
+            Active
+
+        = submit "Update", class: "btn right"
       - end
 
       = link "Cancel", to: user_path(@conn, :index), class: "btn grey left"
-      = button "Delete", to: user_path(@conn, :delete, @user), method: "delete", class: "btn red left", style: "margin: 0 10px;"
+      %a.modal-trigger.btn.red.mar-sides.waves-effect.waves-light{href: "#confirm"} Delete
       .clearfix
+
+= render MyWedding.SharedView, "_confirm.html", button: button "Delete", to: user_path(@conn, :delete, @user), method: "delete", class: "btn btn-flat red-text red-outline"
