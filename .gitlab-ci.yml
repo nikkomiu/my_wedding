@@ -37,7 +37,7 @@ can_be_merged:
   stage: test
   image: debian:jessie
   before_script:
-    - apt-get install git -y
+    - apt-get update && apt-get install git -y
     - git config --global user.email "admin@nikkomiu.com"
     - git config --global user.name "CI"
   script:
