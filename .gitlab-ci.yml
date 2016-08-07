@@ -35,14 +35,15 @@ test:
 # Verify a release can be merged into master
 can_be_merged:
   stage: test
+  image: debian:jessie
   before_script:
+    - apt-get install git -y
     - git config --global user.email "admin@nikkomiu.com"
     - git config --global user.name "CI"
   script:
     - git checkout master
     - git merge $CI_BUILD_REF
   only:
-    - tags
     - develop
 
 # Create the Release Artifacts
