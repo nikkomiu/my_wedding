@@ -1,7 +1,10 @@
 %nav.page-nav
   .nav-wrapper.color-navbar
     .brand-logo.left
-      = link "My Wedding", to: post_path(@conn, :index)
+      = link to: post_path(@conn, :index) do
+        = svg_image(@conn, "logo", "wedding")
+        Our Wedding
+      - end
 
     %ul.right
       %li= link "Pages", to: post_path(@conn, :index)
