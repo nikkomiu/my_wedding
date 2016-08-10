@@ -5,7 +5,9 @@
         = link "Sign Out", to: auth_path(@conn, :sign_out)
       - else
         = link to: auth_path(@conn, :sign_in), style: "text-decoration: none;" do
-          = svg_image(@conn, "id-card", "wedding")
+          .left
+            = svg_image(@conn, "id-card", "wedding")
+          .left Sign In
         - end
     .center
       © 2016 Copyright Nikko Miu
