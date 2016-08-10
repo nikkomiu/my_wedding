@@ -7,9 +7,13 @@ defmodule MyWedding.AlbumController do
   plug :authorize_manager, "user" when action in [:delete]
 
   def index(conn, _params) do
+    photo_query =
+      from p in MyWedding.Photo,
+        limit: 1
+
     album_query =
       from a in Album,
-        preload: [:photos]
+        preload: [photos: ^photo_query]
 
     albums =
       album_query
@@ -46,10 +50,14 @@ defmodule MyWedding.AlbumController do
   end
 
   def show(conn, %{"id" => id}) do
+    photo_query =
+      from p in MyWedding.Photo,
+        order_by: p.inserted_at
+
     album_query =
       from a in Album,
         where: a.id == ^id,
-        preload: [:photos]
+        preload: [photos: ^photo_query]
 
     album =
       album_query
