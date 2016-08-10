@@ -1,6 +1,11 @@
 .container
   .center
-    %h4.grey-text.text-darken-1 Sign In
+    .wedding-login-header
+      .left
+        = svg_image(@conn, "id-card", "wedding")
+      %h4.left
+        Sign In
+      .clearfix
     .card-panel.grey.lighten-4
       = link to: auth_path(@conn, :request, :google), class: "btn white grey-text google-sign-in waves-effect" do
         = svg_image @conn, "google"
