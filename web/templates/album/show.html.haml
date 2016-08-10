@@ -6,12 +6,12 @@
   .row
     = for photo <- @album.photos do
       .col.s12.m4.l3
-        .card
+        .card.photo-card
           .card-image
             %img.materialboxed{src: "#{static_path(@conn, upload_path(photo.path, "800x500"))}"}
           .card-action
             = link to: "#{static_path(@conn, upload_path(photo.path))}", class: "blue-text right waves-effect no-pad", download: "#{photo.path}" do
-              = svg_image(@conn, "file_download")
+              = svg_image(@conn, "image-download", "wedding")
             - end
 
             - if is_authorized(@conn, :manager) do

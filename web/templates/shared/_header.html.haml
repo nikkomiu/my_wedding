@@ -7,10 +7,19 @@
       - end
 
     %ul.right
-      %li= link "Pages", to: post_path(@conn, :index)
-      %li= link "Photos", to: album_path(@conn, :index)
+      %li
+        = link to: post_path(@conn, :index) do
+          = svg_image(@conn, "news", "wedding")
+        - end
+      %li
+        = link to: album_path(@conn, :index) do
+          = svg_image(@conn, "picture", "wedding")
+        - end
       = if is_authorized(@conn, :admin) do
-        %li= link "Admin", to: home_path(@conn, :index)
+        %li
+          = link to: home_path(@conn, :index) do
+            = svg_image(@conn, "settings", "wedding")
+          - end
       - end
 
 - if (get_flash(@conn, :info) != nil) do
