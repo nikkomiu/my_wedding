@@ -4,11 +4,9 @@
       - if current_user(@conn) do
         = link "Sign Out", to: auth_path(@conn, :sign_out)
       - else
-        = link to: auth_path(@conn, :request, :google), class: "btn white grey-text google-sign-in waves-effect" do
-          = svg_image @conn, "google"
-          Sign in
+        = link to: auth_path(@conn, :sign_in), style: "text-decoration: none;" do
+          = svg_image(@conn, "id-card", "wedding")
         - end
-
     .center
       © 2016 Copyright Nikko Miu
 

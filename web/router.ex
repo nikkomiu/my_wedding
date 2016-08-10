@@ -25,6 +25,7 @@ defmodule MyWedding.Router do
 
     get "/", PostController, :index
 
+    get "/sign-in", AuthController, :sign_in
     get "/sign-out", AuthController, :sign_out
 
     resources "/pages", PostController
