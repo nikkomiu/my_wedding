@@ -30,6 +30,11 @@ defmodule MyWedding.AuthController do
     end
   end
 
+  def sign_in(conn, _params) do
+    conn
+    |> render(:sign_in)
+  end
+
   def sign_out(conn, _params) do
     conn
     |> configure_session(drop: true)

@@ -111,28 +111,28 @@ h1, h2, h3, h4, h5, h6 {
   border-style: dashed;
 }
 
-.card-action .btn-flat {
-  height: 21px;
-  line-height: 21px;
-
-  padding: 0 5px;
-  margin-left: 5px;
-}
-
 .alert {
   margin: 0;
 }
 
 .google-sign-in {
-  margin-top: 7px;
   text-transform: none;
+  border-color: blue;
 
   line-height: 32px;
+  letter-spacing: 0.1px;
+  padding: 0 10px 0 12px;
 
-  svg {
+  .material-google-svg {
     position: relative;
     top: 4px;
-    right: 10px;
+
+    padding-top: 4px;
+    padding-right: 2px;
+
+    margin-right: 6px;
+
+    border-right: 1px solid #ddd;
   }
 }
 
@@ -161,6 +161,24 @@ h1, h2, h3, h4, h5, h6 {
 
   h4 {
     margin: 0.42rem;
+  }
+}
+
+.photo-card {
+  .card-action {
+    padding: 8px;
+
+    .wedding-svgs svg {
+      height: 30px;
+    }
+  }
+
+  .card-action .btn-flat {
+    height: 30px;
+    line-height: 30px;
+
+    padding: 0 8px;
+    margin-left: 5px;
   }
 }
 
