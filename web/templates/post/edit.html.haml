@@ -13,5 +13,4 @@
   %a.modal-trigger.btn.red.mar-sides.waves-effect.waves-light{href: "#confirm"} Delete
   = link "Back", to: post_path(@conn, :show, @post), class: "btn waves-effect grey left"
 
-= render MyWedding.SharedView, "_simplemde.html", element: "post_body"
 = render MyWedding.SharedView, "_confirm.html", button: button "Delete", to: post_path(@conn, :delete, @post), method: :delete, class: "btn btn-flat red-text red-outline"
