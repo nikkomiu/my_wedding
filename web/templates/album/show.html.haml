@@ -1,5 +1,5 @@
 .pad-sides.large
-  %h4.truncate
+  %h4.grey-text.lighter-2.truncate
     = @album.title
     %small= @album.description
 
@@ -15,8 +15,7 @@
             - end
 
             - if is_authorized(@conn, :manager) do
-              = button "Delete", to: photo_path(@conn, :delete, photo), method: :delete, data: [confirm: "Are you sure?"], class: "btn-flat red-text waves-effect"
-
+              = button "Delete", to: photo_path(@conn, :delete, photo), method: :delete, data: [confirm: "Are you sure?"], class: "btn-flat red-text"
             .clearfix
     - end
 

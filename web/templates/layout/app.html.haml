@@ -13,8 +13,6 @@
     %link{rel: "icon", href: "#{static_path(@conn, "/favicon.ico?v=1")}"}
     %link{href: "#{static_path(@conn, "/assets/css/app.css")}", rel: "stylesheet"}
   %body
-    %script{src: "#{static_path(@conn, "/assets/js/app.js")}", async: "", defer: ""}
-
     = render MyWedding.SharedView, "_header.html", conn: @conn
 
     %main.page-content
@@ -22,3 +20,6 @@
 
     %footer.page-footer
       = render MyWedding.SharedView, "_footer.html", conn: @conn
+
+    %script{src: "#{static_path(@conn, "/assets/js/app.js")}"}
+    = render_existing(view_module(@conn), "#{@conn.private.phoenix_action}_js.html")

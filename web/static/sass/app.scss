@@ -23,6 +23,7 @@ $input-font-size: 16px;
 
 html {
   font-family: "Open Sans", sans-serif;
+  transition: background-color 1.5s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -166,6 +167,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .photo-card {
+  background-color: transparent;
+
   .card-action {
     padding: 10px 15px;
 
