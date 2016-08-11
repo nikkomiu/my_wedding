@@ -2,7 +2,12 @@
   .container
     .left
       - if current_user(@conn) do
-        = link "Sign Out", to: auth_path(@conn, :sign_out)
+        = link to: auth_path(@conn, :sign_out) do
+          .left.small
+            = svg_image(@conn, "exit", "wedding")
+          .left
+            Sign Out
+        - end
       - else
         = link to: auth_path(@conn, :sign_in), style: "text-decoration: none;" do
           .left
