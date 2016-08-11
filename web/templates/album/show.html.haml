@@ -25,7 +25,7 @@
     %ul
       %li
         = link to: album_path(@conn, :download, @album), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Download Album" do
-          = svg_image @conn, "download", "wedding"
+          = svg_image @conn, "file_download"
         - end
       %li
         = link to: album_path(@conn, :edit, @album), class: "btn-floating orange tooltipped", "data-position": "left", "data-tooltip": "Edit Album" do
@@ -41,7 +41,7 @@
     %ul
       %li
         = link to: album_path(@conn, :download, @album), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Download Album" do
-          = svg_image @conn, "download", "wedding"
+          = svg_image @conn, "file_download"
         - end
       %li
         = link to: album_path(@conn, :upload, @album), class: "btn-floating green tooltipped", "data-position": "left", "data-tooltip": "Add Photos" do

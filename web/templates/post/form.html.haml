@@ -2,7 +2,7 @@
   .col.s12.m10
     .input-field
       = mtl_label @f, :title
-      = text_input @f, :title
+      = text_input @f, :title, autofocus: ""
       = error_tag @f, :title
 
   .col.s12.m2
