@@ -1,0 +1,64 @@
+.card-title {
+  margin: 0;
+
+  .material-svgs {
+    position: relative;
+    top: 3px;
+  }
+}
+
+.small-card-image {
+  @extend .card-image;
+
+  img {
+    object-fit: cover;
+    max-height: 225px;
+  }
+}
+
+.card-description {
+  margin-bottom: 0;
+}
+
+.card-action a.no-pad {
+  margin: 0 !important;
+}
+
+.card-panel h3 {
+  margin: 0.7rem 0.2rem;
+}
+
+.collection .collection-item.avatar {
+  min-height: 62px;
+}
+
+.card .card-heading {
+  @extend .card-content;
+
+  padding: 10px 20px;
+
+  border-bottom: 1px solid lightgrey;
+
+  h4 {
+    margin: 0.42rem;
+  }
+}
+
+.photo-card {
+  background-color: transparent;
+
+  .card-action {
+    padding: 10px 15px;
+
+    .wedding-svgs svg {
+      height: 26px;
+    }
+  }
+
+  .card-action .btn-flat {
+    height: 26px;
+    line-height: 26px;
+
+    padding: 0 8px;
+  }
+}
