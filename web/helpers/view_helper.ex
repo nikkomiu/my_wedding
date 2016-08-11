@@ -11,6 +11,10 @@ defmodule MyWedding.ViewHelper do
     end
   end
 
+  def template_name(template) do
+    template |> String.split(".") |> List.first()
+  end
+
   def upload_path(filename, size) do
     split_path =
       filename
