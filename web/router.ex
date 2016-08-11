@@ -32,6 +32,7 @@ defmodule MyWedding.Router do
 
     resources "/albums", AlbumController
     get "/albums/:id/upload", AlbumController, :upload
+    get "/albums/:id/download", AlbumController, :download
   end
 
   scope "/auth", MyWedding do
