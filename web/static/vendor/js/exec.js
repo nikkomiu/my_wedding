@@ -4,10 +4,15 @@ $(function() {
   $('.modal-trigger').leanModal();
   $('select').material_select();
 
+  albumBackground()
+})
+
+function albumBackground() {
   var transition_prop = 'background-color 2s ease'
+  var path_regex = /\/albums\/\d+\/?$/
 
   // If is on /albums/:id
-  if (document.location.pathname.match(/\/albums\/\d/) != null) {
+  if (document.location.pathname.match(path_regex) != null) {
     // If the page was not reloaded
     if (performance.navigation.type == 0) {
       // Add background transition
@@ -20,8 +25,8 @@ $(function() {
 
   // If was on /albums/:id and not still on it
   //   and the page was not reloaded
-  if (document.referrer.match(/\/albums\/\d/) != null &&
-      document.location.pathname.match(/\/albums\/\d/) == null &&
+  if (document.referrer.match(path_regex) != null &&
+      document.location.pathname.match(path_regex) == null &&
       performance.navigation.type != 1) {
     // Set the background to black
     $('html').css('background-color', '#292929');
@@ -31,4 +36,4 @@ $(function() {
       $('html').css('transition', transition_prop).css('background-color', '#FFF');
     },  1)
   }
-})
+}
