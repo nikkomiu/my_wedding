@@ -11,6 +11,15 @@
       = number_input @f, :order
       = error_tag @f, :order
 
+  .col.s12
+    .input-field
+      %select.icons#post_photo_id{name: "post[photo_id]"}
+        %option{disabled: "", selected: ""} Choose a cover photo
+        = for {path, id} <- @photo_list do
+          %option{value: "#{id}", data-icon: "#{static_path(@conn, upload_path(path, "800x500"))}", class: "circle"}= path
+        - end
+      = label @f, :photo
+
 .input-field
   = textarea @f, :body
   = error_tag @f, :body

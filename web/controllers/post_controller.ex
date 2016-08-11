@@ -11,7 +11,8 @@ defmodule MyWedding.PostController do
       from p in Post,
         where: p.is_active == true,
         order_by: p.order,
-        order_by: p.inserted_at
+        order_by: p.inserted_at,
+        preload: [:photo]
     )
 
     render(conn, :index, posts: posts)
@@ -19,7 +20,7 @@ defmodule MyWedding.PostController do
 
   def new(conn, _params) do
     changeset = Post.changeset(%Post{order: 0, is_active: true})
-    render(conn, :new, changeset: changeset)
+    render(conn, :new, changeset: changeset, photo_list: photo_list)
   end
 
   def create(conn, %{"post" => post_params}) do
@@ -36,14 +37,19 @@ defmodule MyWedding.PostController do
   end
 
   def show(conn, %{"id" => id}) do
-    post = Repo.get!(Post, id)
+    post = Repo.one!(
+      from p in Post,
+        where: p.id == ^id,
+        preload: [:photo]
+    )
+
     render(conn, :show, post: post)
   end
 
   def edit(conn, %{"id" => id}) do
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post)
-    render(conn, :edit, post: post, changeset: changeset)
+    render(conn, :edit, post: post, changeset: changeset, photo_list: photo_list)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
@@ -57,7 +63,7 @@ defmodule MyWedding.PostController do
         |> redirect(to: post_path(conn, :show, post))
       {:error, changeset} ->
         conn
-        |> render(conn, :edit, post: post, changeset: changeset)
+        |> render(conn, :edit, post: post, changeset: changeset, photo_list: photo_list)
     end
   end
 
@@ -71,5 +77,20 @@ defmodule MyWedding.PostController do
     conn
     |> put_flash(:info, "Post deleted successfully.")
     |> redirect(to: post_path(conn, :index))
+  end
+
+  defp photo_list() do
+    album_id =
+      Repo.one(
+        from a in MyWedding.Album,
+          where: a.title == "Post Photos",
+          select: a.id
+      )
+
+    Repo.all(
+      from p in MyWedding.Photo,
+        select: {p.path, p.id},
+        where: p.album_id == ^album_id
+    )
   end
 end

@@ -5,7 +5,7 @@
 
     = render MyWedding.SharedView, "_form_error.html", changeset: @changeset
 
-    = render "form.html", f: f
+    = render "form.html", conn: @conn, photo_list: @photo_list, f: f
 
     = submit "Update Page", class: "btn right mar-bottom"
   - end
