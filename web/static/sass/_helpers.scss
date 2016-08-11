@@ -1,0 +1,17 @@
+.pad-sides {
+  padding-left: 10px;
+  padding-right: 10px;
+
+  &.large {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.mar-right {
+  margin-right: 10px;
+}
+
+.mar-bottom {
+  margin-bottom: 10px;
+}

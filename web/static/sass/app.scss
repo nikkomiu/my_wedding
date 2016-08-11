@@ -14,12 +14,14 @@ $input-font-size: 16px;
 
 @import "materialize";
 
+@import "_color";
 @import "_footer";
-@import "_svg_icons";
 @import "_form";
 @import "_btn";
 @import "_nav";
+@import "_card";
 @import "_dropzone";
+@import "_svg_icons";
 
 html {
   font-family: "Open Sans", sans-serif;
@@ -39,60 +41,6 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 16px !important;
 }
 
-#sidenav-overlay {
-  z-index: 998;
-}
-
-.card-title {
-  margin: 0;
-
-  .material-svgs {
-    position: relative;
-    top: 3px;
-  }
-}
-
-.card-description {
-  margin-bottom: 0;
-}
-
-.side-nav li.sidebar-header {
-  padding-left: 20px;
-  padding-right: 20px;
-
-  color: #777;
-
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-
-.pad-sides {
-  padding-left: 10px;
-  padding-right: 10px;
-
-  &.large {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-
-.mar-right {
-  margin-right: 10px;
-}
-
-.mar-bottom {
-  margin-bottom: 10px;
-}
-
-.small-card-image {
-  @extend .card-image;
-
-  img {
-    object-fit: cover;
-    max-height: 225px;
-  }
-}
-
 .parallax-container {
   &.small {
     height: 200px;
@@ -110,91 +58,8 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.page-nav .brand-logo.left {
-  padding-left: 10px;
-}
-
-.dropzone {
-  border-style: dashed;
-}
-
 .alert {
   margin: 0;
-}
-
-.google-sign-in {
-  text-transform: none;
-  border-color: blue;
-
-  line-height: 32px;
-  letter-spacing: 0.1px;
-  padding: 0 10px 0 12px;
-
-  .material-google-svg {
-    position: relative;
-    top: 3px;
-
-    padding-top: 4px;
-    padding-right: 2px;
-
-    margin-right: 6px;
-
-    border-right: 1px solid #ddd;
-
-    svg {
-      position: relative;
-      top: 3px;
-
-      margin: 0;
-    }
-  }
-}
-
-.blue-text svg {
-  fill: #2196f3;
-}
-
-.card-action a.no-pad {
-  margin: 0 !important;
-}
-
-.card-panel h3 {
-  margin: 0.7rem 0.2rem;
-}
-
-.collection .collection-item.avatar {
-  min-height: 62px;
-}
-
-.card .card-heading {
-  @extend .card-content;
-
-  padding: 10px 20px;
-
-  border-bottom: 1px solid lightgrey;
-
-  h4 {
-    margin: 0.42rem;
-  }
-}
-
-.photo-card {
-  background-color: transparent;
-
-  .card-action {
-    padding: 10px 15px;
-
-    .wedding-svgs svg {
-      height: 26px;
-    }
-  }
-
-  .card-action .btn-flat {
-    height: 26px;
-    line-height: 26px;
-
-    padding: 0 8px;
-  }
 }
 
 .wedding-login-header h4 {
@@ -205,8 +70,4 @@ h1, h2, h3, h4, h5, h6 {
 
 .modal.small {
   max-width: 400px;
-}
-
-.red-outline {
-  border: 1px solid red !important;
 }
