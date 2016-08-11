@@ -9,6 +9,10 @@ defmodule MyWedding.ControllerHelper do
     :zip.create(filename, files, [:memory, {:cwd, base_path}])
   end
 
+  def file_zip(filename, files, base_path \\ "/") do
+    :zip.create(filename, files, [{:cwd, base_path}])
+  end
+
   def send_binary_file(conn, filename, data) do
     conn
     |> put_resp_header("Content-Type", "application/octet-stream")
