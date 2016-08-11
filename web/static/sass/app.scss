@@ -128,7 +128,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .material-google-svg {
     position: relative;
-    top: 4px;
+    top: 3px;
 
     padding-top: 4px;
     padding-right: 2px;
@@ -136,6 +136,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 6px;
 
     border-right: 1px solid #ddd;
+
+    svg {
+      position: relative;
+      top: 3px;
+
+      margin: 0;
+    }
   }
 }
 

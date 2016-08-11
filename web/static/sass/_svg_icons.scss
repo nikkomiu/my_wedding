@@ -2,6 +2,14 @@
   @extend .material-icons;
 }
 
+.small .wedding-svgs.wedding-exit-svg svg {
+  position: relative;
+  top: 2px;
+
+  width: 32px;
+  margin-right: 6px;
+}
+
 .btn .material-svgs svg {
   width: 24px;
   height: 24px;
