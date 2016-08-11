@@ -1,19 +1,18 @@
-.container
-  .pad-sides.large
-    %h4 Edit Page
+.pad-sides.large
+  %h4 Edit Page
 
-    = form_for @changeset, post_path(@conn, :update, @post), fn f ->
+  = form_for @changeset, post_path(@conn, :update, @post), fn f ->
 
-      = render MyWedding.SharedView, "_form_error.html", changeset: @changeset
+    = render MyWedding.SharedView, "_form_error.html", changeset: @changeset
 
-      = render "form.html", f: f
+    = render "form.html", f: f
 
-      = submit "Update Page", class: "btn right mar-bottom"
-    - end
+    = submit "Update Page", class: "btn right mar-bottom"
+  - end
 
-    = link to: post_path(@conn, :show, @post), class: "btn waves-effect grey left mar-bottom mar-right" do
-      = svg_image(@conn, "arrow_back")
-    - end
-    %a.modal-trigger.btn.red.waves-effect.waves-light{href: "#confirm"}= svg_image(@conn, "delete")
+  = link to: post_path(@conn, :show, @post), class: "btn waves-effect grey left mar-bottom mar-right" do
+    = svg_image(@conn, "arrow_back")
+  - end
+  %a.modal-trigger.btn.red.waves-effect.waves-light{href: "#confirm"}= svg_image(@conn, "delete")
 
 = render MyWedding.SharedView, "_confirm.html", button: button "Delete", to: post_path(@conn, :delete, @post), method: :delete, class: "btn btn-flat red-text red-outline"
