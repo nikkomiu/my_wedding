@@ -13,8 +13,10 @@ function albumBackground() {
 
   // If is on /albums/:id
   if (document.location.pathname.match(path_regex) != null) {
-    // If the page was not reloaded
-    if (performance.navigation.type == 0) {
+    // If the page was not reloaded and there is a referrer
+    if (performance.navigation.type == 0 &&
+        document.referrer.match(path_regex) != null &&
+        document.referrer != "") {
       // Add background transition
       $('html').css('transition', transition_prop)
     }
