@@ -99,6 +99,35 @@ defmodule MyWedding.AlbumController do
     |> redirect(to: album_path(conn, :index))
   end
 
+  def download(conn, %{"id" => id}) do
+    album_name = Repo.one!(
+      from a in Album,
+        where: a.id == ^id,
+        select: a.title
+    )
+
+    photos = Repo.all(
+      from p in MyWedding.Photo,
+        where: p.album_id == ^id,
+        select: p.path
+    )
+
+    base_path =
+      app_base(conn)
+      |> Path.join("priv/static/uploads/")
+
+    photo_paths = Enum.map(photos, fn(p) -> p |> to_char_list end)
+
+    case mem_zip("#{album_name} Album.zip", photo_paths, base_path) do
+      {:ok, {filename, data}} ->
+        conn
+        |> send_binary_file(filename, data)
+      {:error, _} ->
+        conn
+        |> redirect(to: album_path(conn, :show, id))
+    end
+  end
+
   defp pub_priv_query(query, conn) do
     cond do
       is_authorized(conn, :uploader) ->

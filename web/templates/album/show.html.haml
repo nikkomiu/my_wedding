@@ -24,7 +24,11 @@
     .btn-floating.btn-large.red= svg_image @conn, "more_vert"
     %ul
       %li
-        = link to: album_path(@conn, :edit, @album), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Edit Album" do
+        = link to: album_path(@conn, :download, @album), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Download Album" do
+          = svg_image @conn, "download", "wedding"
+        - end
+      %li
+        = link to: album_path(@conn, :edit, @album), class: "btn-floating orange tooltipped", "data-position": "left", "data-tooltip": "Edit Album" do
           = svg_image @conn, "mode_edit"
         - end
       %li
@@ -33,7 +37,13 @@
         - end
 - else
   .fixed-action-btn
-    .btn-floating.btn-large.green
-      = link to: album_path(@conn, :upload, @album) do
-        = svg_image @conn, "add"
-      - end
+    .btn-floating.btn-large.red= svg_image @conn, "more_vert"
+    %ul
+      %li
+        = link to: album_path(@conn, :download, @album), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Download Album" do
+          = svg_image @conn, "download", "wedding"
+        - end
+      %li
+        = link to: album_path(@conn, :upload, @album), class: "btn-floating green tooltipped", "data-position": "left", "data-tooltip": "Add Photos" do
+          = svg_image @conn, "add"
+        - end
