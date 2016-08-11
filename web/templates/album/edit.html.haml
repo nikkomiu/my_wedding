@@ -1,25 +1,24 @@
-.container
-  .pad-sides.large
-    %h4 Edit Album
+.pad-sides.large
+  %h4 Edit Album
 
-    = form_for @changeset, album_path(@conn, :update, @album), fn f ->
-      = render MyWedding.SharedView, "_form_error.html", changeset: @changeset
+  = form_for @changeset, album_path(@conn, :update, @album), fn f ->
+    = render MyWedding.SharedView, "_form_error.html", changeset: @changeset
 
-      = render "form.html", f: f
+    = render "form.html", f: f
 
-      .switch{style: "margin-bottom: 30px"}
-        %label
-          Private
-          = checkbox f, :is_public
-          %span.lever
-          Public
+    .switch{style: "margin-bottom: 30px"}
+      %label
+        Private
+        = checkbox f, :is_public
+        %span.lever
+        Public
 
-      = submit "Update Album", class: "btn right mar-bottom"
-    - end
+    = submit "Update Album", class: "btn right mar-bottom"
+  - end
 
-    = link to: album_path(@conn, :show, @album), class: "btn waves-effect waves-light grey left mar-right mar-bottom" do
-      = svg_image(@conn, "arrow_back")
-    - end
-    %a.modal-trigger.btn.red.waves-effect.waves-light{href: "#confirm"}= svg_image(@conn, "delete")
+  = link to: album_path(@conn, :show, @album), class: "btn waves-effect waves-light grey left mar-right mar-bottom" do
+    = svg_image(@conn, "arrow_back")
+  - end
+  %a.modal-trigger.btn.red.waves-effect.waves-light{href: "#confirm"}= svg_image(@conn, "delete")
 
-  = render MyWedding.SharedView, "_confirm.html", button: button "Delete", to: album_path(@conn, :delete, @album), method: "delete", class: "btn btn-flat red-text red-outline"
+= render MyWedding.SharedView, "_confirm.html", button: button "Delete", to: album_path(@conn, :delete, @album), method: "delete", class: "btn btn-flat red-text red-outline"
