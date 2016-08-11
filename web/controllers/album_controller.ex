@@ -112,21 +112,17 @@ defmodule MyWedding.AlbumController do
         select: p.path
     )
 
-    base_path = Path.join([
-      Application.app_dir(Phoenix.Controller.endpoint_module(conn).config(:otp_app)),
-      "priv/static/uploads/",
-    ])
+    base_path =
+      app_base(conn)
+      |> Path.join("priv/static/uploads/")
 
     photo_paths = Enum.map(photos, fn(p) -> p |> to_char_list end)
 
-    case :zip.create("#{album_name} Album.zip", photo_paths, [:cooked, :memory, {:cwd, base_path}]) do
+    case mem_zip("#{album_name} Album.zip", photo_paths, base_path) do
       {:ok, {filename, data}} ->
         conn
-        |> put_resp_header("Content-Type", "application/octet-stream")
-        |> put_resp_header("Content-Disposition", "attachment; filename=\"#{filename}\"")
-        |> put_resp_header("Location", album_path(conn, :show, id))
-        |> resp(200, data)
-      {:error, reason} ->
+        |> send_binary_file(filename, data)
+      {:error, _} ->
         conn
         |> redirect(to: album_path(conn, :show, id))
     end

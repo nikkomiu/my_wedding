@@ -23,7 +23,7 @@ defmodule MyWedding.AuthController do
         conn
         |> put_flash(:error, "Your account is not active. Please contact the site administrator to activate your account.")
         |> redirect(to: "/")
-      {:error, reason} ->
+      {:error, _reason} ->
         conn
         |> put_flash(:error, "Could not log you in! Please contact the site admin if the problem persists.")
         |> redirect(to: "/")

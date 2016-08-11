@@ -2,7 +2,8 @@
   @extend .material-icons;
 }
 
-.btn-floating .material-svgs svg {
+.btn-floating .material-svgs svg,
+.btn-floating .wedding-svgs svg {
   height: 20px;
   width: 20px;
 
