@@ -30,11 +30,13 @@
             %span.lever
             Active
 
-        = submit "Update", class: "btn right"
+        = submit "Update", class: "btn right mar-bottom"
       - end
 
-      = link "Cancel", to: user_path(@conn, :index), class: "btn grey left"
-      %a.modal-trigger.btn.red.mar-sides.waves-effect.waves-light{href: "#confirm"} Delete
+      = link to: user_path(@conn, :index), class: "btn grey left mar-right mar-bottom pad-sides large" do
+        = svg_image(@conn, "arrow_back")
+      - end
+      %a.modal-trigger.btn.red.waves-effect.waves-light{href: "#confirm"}= svg_image(@conn, "delete")
       .clearfix
 
 = render MyWedding.SharedView, "_confirm.html", button: button "Delete", to: user_path(@conn, :delete, @user), method: "delete", class: "btn btn-flat red-text red-outline"

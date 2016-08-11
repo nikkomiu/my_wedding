@@ -8,7 +8,7 @@ $(function() {
 })
 
 function albumBackground() {
-  var transition_prop = 'background-color 2s ease'
+  var transition_prop = 'background-color 2.3s ease'
   var path_regex = /\/albums\/\d+\/?$/
 
   // If is on /albums/:id
