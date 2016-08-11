@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
 $primary-color: lighten(#187bd6, 4%);
 $primary-color-light: #64b5f6;
@@ -23,6 +23,10 @@ $input-font-size: 16px;
 
 html {
   font-family: "Open Sans", sans-serif;
+}
+
+strong {
+  font-weight: 700;
 }
 
 h1, h2, h3, h4, h5, h6 {
