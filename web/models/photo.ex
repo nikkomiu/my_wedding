@@ -3,6 +3,8 @@ defmodule MyWedding.Photo do
 
   schema "photos" do
     field :path, :string
+
+    has_many :posts, MyWedding.Post
     belongs_to :album, MyWedding.Album
 
     timestamps()
