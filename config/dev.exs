@@ -17,7 +17,7 @@ config :my_wedding, MyWedding.Endpoint,
 config :my_wedding, MyWedding.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|scss|sass|css|png|jpeg|jpg|gif|svg)$},
+      ~r{priv/static/(assets|images|svg).*(js|scss|sass|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{web/views/.*(ex)$},
       ~r{web/templates/.*(eex|haml)$}
