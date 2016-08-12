@@ -47,6 +47,7 @@ defmodule MyWedding.Router do
     pipe_through :admin
 
     get "/", HomeController, :index
+    get "/download-photos", HomeController, :download_photos
 
     resources "/users", UserController, only: [:index, :show, :update, :delete]
   end

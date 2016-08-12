@@ -24,7 +24,7 @@
     .btn-floating.btn-large.red= svg_image @conn, "more_vert"
     %ul
       %li
-        = link to: album_path(@conn, :download, @album), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Download Album" do
+        = link to: album_path(@conn, :download, @album), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Download Album", target: "_blank" do
           = svg_image @conn, "file_download"
         - end
       %li
@@ -40,7 +40,7 @@
     .btn-floating.btn-large.red= svg_image @conn, "more_vert"
     %ul
       %li
-        = link to: album_path(@conn, :download, @album), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Download Album" do
+        = link to: album_path(@conn, :download, @album), class: "btn-floating blue tooltipped", "data-position": "left", "data-tooltip": "Download Album", target: "_blank" do
           = svg_image @conn, "file_download"
         - end
       %li

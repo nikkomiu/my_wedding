@@ -5,8 +5,49 @@ defmodule MyWedding.ControllerHelper do
     Application.app_dir(Phoenix.Controller.endpoint_module(conn).config(:otp_app))
   end
 
-  def mem_zip(filename, files, base_path \\ "/") do
-    :zip.create(filename, files, [:memory, {:cwd, base_path}])
+  def get_photo_archive(base_path, saved_zip_name, photos) do
+    files = File.ls!(base_path)
+
+    # If the current archive exists serve it otherwise create a new one
+    if files |> Enum.any?(fn(x) -> x == saved_zip_name end) do
+      {:ok, read_zip(base_path, saved_zip_name)}
+    else
+      # ID part of the filename to remove
+      id = saved_zip_name |> String.split("-") |> List.first()
+
+      # Remove the old zip file
+      case files |> Enum.find(fn(x) -> x |> String.starts_with?(id) end) do
+        nil ->
+          nil
+        file ->
+          base_path
+          |> Path.join(file)
+          |> File.rm()
+      end
+
+      # Get the path of all of the photos
+      photo_paths = Enum.map(photos, fn(p) -> p.path |> to_char_list end)
+
+      # Zip the files
+      case file_zip(base_path |> Path.join(saved_zip_name), photo_paths, base_path) do
+        {:ok, _} ->
+          {:ok, read_zip(base_path, saved_zip_name)}
+        match ->
+          match
+      end
+    end
+  end
+
+  def newest_photo_date(photo) do
+    photo.inserted_at
+    |> Ecto.DateTime.to_iso8601
+    |> String.replace(":", "_")
+  end
+
+  defp read_zip(base_path, filename) do
+    base_path
+    |> Path.join(filename)
+    |> File.read!()
   end
 
   def file_zip(filename, files, base_path \\ "/") do
