@@ -26,7 +26,6 @@ defmodule MyWedding.Api.PhotoController do
 
         image =
           path
-          |> when_image_exists()
           |> open()
           |> resize_to_fill(size)
           |> save()
@@ -65,20 +64,7 @@ defmodule MyWedding.Api.PhotoController do
     conn
     |> redirect(to: album_path(conn, :show, photo.album_id))
   end
-
-  defp when_image_exists(path) do
-    Logger.debug "Checking for image..."
-
-    unless File.exists?(path) do
-      Logger.warn "Image doesn't exist yet"
-
-      :timer.sleep(10)
-      when_image_exists(path)
-    end
-
-    path
-  end
-
+  
   defp get_full_path(conn, filename) do
     Application.app_dir(Phoenix.Controller.endpoint_module(conn).config(:otp_app))
     |> Path.join("/priv/static/uploads/#{filename}")
