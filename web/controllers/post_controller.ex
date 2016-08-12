@@ -7,13 +7,16 @@ defmodule MyWedding.PostController do
   plug :authorize_manager, "user" when action in [:delete]
 
   def index(conn, _params) do
-    posts = Repo.all(
+    post_query =
       from p in Post,
-        where: p.is_active == true,
         order_by: p.order,
         order_by: p.inserted_at,
         preload: [:photo]
-    )
+
+    posts =
+      post_query
+      |> pub_priv_query(conn)
+      |> Repo.all()
 
     render(conn, :index, posts: posts)
   end
@@ -32,16 +35,20 @@ defmodule MyWedding.PostController do
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: post_path(conn, :show, post.id))
       {:error, changeset} ->
-        render(conn, :new, changeset: changeset)
+        render(conn, :new, changeset: changeset, photo_list: photo_list)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    post = Repo.one!(
+    post_query =
       from p in Post,
         where: p.id == ^id,
         preload: [:photo]
-    )
+
+    post =
+      post_query
+      |> pub_priv_query(conn)
+      |> Repo.one!()
 
     render(conn, :show, post: post)
   end
@@ -92,5 +99,15 @@ defmodule MyWedding.PostController do
         select: {p.path, p.id},
         where: p.album_id == ^album_id
     )
+  end
+
+  defp pub_priv_query(query, conn) do
+    cond do
+      is_authorized(conn, :author) ->
+        query
+      true ->
+        from p in query,
+          where: p.is_active == true
+    end
   end
 end
