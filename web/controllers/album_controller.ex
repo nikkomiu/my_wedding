@@ -9,7 +9,8 @@ defmodule MyWedding.AlbumController do
   def index(conn, _params) do
     photo_query =
       from p in MyWedding.Photo,
-        limit: 1
+        order_by: p.id,
+        limit: 3
 
     album_query =
       from a in Album,

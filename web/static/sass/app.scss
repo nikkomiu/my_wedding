@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import url(https://fonts.googleapis.com/css?family=Raleway:700,300);
 
 $primary-color: lighten(#187bd6, 4%);
 $primary-color-light: #64b5f6;
@@ -15,6 +15,7 @@ $input-font-size: 16px;
 @import "materialize";
 
 @import "_color";
+@import "_helpers";
 @import "_footer";
 @import "_form";
 @import "_btn";
@@ -24,7 +25,8 @@ $input-font-size: 16px;
 @import "_svg_icons";
 
 html {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
 }
 
 strong {
