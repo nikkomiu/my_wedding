@@ -9,8 +9,7 @@ defmodule MyWedding.AlbumController do
   def index(conn, _params) do
     photo_query =
       from p in MyWedding.Photo,
-        order_by: p.id,
-        limit: 3
+        order_by: [asc: :inserted_at]
 
     album_query =
       from a in Album,
@@ -29,14 +28,6 @@ defmodule MyWedding.AlbumController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def upload(conn, %{"id" => id}) do
-    album = Repo.get!(Album, id)
-
-    changeset = MyWedding.Photo.changeset(%MyWedding.Photo{})
-
-    render(conn, :upload, album: album, changeset: changeset)
-  end
-
   def create(conn, %{"album" => album_params}) do
     changeset = Album.changeset(%Album{}, album_params)
 
@@ -53,7 +44,7 @@ defmodule MyWedding.AlbumController do
   def show(conn, %{"id" => id}) do
     photo_query =
       from p in MyWedding.Photo,
-        order_by: p.inserted_at
+        order_by: [desc: :inserted_at]
 
     album_query =
       from a in Album,
@@ -100,32 +91,61 @@ defmodule MyWedding.AlbumController do
     |> redirect(to: album_path(conn, :index))
   end
 
+  def upload(conn, %{"id" => id}) do
+    album = Repo.get!(Album, id)
+
+    changeset = MyWedding.Photo.changeset(%MyWedding.Photo{})
+
+    render(conn, :upload, album: album, changeset: changeset)
+  end
+
   def download(conn, %{"id" => id}) do
+    photos = Repo.all(
+      from p in MyWedding.Photo,
+        where: p.album_id == ^id,
+        select: struct(p, [:path, :inserted_at]),
+        order_by: [desc: :inserted_at]
+    )
+
     album_name = Repo.one!(
       from a in Album,
         where: a.id == ^id,
         select: a.title
     )
 
-    photos = Repo.all(
-      from p in MyWedding.Photo,
-        where: p.album_id == ^id,
-        select: p.path
-    )
+    inserted = (photos |> List.first()).inserted_at
+      |> Ecto.DateTime.to_iso8601
+      |> String.replace(":", "_")
 
-    base_path =
-      app_base(conn)
-      |> Path.join("priv/static/uploads/")
+    send_zip_name = "#{album_name} Album.zip"
+    saved_zip_name = "#{id}-#{inserted}.zip"
 
-    photo_paths = Enum.map(photos, fn(p) -> p |> to_char_list end)
+    base_path = app_base(conn) |> Path.join("priv/static/uploads/")
+    files = File.ls!(base_path)
 
-    case mem_zip("#{album_name} Album.zip", photo_paths, base_path) do
-      {:ok, {filename, data}} ->
-        conn
-        |> send_binary_file(filename, data)
-      {:error, _} ->
-        conn
-        |> redirect(to: album_path(conn, :show, id))
+    # If the current archive exists serve it otherwise create a new one
+    if files |> Enum.any?(fn(x) -> x == saved_zip_name end) do
+      conn
+      |> send_binary_file(send_zip_name, File.read!(Path.join(base_path, saved_zip_name)))
+    else
+      # Remove the old zip file
+      base_path
+      |> Path.join(files |> Enum.find(fn(x) -> x |> String.starts_with?(id) end))
+      |> File.rm()
+
+      # Get the path of all of the photos
+      photo_paths = Enum.map(photos, fn(p) -> p.path |> to_char_list end)
+
+      # Zip the files
+      case file_zip(base_path |> Path.join(saved_zip_name), photo_paths, base_path) do
+        {:ok, _} ->
+          conn
+          |> send_binary_file(send_zip_name, File.read!(Path.join(base_path, saved_zip_name)))
+        {:error, _} ->
+          conn
+          |> put_flash(:error, "Error creating archive of album!")
+          |> redirect(to: album_path(conn, :show, id))
+      end
     end
   end
 
