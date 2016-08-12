@@ -113,40 +113,23 @@ defmodule MyWedding.AlbumController do
         select: a.title
     )
 
-    inserted = (photos |> List.first()).inserted_at
-      |> Ecto.DateTime.to_iso8601
-      |> String.replace(":", "_")
-
-    send_zip_name = "#{album_name} Album.zip"
-    saved_zip_name = "#{id}-#{inserted}.zip"
+    newest_inserted =
+      photos
+      |> List.first()
+      |> newest_photo_date()
 
     base_path = app_base(conn) |> Path.join("priv/static/uploads/")
-    files = File.ls!(base_path)
+    send_filename = "#{album_name} Album.zip"
 
-    # If the current archive exists serve it otherwise create a new one
-    if files |> Enum.any?(fn(x) -> x == saved_zip_name end) do
-      conn
-      |> send_binary_file(send_zip_name, File.read!(Path.join(base_path, saved_zip_name)))
-    else
-      # Remove the old zip file
-      base_path
-      |> Path.join(files |> Enum.find(fn(x) -> x |> String.starts_with?(id) end))
-      |> File.rm()
-
-      # Get the path of all of the photos
-      photo_paths = Enum.map(photos, fn(p) -> p.path |> to_char_list end)
-
-      # Zip the files
-      case file_zip(base_path |> Path.join(saved_zip_name), photo_paths, base_path) do
-        {:ok, _} ->
-          conn
-          |> send_binary_file(send_zip_name, File.read!(Path.join(base_path, saved_zip_name)))
-        {:error, _} ->
-          conn
-          |> put_flash(:error, "Error creating archive of album!")
-          |> redirect(to: album_path(conn, :show, id))
-      end
-    end
+    case get_photo_archive(base_path, "#{id}-#{newest_inserted}.zip", photos) do
+      {:ok, data} ->
+        conn
+        |> send_binary_file(send_filename, data)
+      {:error, _} ->
+        conn
+        |> put_flash(:error, "Error creating archive of album!")
+        |> redirect(to: album_path(conn, :show, id))
+     end
   end
 
   defp pub_priv_query(query, conn) do
