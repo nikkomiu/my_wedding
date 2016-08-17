@@ -6,6 +6,8 @@ config :my_wedding, MyWedding.Endpoint,
   http: [port: 4001],
   server: false
 
+config :my_wedding, :environment, :test
+
 # Print only warnings and errors during test
 config :logger, level: :warn
 
