@@ -13,7 +13,7 @@
     %link{rel: "icon", href: "#{static_path(@conn, "/favicon.ico?v=1")}"}
     %link{href: "#{static_path(@conn, "/assets/css/app.css")}", rel: "stylesheet"}
   %body
-    = if Mix.env == :prod do
+    = if is_env(:prod) do
       = render MyWedding.SharedView, "_analytics.html"
     - end
     %script{src: "#{static_path(@conn, "/assets/js/app.js")}"}

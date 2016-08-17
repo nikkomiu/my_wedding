@@ -1,6 +1,10 @@
 defmodule MyWedding.ViewHelper do
   require Logger
 
+  def is_env(env) do
+    Application.get_env(:my_wedding, :environment) == env
+  end
+
   def mtl_label(form, field) do
     Phoenix.HTML.Form.label(form, field, class: is_active(form, field))
   end
