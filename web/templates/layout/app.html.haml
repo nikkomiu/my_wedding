@@ -13,6 +13,7 @@
     %link{rel: "icon", href: "#{static_path(@conn, "/favicon.ico?v=1")}"}
     %link{href: "#{static_path(@conn, "/assets/css/app.css")}", rel: "stylesheet"}
   %body
+    = render MyWedding.SharedView, "_analytics.html"
     %script{src: "#{static_path(@conn, "/assets/js/app.js")}"}
 
     = render MyWedding.SharedView, "_header.html", conn: @conn
