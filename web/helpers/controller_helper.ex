@@ -1,5 +1,7 @@
 defmodule MyWedding.ControllerHelper do
+
   import Plug.Conn
+  import Mogrify
 
   def app_base(conn) do
     Application.app_dir(Phoenix.Controller.endpoint_module(conn).config(:otp_app))
@@ -59,5 +61,33 @@ defmodule MyWedding.ControllerHelper do
     |> put_resp_header("Content-Type", "application/octet-stream")
     |> put_resp_header("Content-Disposition", "attachment; filename=\"#{filename}\"")
     |> resp(200, data)
+  end
+
+  def convert_image(path, size) do
+    image =
+      path
+      |> open()
+      |> resize_to_fill(size)
+      |> save()
+
+    image.path
+    |> File.cp!(get_size_image_path_from_full_path(path, size))
+
+    image.path
+  end
+
+  def get_full_image_path(conn, filename) do
+    Application.app_dir(Phoenix.Controller.endpoint_module(conn).config(:otp_app))
+    |> Path.join("/priv/static/uploads/#{filename}")
+  end
+
+  defp get_size_image_path_from_full_path(orig_path, size) do
+    split_path =
+      orig_path
+      |> String.split(".")
+
+    split_path
+    |> List.replace_at(length(split_path) -2, Enum.join([List.first(Enum.take(split_path, -2)), size], "-"))
+    |> Enum.join(".")
   end
 end

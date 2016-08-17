@@ -2,7 +2,6 @@ defmodule MyWedding.Api.PhotoController do
   use MyWedding.Web, :controller
 
   require Logger
-  import Mogrify
 
   def create(conn, %{"file" => file_param, "album_id" => album_id}) do
     if Regex.match?(~r/image\/.*/, file_param.content_type) do
@@ -14,26 +13,16 @@ defmodule MyWedding.Api.PhotoController do
 
       filename = "#{uuid}.#{List.last(String.split(file_param.filename, "."))}"
 
-      path = get_full_path(conn, filename)
+      path = get_full_image_path(conn, filename)
 
       # Copy the full size file into place
       path
       |> copy_temp_file(file_param.path)
 
-      # Convert Image
+      # Async Convert Image
       Task.async(fn ->
-        size = "800x500"
-
-        image =
-          path
-          |> open()
-          |> resize_to_fill(size)
-          |> save()
-
-        image.path
-        |> File.cp!(get_size_path_from_full_path(path, size))
+        convert_image(path, "800x500")
       end)
-      # End Convert Image
 
       # Insert Image
       album = Repo.get!(MyWedding.Album, album_id)
@@ -63,21 +52,6 @@ defmodule MyWedding.Api.PhotoController do
 
     conn
     |> redirect(to: album_path(conn, :show, photo.album_id))
-  end
-  
-  defp get_full_path(conn, filename) do
-    Application.app_dir(Phoenix.Controller.endpoint_module(conn).config(:otp_app))
-    |> Path.join("/priv/static/uploads/#{filename}")
-  end
-
-  defp get_size_path_from_full_path(orig_path, size) do
-    split_path =
-      orig_path
-      |> String.split(".")
-
-    split_path
-    |> List.replace_at(length(split_path) -2, Enum.join([List.first(Enum.take(split_path, -2)), size], "-"))
-    |> Enum.join(".")
   end
 
   defp copy_temp_file(perm_path, temp_path) do

@@ -28,6 +28,8 @@ defmodule MyWedding.Router do
     get "/terms", PageController, :terms
     get "/privacy", PageController, :terms
 
+    get "/uploads/:image_id", ImageController, :upload
+
     resources "/pages", PostController
 
     resources "/albums", AlbumController
