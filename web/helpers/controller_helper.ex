@@ -81,7 +81,7 @@ defmodule MyWedding.ControllerHelper do
     |> Path.join("/priv/static/uploads/#{filename}")
   end
 
-  defp get_size_image_path_from_full_path(orig_path, size) do
+  def get_size_image_path_from_full_path(orig_path, size) do
     split_path =
       orig_path
       |> String.split(".")
