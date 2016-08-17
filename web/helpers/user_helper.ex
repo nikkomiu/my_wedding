@@ -21,7 +21,7 @@ defmodule MyWedding.UserHelper do
         unless is_authorized(conn, unquote(perm)) do
           has_unauthorized_fn =
             __info__(:functions) |>
-            Enum.map(fn(tuple) -> tuple_keys(tuple) end)
+            Enum.map(fn({key, _}) -> key end)
             |> Enum.member?(:unauthorized)
 
           if has_unauthorized_fn do
@@ -37,10 +37,6 @@ defmodule MyWedding.UserHelper do
         conn
       end
     end
-  end
-
-  def tuple_keys({keys, _values}) do
-    keys
   end
 
   def is_authorized(conn, auth_level) do
