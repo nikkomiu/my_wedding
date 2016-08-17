@@ -25,6 +25,9 @@ defmodule MyWedding.Router do
 
     get "/", PostController, :index
 
+    get "/terms", PageController, :terms
+    get "/privacy", PageController, :terms
+
     resources "/pages", PostController
 
     resources "/albums", AlbumController
