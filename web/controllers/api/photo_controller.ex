@@ -48,7 +48,15 @@ defmodule MyWedding.Api.PhotoController do
   def delete(conn, %{"id" => id}) do
     photo = Repo.get!(MyWedding.Photo, id)
 
-    Repo.delete!(photo)
+    path = get_full_image_path(conn, "#{photo.path}")
+    get_size_image_path_from_full_path(path, "800x500") |> File.rm()
+
+    case path |> File.rm() do
+      {:error, status} when status != :enoent ->
+        raise("Could not delete file! #{status}")
+      _ ->
+        Repo.delete!(photo)
+    end
 
     conn
     |> redirect(to: album_path(conn, :show, photo.album_id))
