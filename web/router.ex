@@ -25,9 +25,6 @@ defmodule MyWedding.Router do
 
     get "/", PostController, :index
 
-    get "/sign-in", AuthController, :sign_in
-    get "/sign-out", AuthController, :sign_out
-
     resources "/pages", PostController
 
     resources "/albums", AlbumController
@@ -37,6 +34,9 @@ defmodule MyWedding.Router do
 
   scope "/auth", MyWedding do
     pipe_through :browser
+
+    get "/sign-in", AuthController, :sign_in
+    get "/sign-out", AuthController, :sign_out
 
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
