@@ -56,7 +56,7 @@ defmodule MyWedding.Web do
       import MyWedding.ErrorHelpers
       import MyWedding.Gettext
 
-      import PhoenixInlineSvg.Helpers
+      import MyWedding.InlineSvgCache
 
       import MyWedding.ViewHelper
       import MyWedding.UserHelper
