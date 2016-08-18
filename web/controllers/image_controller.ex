@@ -8,7 +8,12 @@ defmodule MyWedding.ImageController do
       [name, size] ->
         path = get_full_image_path(conn, "#{name}.#{filetype}")
 
-        data = convert_image(path, size) |> File.read!()
+        data =
+          try do
+            convert_image(path, size) |> File.read!()
+          rescue
+            _ -> path |> File.read!()
+          end
 
         conn
         |> put_resp_header("Content-Type", "image/#{filetype}")
