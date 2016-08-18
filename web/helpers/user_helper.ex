@@ -31,12 +31,20 @@ defmodule MyWedding.UserHelper do
             |> put_flash(:error, "You are not allowed to do that!")
             |> redirect(to: "/")
           end
-          |> send_resp()
+
+          # Throw an exception to stop execution
+          raise MyWedding.UserHelper.UnauthorizedError
         end
 
         conn
       end
     end
+  end
+
+  defmodule UnauthorizedError do
+    message = "Not authorized to view this page"
+
+    defexception message: message, plug_status: 403
   end
 
   def is_authorized(conn, auth_level) do

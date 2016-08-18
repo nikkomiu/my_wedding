@@ -2,6 +2,7 @@ defmodule MyWedding.Admin.HomeController do
   use MyWedding.Web, :controller
 
   def index(conn, _params) do
+    IO.inspect "-=-=-=-=-=-=-=-=-=-=- Oh shat"
     user_count =
       Repo.one(
         from u in MyWedding.User,
@@ -51,7 +52,7 @@ defmodule MyWedding.Admin.HomeController do
       {:error, _} ->
         conn
         |> put_flash(:error, "Error creating archive!")
-        |> redirect(to: home_path(@conn, :index))
+        |> redirect(to: home_path(conn, :index))
      end
   end
 end
