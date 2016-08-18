@@ -13,6 +13,7 @@ defmodule MyWedding do
       # Start the endpoint when the application starts
       supervisor(MyWedding.Endpoint, []),
       # Start your own worker by calling: MyWedding.Worker.start_link(arg1, arg2, arg3)
+      worker(MyWedding.InlineSvgCache, [])
       # worker(MyWedding.Worker, [arg1, arg2, arg3]),
     ]
 
