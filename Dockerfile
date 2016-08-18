@@ -1,11 +1,11 @@
-FROM buildpack-deps:jessie
+FROM debian:jessie
 
 # WARNING: This expects there to be a release in the rel directory
 
 MAINTAINER Nikko Miu <nikkoamiu@gmail.com>
 
 # Install Dependencies
-RUN apt-get update && apt-get install libssl1.0.0 -y
+RUN apt-get update && apt-get install -y libssl1.0.0 imagemagick
 
 # Build Arguments
 ARG APP_VER=0.0.1
