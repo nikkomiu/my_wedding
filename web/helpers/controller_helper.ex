@@ -67,6 +67,7 @@ defmodule MyWedding.ControllerHelper do
     image =
       path
       |> open()
+      |> auto_orient()
       |> resize_to_fill(size)
       |> save()
 
