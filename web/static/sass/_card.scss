@@ -61,4 +61,13 @@
 
     padding: 0 8px;
   }
+
+  .materialboxed {
+    height: 180px;
+    object-fit: cover;
+
+    &.active {
+      object-fit: contain;
+    }
+  }
 }
