@@ -45,18 +45,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .parallax-container {
   &.small {
-    height: 200px;
+    height: 250px;
   }
 
   h3 {
     color: white;
-    padding-top: 50px;
+    padding-top: 85px;
     text-shadow: 1px 1px 9px #000;
-  }
-
-  .parallax {
-    filter: blur(4px);
-    -webkit-filter: blur(4px);
   }
 }
 
