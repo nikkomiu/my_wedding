@@ -67,11 +67,9 @@ defmodule MyWedding.Api.PhotoController do
   end
 
   def verify(conn, %{"g-recaptcha-response" => recaptcha_response}) do
-    res = HTTPotion.post "https://www.google.com/recaptcha/api/siteverify?" <>
-      "secret=" <> "" <>
-      "&response=" <> recaptcha_response
+    res = MyWedding.Recaptcha.verify_response(recaptcha_response)
 
-    Logger.info "ReCAPTCHA Data: " <> res.body
+    Logger.info "ReCAPTCHA Data: " <> (res.body |> String.replace("\n", "") |> String.replace("\n  ", ""))
 
     data = Poison.decode!(res.body, as: %MyWedding.Recaptcha{})
 
