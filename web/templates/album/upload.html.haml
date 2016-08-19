@@ -24,6 +24,10 @@
           if (status == "success") {
             $('#recaptcha').closeModal()
           }
+        },
+        error: function(xhr, status, err) {
+          grecaptcha.reset()
+          Materialize.toast("<b>Error!</b> Could not process ReCAPTCHA.", 5000, 'red')
         }
       })
     }
