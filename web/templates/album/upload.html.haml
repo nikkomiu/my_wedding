@@ -1,10 +1,34 @@
 .pad-sides.large
   %h4 Upload Photos
 
-  = form_for @changeset, photo_path(@conn, :create), [multipart: true, class: "dropzone"], fn(_f) ->
-    %input{type: "hidden", name: "album_id", value: "#{@album.id}"}
+  = form_for @changeset, photo_path(@conn, :upload, @album.id), [multipart: true, class: "dropzone"], fn(_f) ->
     .fallback
       %input{type: "file", name: "file", multiple: ""}
   - end
 
   = link "Done", to: album_path(@conn, :show, @album), class: "btn grey waves-effect waves-light right", style: "margin-top: 20px"
+
+.modal.small.grey.lighten-2#recaptcha
+  .modal-content
+    %input#recaptcha_url{type: "hidden", value: "#{photo_path(@conn, :verify)}"}
+    .g-recaptcha{data-sitekey: "#{get_env(:recaptcha_key)}", data-callback: "recaptchaSuccess"}
+
+= unless @skip_recaptcha do
+  %script
+    var recaptchaSuccess = function(data) {
+      $.ajax({
+        type: "POST",
+        url: $("#recaptcha_url").val(),
+        data: {"g-recaptcha-response": data},
+        success: function(data, status, xhr) {
+          if (status == "success") {
+            $('#recaptcha').closeModal()
+          }
+        }
+      })
+    }
+
+    $('#recaptcha').openModal({
+      dismissible: false
+    })
+- end

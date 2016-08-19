@@ -9,7 +9,8 @@ config :my_wedding, MyWedding.Endpoint,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     cd: Path.expand("../", __DIR__)]]
 
-config :my_wedding, :environment, :dev
+config :my_wedding,
+  :environment, :dev
 
 # Watch static and templates for browser reloading.
 config :my_wedding, MyWedding.Endpoint,

@@ -2,7 +2,11 @@ defmodule MyWedding.ViewHelper do
   require Logger
 
   def is_env(env) do
-    Application.get_env(:my_wedding, :environment) == env
+    get_env(:environment) == env
+  end
+
+  def get_env(var) do
+    Application.get_env(:my_wedding, var)
   end
 
   def mtl_label(form, field) do

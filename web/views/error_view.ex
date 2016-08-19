@@ -1,8 +1,12 @@
 defmodule MyWedding.ErrorView do
   use MyWedding.Web, :view
 
+  def render("401.json", _) do
+    %{message: "You are not authorized to do that!"}
+  end
+
   def render("422.json", _assigns) do
-    %{error: "Could not process request"}
+    %{message: "Could not process request"}
   end
 
   # In case no render clause matches or no

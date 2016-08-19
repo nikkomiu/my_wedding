@@ -5,7 +5,10 @@ config :my_wedding, MyWedding.Endpoint,
   url: [scheme: "https", host: "wedding.nikkomiu.com", port: 443],
   cache_static_manifest: "priv/static/manifest.json"
 
-config :my_wedding, :environment, :prod
+config :my_wedding,
+  :environment, :prod
+  :recaptcha_key, "${RECAPTCHA_KEY}",
+  :recaptcha_secret, "${RECAPTCHA_SECRET}"
 
 # Logging
 config :logger, level: :info
