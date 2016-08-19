@@ -30,12 +30,21 @@ defmodule MyWedding.AuthController do
     end
   end
 
-  def sign_in(conn, _params) do
+  def new(conn, _params) do
     conn
     |> render(:sign_in)
   end
 
-  def sign_out(conn, _params) do
+  def create(conn, %{"session" => %{"username" => username, "password" => password}}) do
+    IO.puts username
+    IO.puts password
+
+    conn
+    |> put_flash(:error, "Incorrect username or password.")
+    |> render(:sign_in)
+  end
+
+  def delete(conn, _params) do
     conn
     |> configure_session(drop: true)
     |> redirect(to: "/")
