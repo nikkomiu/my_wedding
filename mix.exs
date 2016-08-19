@@ -18,7 +18,8 @@ defmodule MyWedding.Mixfile do
     [mod: {MyWedding, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger,
                     :ueberauth_google, :guardian, :phoenix_inline_svg, :earmark,
-                    :gettext, :phoenix_ecto, :postgrex, :phoenix_haml, :mogrify]]
+                    :gettext, :phoenix_ecto, :postgrex, :phoenix_haml, :mogrify,
+                    :httpotion]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,6 +40,7 @@ defmodule MyWedding.Mixfile do
      {:exrm, "~> 1.0"},
      {:mogrify, "~> 0.3"},
      {:earmark, "~> 1.0"},
+     {:httpotion, "~> 3.0"},
      {:guardian, "~> 0.12"},
      {:ueberauth_google, "~> 0.2"},
      {:phoenix_inline_svg, "~> 0.2"}]

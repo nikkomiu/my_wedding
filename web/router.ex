@@ -18,6 +18,7 @@ defmodule MyWedding.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
   end
 
   scope "/", MyWedding do
@@ -28,7 +29,7 @@ defmodule MyWedding.Router do
     get "/terms", PageController, :terms
     get "/privacy", PageController, :terms
 
-    get "/uploads/:image_id", ImageController, :upload
+    get "/uploads/:image_id", StaticFallbackController, :upload
 
     resources "/pages", PostController
 
@@ -63,6 +64,8 @@ defmodule MyWedding.Router do
 
     get "/health-check", HealthController, :health_check
 
-    resources "/photos", PhotoController, only: [:create, :delete]
+    post "/albums/:id/upload", PhotoController, :upload
+    post "/albums/upload-verify", PhotoController, :verify
+    delete "/photos/:id", PhotoController, :delete
   end
 end

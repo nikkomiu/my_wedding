@@ -96,7 +96,7 @@ defmodule MyWedding.AlbumController do
 
     changeset = MyWedding.Photo.changeset(%MyWedding.Photo{})
 
-    render(conn, :upload, album: album, changeset: changeset)
+    render(conn, :upload, album: album, changeset: changeset, skip_recaptcha: recaptcha_verify(conn))
   end
 
   def download(conn, %{"id" => id}) do

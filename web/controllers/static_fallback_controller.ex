@@ -1,4 +1,4 @@
-defmodule MyWedding.ImageController do
+defmodule MyWedding.StaticFallbackController do
   use MyWedding.Web, :controller
 
   def upload(conn, %{"image_id" => image_id}) do

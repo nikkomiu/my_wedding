@@ -91,4 +91,9 @@ defmodule MyWedding.ControllerHelper do
     |> List.replace_at(length(split_path) -2, Enum.join([List.first(Enum.take(split_path, -2)), size], "-"))
     |> Enum.join(".")
   end
+
+  def recaptcha_verify(conn) do
+    recaptcha_session = get_session(conn, :recaptcha)
+    MyWedding.UserHelper.current_user(conn) != nil || (recaptcha_session && recaptcha_session.success)
+  end
 end
