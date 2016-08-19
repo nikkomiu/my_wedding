@@ -40,8 +40,9 @@ defmodule MyWedding.Router do
   scope "/auth", MyWedding do
     pipe_through :browser
 
-    get "/sign-in", AuthController, :sign_in
-    get "/sign-out", AuthController, :sign_out
+    get "/sign-in", AuthController, :new
+    post "/sign-in", AuthController, :create
+    get "/sign-out", AuthController, :delete
 
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
