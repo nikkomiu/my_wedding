@@ -71,7 +71,7 @@ defmodule MyWedding.Api.PhotoController do
       "secret=" <> "" <>
       "&response=" <> recaptcha_response
 
-    Logger.info "ReCaptcha Data: " <> res.body
+    Logger.info "ReCAPTCHA Data: " <> res.body
 
     data = Poison.decode!(res.body, as: %MyWedding.Recaptcha{})
 
