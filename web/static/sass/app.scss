@@ -45,19 +45,22 @@ h1, h2, h3, h4, h5, h6 {
 
 .parallax-container {
   &.small {
-    height: 200px;
+    height: 250px;
   }
 
   h3 {
     color: white;
-    padding-top: 50px;
+    padding-top: 85px;
     text-shadow: 1px 1px 9px #000;
   }
+<<<<<<< HEAD
 
   .parallax {
     filter: blur(4px);
     -webkit-filter: blur(4px);
   }
+=======
+>>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
 }
 
 .alert {
@@ -66,10 +69,26 @@ h1, h2, h3, h4, h5, h6 {
 
 .wedding-login-header h4 {
   @extend .grey-text;
+<<<<<<< HEAD
 
   margin-top: 20px;
 }
 
 .modal.small {
   max-width: 400px;
+=======
+
+  margin-top: 20px;
+}
+
+.modal.small {
+  max-width: 400px;
+}
+
+.g-recaptcha {
+  display: table;
+
+  margin-left: auto;
+  margin-right: auto;
+>>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
 }

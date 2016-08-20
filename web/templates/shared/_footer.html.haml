@@ -2,19 +2,32 @@
   .container
     .left
       - if current_user(@conn) do
+<<<<<<< HEAD
         = link to: auth_path(@conn, :sign_out) do
+=======
+        = link to: auth_path(@conn, :delete) do
+>>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
           .left.small
             = svg_image(@conn, "exit", "wedding")
           .left
             Sign Out
         - end
       - else
+<<<<<<< HEAD
         = link to: auth_path(@conn, :sign_in), style: "text-decoration: none;" do
+=======
+        = link to: auth_path(@conn, :new), style: "text-decoration: none;" do
+>>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
           .left
             = svg_image(@conn, "id-card", "wedding")
           .left Sign In
         - end
     .center
+<<<<<<< HEAD
       © 2016 Copyright Nikko Miu
+=======
+      © 2016 Nikko Miu |
+      = link "Terms & Privacy", to: page_path(@conn, :terms)
+>>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
 
     .clearfix

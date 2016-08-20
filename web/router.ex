@@ -18,6 +18,7 @@ defmodule MyWedding.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
   end
 
   scope "/", MyWedding do
@@ -25,8 +26,15 @@ defmodule MyWedding.Router do
 
     get "/", PostController, :index
 
+<<<<<<< HEAD
     get "/sign-in", AuthController, :sign_in
     get "/sign-out", AuthController, :sign_out
+=======
+    get "/terms", PageController, :terms
+    get "/privacy", PageController, :terms
+
+    get "/uploads/:image_id", StaticFallbackController, :upload
+>>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
 
     resources "/pages", PostController
 
@@ -37,6 +45,10 @@ defmodule MyWedding.Router do
 
   scope "/auth", MyWedding do
     pipe_through :browser
+
+    get "/sign-in", AuthController, :new
+    post "/sign-in", AuthController, :create
+    get "/sign-out", AuthController, :delete
 
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
@@ -57,6 +69,12 @@ defmodule MyWedding.Router do
 
     get "/health-check", HealthController, :health_check
 
+<<<<<<< HEAD
     resources "/photos", PhotoController, only: [:create, :delete]
+=======
+    post "/albums/:id/upload", PhotoController, :upload
+    post "/albums/upload-verify", PhotoController, :verify
+    delete "/photos/:id", PhotoController, :delete
+>>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
   end
 end
