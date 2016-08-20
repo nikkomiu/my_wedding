@@ -21,11 +21,7 @@ defmodule MyWedding.UserHelper do
         unless is_authorized(conn, unquote(perm)) do
           has_unauthorized_fn =
             __info__(:functions) |>
-<<<<<<< HEAD
-            Enum.map(fn(tuple) -> tuple_keys(tuple) end)
-=======
             Enum.map(fn({key, _}) -> key end)
->>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
             |> Enum.member?(:unauthorized)
 
           if has_unauthorized_fn do
@@ -35,13 +31,9 @@ defmodule MyWedding.UserHelper do
             |> put_flash(:error, "You are not allowed to do that!")
             |> redirect(to: "/")
           end
-<<<<<<< HEAD
-          |> send_resp()
-=======
 
           # Throw an exception to stop execution
           raise MyWedding.UserHelper.UnauthorizedError
->>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
         end
 
         conn
@@ -49,15 +41,10 @@ defmodule MyWedding.UserHelper do
     end
   end
 
-<<<<<<< HEAD
-  def tuple_keys({keys, _values}) do
-    keys
-=======
   defmodule UnauthorizedError do
     message = "Not authorized to view this page"
 
     defexception message: message, plug_status: 403
->>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
   end
 
   def is_authorized(conn, auth_level) do

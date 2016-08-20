@@ -2,10 +2,6 @@ defmodule MyWedding.Api.PhotoController do
   use MyWedding.Web, :controller
 
   require Logger
-<<<<<<< HEAD
-  import Mogrify
-=======
->>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
 
   plug :authorize_uploader, "user" when action in [:delete]
 
@@ -25,22 +21,14 @@ defmodule MyWedding.Api.PhotoController do
       path
       |> copy_temp_file(file_param.path)
 
-<<<<<<< HEAD
-      # Convert Image
-=======
       # Async Convert Image
->>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
       Task.async(fn ->
         convert_image(path, "800x500")
       end)
       # End Convert Image
 
       # Insert Image
-<<<<<<< HEAD
-      album = Repo.get!(MyWedding.Album, album_id)
-=======
       album = Repo.get!(MyWedding.Album, id)
->>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
       changeset = Ecto.build_assoc(album, :photos, path: filename)
 
       case Repo.insert(changeset) do
@@ -65,17 +53,6 @@ defmodule MyWedding.Api.PhotoController do
   def delete(conn, %{"id" => id}) do
     photo = Repo.get!(MyWedding.Photo, id)
 
-<<<<<<< HEAD
-    Repo.delete!(photo)
-
-    conn
-    |> redirect(to: album_path(conn, :show, photo.album_id))
-  end
-  
-  defp get_full_path(conn, filename) do
-    Application.app_dir(Phoenix.Controller.endpoint_module(conn).config(:otp_app))
-    |> Path.join("/priv/static/uploads/#{filename}")
-=======
     path = get_full_image_path(conn, "#{photo.path}")
     get_size_image_path_from_full_path(path, "800x500") |> File.rm()
 
@@ -88,7 +65,6 @@ defmodule MyWedding.Api.PhotoController do
 
     conn
     |> redirect(to: album_path(conn, :show, photo.album_id))
->>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
   end
 
   def verify(conn, %{"g-recaptcha-response" => recaptcha_response}) do
@@ -110,16 +86,10 @@ defmodule MyWedding.Api.PhotoController do
     end
   end
 
-<<<<<<< HEAD
-    split_path
-    |> List.replace_at(length(split_path) -2, Enum.join([List.first(Enum.take(split_path, -2)), size], "-"))
-    |> Enum.join(".")
-=======
   def unauthorized(conn, _) do
     conn
     |> put_status(:unauthorized)
     |> render(MyWedding.ErrorView, "401.json")
->>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
   end
 
   defp copy_temp_file(perm_path, temp_path) do

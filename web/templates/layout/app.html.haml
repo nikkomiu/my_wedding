@@ -15,12 +15,9 @@
 
     = render_existing(@view_module, "#{template_name(@view_template)}_head.html")
   %body
-<<<<<<< HEAD
-=======
     = if is_env(:prod) do
       = render MyWedding.SharedView, "_analytics.html"
     - end
->>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
     %script{src: "#{static_path(@conn, "/assets/js/app.js")}"}
 
     = render MyWedding.SharedView, "_header.html", conn: @conn

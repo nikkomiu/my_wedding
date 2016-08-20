@@ -1,11 +1,7 @@
 defmodule MyWedding.ControllerHelper do
-<<<<<<< HEAD
-  import Plug.Conn
-=======
 
   import Plug.Conn
   import Mogrify
->>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
 
   def app_base(conn) do
     Application.app_dir(Phoenix.Controller.endpoint_module(conn).config(:otp_app))
@@ -66,8 +62,6 @@ defmodule MyWedding.ControllerHelper do
     |> put_resp_header("Content-Disposition", "attachment; filename=\"#{filename}\"")
     |> resp(200, data)
   end
-<<<<<<< HEAD
-=======
 
   def convert_image(path, size) do
     image =
@@ -102,5 +96,4 @@ defmodule MyWedding.ControllerHelper do
     recaptcha_session = get_session(conn, :recaptcha)
     MyWedding.UserHelper.current_user(conn) != nil || (recaptcha_session && recaptcha_session.success)
   end
->>>>>>> ea297328f3042e8d4613d6bcd48e3263e45fb36f
 end
