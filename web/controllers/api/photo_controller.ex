@@ -25,6 +25,7 @@ defmodule MyWedding.Api.PhotoController do
       Task.async(fn ->
         convert_image(path, "800x500")
       end)
+      # End Convert Image
 
       # Insert Image
       album = Repo.get!(MyWedding.Album, id)

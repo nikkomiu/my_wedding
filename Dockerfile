@@ -15,12 +15,14 @@ ARG MIX_ENV=prod
 COPY rel/my_wedding/releases/$APP_VER/my_wedding.tar.gz /usr/my_wedding/app.tar.gz
 WORKDIR /usr/my_wedding
 
+COPY deploy/nginx.conf /kube/nginx/nginx.conf
+
 # Extract release
 RUN tar -xvf app.tar.gz
 RUN chmod +x bin/my_wedding
 
 # Create Symlink for Uploads
-RUN ln -s /usr/my_wedding/lib/my_wedding-$APP_VER/priv/static/uploads /uploads
+RUN ln -s /usr/my_wedding/lib/my_wedding-$APP_VER/priv/static/uploads /kube/uploads
 
 # Runtime ENV
 ENV LANG=en_US.UTF-8
@@ -40,7 +42,7 @@ ENV RELX_REPLACE_OS_VARS=true
 EXPOSE $PORT
 
 # Show Volumes for Uploads
-VOLUME ["/uploads"]
+VOLUME ["/kube/uploads"]
 
 # Run startup script
 CMD ["bin/my_wedding", "foreground"]
