@@ -14,7 +14,7 @@ build: deps
 
 # Get and build assets
 assets: fetch-assets
-	brunch b
+	brunch b --production
 	mix phoenix.digest
 
 deps:
