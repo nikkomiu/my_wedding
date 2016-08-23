@@ -1,0 +1,22 @@
+<script>
+  var recaptchaSuccess = function(data) {
+    $.ajax({
+      type: "POST",
+      url: $("#recaptcha_url").val(),
+      data: {"g-recaptcha-response": data},
+      success: function(data, status, xhr) {
+        if (status == "success") {
+          $('#recaptcha').closeModal()
+        }
+      },
+      error: function(xhr, status, err) {
+        grecaptcha.reset()
+        Materialize.toast("<b>Error!</b> Could not process ReCAPTCHA.", 5000, 'red')
+      }
+    })
+  }
+
+  $('#recaptcha').openModal({
+    dismissible: false
+  })
+</script>

@@ -12,7 +12,7 @@
 
     %link{rel: "icon", href: "#{static_path(@conn, "/favicon.ico?v=1")}"}
 
-    = render_existing(@view_module, "#{template_name(@view_template)}_head.html")
+    = render_existing(@view_module, "#{template_name(@view_template)}_head.html", assigns)
   %body
     %link{href: "#{static_path(@conn, "/assets/css/app.css")}", rel: "stylesheet"}
     = if is_env(:prod) do
@@ -28,4 +28,4 @@
       = render MyWedding.SharedView, "_footer.html", conn: @conn
 
     %script{src: "#{static_path(@conn, "/assets/js/app.js")}"}
-    = render_existing(@view_module, "#{template_name(@view_template)}_js.html")
+    = render_existing(@view_module, "#{template_name(@view_template)}_js.html", assigns)
