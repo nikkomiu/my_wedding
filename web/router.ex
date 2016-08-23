@@ -2,7 +2,7 @@ defmodule MyWedding.Router do
   use MyWedding.Web, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "json"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
@@ -18,7 +18,6 @@ defmodule MyWedding.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug :fetch_session
   end
 
   scope "/", MyWedding do
@@ -36,6 +35,15 @@ defmodule MyWedding.Router do
     resources "/albums", AlbumController
     get "/albums/:id/upload", AlbumController, :upload
     get "/albums/:id/download", AlbumController, :download
+  end
+
+  scope "/", MyWedding do
+    pipe_through :browser
+    pipe_through :api
+
+    post "/albums/:id/upload", PhotoController, :upload
+    post "/albums/upload-verify", PhotoController, :verify
+    delete "/photos/:id", PhotoController, :delete
   end
 
   scope "/auth", MyWedding do
@@ -63,9 +71,5 @@ defmodule MyWedding.Router do
     pipe_through :api
 
     get "/health-check", HealthController, :health_check
-
-    post "/albums/:id/upload", PhotoController, :upload
-    post "/albums/upload-verify", PhotoController, :verify
-    delete "/photos/:id", PhotoController, :delete
   end
 end
