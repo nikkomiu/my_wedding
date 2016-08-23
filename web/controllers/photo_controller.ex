@@ -1,4 +1,4 @@
-defmodule MyWedding.Api.PhotoController do
+defmodule MyWedding.PhotoController do
   use MyWedding.Web, :controller
 
   require Logger
