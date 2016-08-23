@@ -1,7 +1,7 @@
 .row
   = for post <- @posts do
     .col.sm12.m4
-      .card
+      .card.hoverable
         .small-card-image
           - if post.photo_id == nil do
             %img{src: "#{static_path(@conn, "/images/default.jpg")}"}
