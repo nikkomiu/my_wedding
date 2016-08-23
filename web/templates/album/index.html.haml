@@ -7,7 +7,7 @@
 
   = for album <- @albums do
     .col.s12.m4
-      .card
+      .card.hoverable
         .small-card-image
           = if length(album.photos) > 0 do
             %img{src: "#{static_path(@conn, upload_path(List.first(album.photos).path, "800x500"))}"}
