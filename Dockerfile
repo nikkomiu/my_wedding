@@ -20,7 +20,7 @@ RUN tar -xvf app.tar.gz
 RUN chmod +x bin/my_wedding
 
 # Create Symlink for Uploads
-RUN ln -s /usr/my_wedding/lib/my_wedding-$APP_VER/priv/static/uploads /uploads
+RUN ln -s /usr/my_wedding/lib/my_wedding-$APP_VER/priv/static/uploads /mnt/uploads
 
 # Runtime ENV
 ENV LANG=en_US.UTF-8
@@ -40,7 +40,7 @@ ENV RELX_REPLACE_OS_VARS=true
 EXPOSE $PORT
 
 # Show Volumes for Uploads
-VOLUME ["/uploads"]
+VOLUME ["/mnt/uploads"]
 
 # Run startup script
 CMD ["bin/my_wedding", "foreground"]

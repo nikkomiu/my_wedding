@@ -39,7 +39,6 @@ defmodule MyWedding.Router do
 
   scope "/", MyWedding do
     pipe_through :browser
-    pipe_through :api
 
     post "/albums/:id/upload", PhotoController, :upload
     post "/albums/upload-verify", PhotoController, :verify

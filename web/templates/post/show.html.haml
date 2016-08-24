@@ -6,7 +6,7 @@
       %img{src: "#{static_path(@conn, upload_path(@post.photo.path, "800x500"))}"}
   %h3.center= @post.title
 
-.container.section
+.container.section.post-body
   = {:safe, Earmark.to_html(@post.body)}
 
 - if is_authorized(@conn, :author) do

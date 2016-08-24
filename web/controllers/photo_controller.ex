@@ -70,7 +70,7 @@ defmodule MyWedding.PhotoController do
   def verify(conn, %{"g-recaptcha-response" => recaptcha_response}) do
     res = MyWedding.Recaptcha.verify_response(recaptcha_response)
 
-    Logger.info "ReCAPTCHA Data: " <> (res.body |> String.replace("\n", "") |> String.replace("\n  ", ""))
+    Logger.info "reCAPTCHA Data: " <> (res.body |> String.replace("\n", "") |> String.replace("\n  ", ""))
 
     data = Poison.decode!(res.body, as: %MyWedding.Recaptcha{})
 
