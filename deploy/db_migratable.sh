@@ -1,7 +1,10 @@
 #!/bin/bash
 
 # Run DB Migrations
-mix ecto.setup
+mix ecto.create
+mix ecto.migrate
+
+git reset --hard
 
 # TODO: If master then checkout latest tag else checkout master
 # Checkout master
