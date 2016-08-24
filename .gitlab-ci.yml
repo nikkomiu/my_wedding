@@ -84,9 +84,10 @@ migrate:
     - artifact_build
   before_script:
     - MIX_ENV=prod make build
-    - chmod +x deploy/deploy.sh
+    - chmod +x deploy/setup.sh deploy/migrate.sh
+    - eval "$(deploy/setup.sh)"
   script:
-    - deploy/deploy.sh
+    - deploy/migrate.sh
   only:
     - tags
     - master
@@ -96,9 +97,10 @@ deploy:
   image: debian:latest
   before_script:
     - apt-get update && apt-get install curl -y
-    - chmod +x deploy/deploy.sh
+    - chmod +x deploy/setup.sh deploy/trigger_build.sh
+    - eval "$(deploy/setup.sh)"
   script:
-    - deploy/deploy.sh
+    - deploy/trigger_build.sh
   only:
     - tags
     - master
