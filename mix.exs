@@ -5,6 +5,8 @@ defmodule MyWedding.Mixfile do
     [app: :my_wedding,
      version: "0.0.1",
      elixir: "~> 1.2",
+     test_coverage: [tool: ExCoveralls],
+     preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test],
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -43,7 +45,8 @@ defmodule MyWedding.Mixfile do
      {:httpotion, "~> 3.0"},
      {:guardian, "~> 0.12"},
      {:ueberauth_google, "~> 0.2"},
-     {:phoenix_inline_svg, "~> 0.2"}]
+     {:phoenix_inline_svg, "~> 0.2"},
+     {:excoveralls, "~> 0.5", only: :test}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

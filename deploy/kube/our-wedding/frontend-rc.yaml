@@ -1,0 +1,73 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  labels:
+    app: our-wedding
+    name: our-wedding-frontend
+  name: our-wedding-frontend
+spec:
+  replicas: 2
+  selector:
+    name: our-wedding-frontend
+  template:
+    metadata:
+      name: our-wedding-frontend
+      labels:
+        app: our-wedding
+        name: our-wedding-frontend
+    spec:
+      imagePullSecrets:
+      - name: gitlab-key
+      containers:
+      - name: our-wedding-frontend
+        image: registry.gitlab.com/nikko.miu/my_wedding:master
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: app-port
+        volumeMounts:
+        - name: uploads-disk
+          mountPath: /mnt/uploads
+        lifecycle:
+          preStop:
+            exec:
+              command: ["./bin/my_wedding", "stop"]
+        env:
+        - name: DB_HOST
+          value: postgres.default
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: our-wedding-secret
+              key: db-pass
+        - name: GOOGLE_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: our-wedding-secret
+              key: google-client-id
+        - name: GOOGLE_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: our-wedding-secret
+              key: google-client-secret
+        - name: RECAPTCHA_KEY
+          valueFrom:
+            secretKeyRef:
+              name: our-wedding-secret
+              key: recaptcha-key
+        - name: RECAPTCHA_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: our-wedding-secret
+              key: recaptcha-secret
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: our-wedding-secret
+              key: secret-key-base
+        - name: PORT
+          value: "8080"
+      volumes:
+      - name: uploads-disk
+        persistentVolumeClaim:
+          claimName: our-wedding-uploads

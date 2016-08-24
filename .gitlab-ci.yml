@@ -14,6 +14,7 @@ stages:
   - push image
   - deploy
 
+# COMPILE STAGE
 compile:
   stage: build
   script:
@@ -22,7 +23,7 @@ compile:
   artifacts:
     untracked: true
 
-# Run Application Tests
+# TEST STAGE
 test:
   stage: test
   dependencies:
@@ -32,8 +33,30 @@ test:
   script:
     - mix test
 
-# Verify a release can be merged into master
-can_be_merged:
+coverage:
+  stage: test
+  dependencies:
+    - compile
+  services:
+    - postgres:latest
+  script:
+    - mix coveralls
+
+migratability:
+  stage: test
+  dependencies:
+    - compile
+  services:
+    - postgres:latest
+  before_script:
+    - chmod +x deploy/db_migratable.sh
+  script:
+    - deploy/db_migratable.sh
+  except:
+    - tags
+  allow_failure: true
+
+mergability:
   stage: test
   image: debian:jessie
   before_script:
@@ -46,8 +69,8 @@ can_be_merged:
   only:
     - develop
 
-# Create the Release Artifacts
-artifact_build:
+# RELEASE STAGE
+releasearaptor:
   stage: release
   script: MIX_ENV=prod make release
   artifacts:
@@ -55,12 +78,12 @@ artifact_build:
     paths:
       - rel/$CI_PROJECT_NAME/
 
-# Build and Deploy Docker Image
-docker_build:
+# PUSH IMAGE STAGE
+containerize:
   stage: push image
   image: docker:latest
   dependencies:
-    - artifact_build
+    - releasearaptor
   services:
     - docker:dind
   script:
@@ -68,16 +91,30 @@ docker_build:
     - docker build -t registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME .
     - docker push registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME
 
-# Run Migrations and Deploy
-deploy:
+# DEPLOY STAGE
+migrate:
   stage: deploy
   dependencies:
-    - artifact_build
+    - releasearaptor
   before_script:
     - MIX_ENV=prod make build
+    - chmod +x deploy/setup.sh deploy/migrate.sh
+    - eval "$(deploy/setup.sh)"
   script:
-    - chmod +x deploy/deploy.sh
-    - deploy/deploy.sh
+    - deploy/migrate.sh
   only:
-    - develop
+    - tags
+    - master
+
+deploy:
+  stage: deploy
+  image: debian:latest
+  before_script:
+    - apt-get update && apt-get install curl -y
+    - chmod +x deploy/setup.sh deploy/trigger_build.sh
+    - eval "$(deploy/setup.sh)"
+  script:
+    - deploy/trigger_build.sh
+  only:
+    - tags
     - master

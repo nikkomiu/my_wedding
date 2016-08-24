@@ -1,0 +1,23 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: our-wedding-nginx
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Mi
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: our-wedding-uploads
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi

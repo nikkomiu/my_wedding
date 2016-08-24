@@ -1,0 +1,39 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  labels:
+    app: our-wedding
+    name: our-wedding-web
+  name: our-wedding-web
+spec:
+  replicas: 2
+  selector:
+    name: our-wedding-web
+  template:
+    metadata:
+      name: our-wedding-web
+      labels:
+        app: our-wedding
+        name: our-wedding-web
+    spec:
+      imagePullSecrets:
+      - name: gitlab-key
+      containers:
+      - name: our-wedding-web
+        imagePullPolicy: Always
+        image: registry.gitlab.com/nikko.miu/nginx:master
+        resources:
+          limits:
+            cpu: "0"
+        ports:
+        - containerPort: 80
+          name: nginx-insecure
+        - containerPort: 443
+          name: nginx-secure
+        volumeMounts:
+        - name: config-disk
+          mountPath: /etc/nginx
+      volumes:
+      - name: config-disk
+        persistentVolumeClaim:
+          claimName: our-wedding-nginx
