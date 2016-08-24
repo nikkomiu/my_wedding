@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Set some ENV variables based on branch
-if [ "$CI_BUILD_REF_NAME" = "master" ]
+# Set ENV variables if version tag or master branch
+if [ -n "$CI_BUILD_TAG" ]
 then
   echo "# PROD Deploy..."
   echo ""
@@ -11,7 +11,7 @@ then
   echo "export CLUSTER=\"production\""
   echo ""
 
-elif [ "$CI_BUILD_REF_NAME" = "develop" ]
+elif [ "$CI_BUILD_REF_NAME" = "master" ]
 then
   echo "# STAGE Deploy..."
   echo ""
