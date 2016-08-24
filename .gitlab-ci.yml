@@ -32,6 +32,15 @@ test:
   script:
     - mix test
 
+test_coverage:
+  stage: test
+  dependencies:
+    - compile
+  services:
+    - postgres:latest
+  script:
+    - mix coveralls
+
 # Verify a release can be merged into master
 can_be_merged:
   stage: test
