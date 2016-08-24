@@ -69,7 +69,7 @@ containerize:
   stage: push image
   image: docker:latest
   dependencies:
-    - artifact_build
+    - prodify
   services:
     - docker:dind
   script:
@@ -81,7 +81,7 @@ containerize:
 migrate:
   stage: deploy
   dependencies:
-    - artifact_build
+    - prodify
   before_script:
     - MIX_ENV=prod make build
     - chmod +x deploy/setup.sh deploy/migrate.sh
