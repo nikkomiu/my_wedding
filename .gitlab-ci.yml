@@ -56,7 +56,7 @@ mergability:
     - develop
 
 # Create the Release Artifacts
-prodify:
+releasearaptor:
   stage: release
   script: MIX_ENV=prod make release
   artifacts:
@@ -69,7 +69,7 @@ containerize:
   stage: push image
   image: docker:latest
   dependencies:
-    - prodify
+    - releasearaptor
   services:
     - docker:dind
   script:
@@ -81,7 +81,7 @@ containerize:
 migrate:
   stage: deploy
   dependencies:
-    - prodify
+    - releasearaptor
   before_script:
     - MIX_ENV=prod make build
     - chmod +x deploy/setup.sh deploy/migrate.sh
