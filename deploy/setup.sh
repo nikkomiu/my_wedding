@@ -8,6 +8,7 @@ then
 
   echo "export DB_HOST=$PROD_DB_HOST"
   echo "export DB_PASS=$PROD_DB_PASS"
+  echo "export DB_PORT=$PROD_DB_PORT"
   echo "export CLUSTER=\"production\""
   echo ""
 
@@ -18,6 +19,7 @@ then
 
   echo "export DB_HOST=$STAGE_DB_HOST"
   echo "export DB_PASS=$STAGE_DB_PASS"
+  echo "export DB_PORT=$STAGE_DB_PORT"
   echo "export CLUSTER=\"staging\""
   echo ""
 
