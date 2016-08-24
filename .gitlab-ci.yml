@@ -14,6 +14,7 @@ stages:
   - push image
   - deploy
 
+# COMPILE STAGE
 compile:
   stage: build
   script:
@@ -22,7 +23,7 @@ compile:
   artifacts:
     untracked: true
 
-# Run Application Tests
+# TEST STAGE
 test:
   stage: test
   dependencies:
@@ -50,10 +51,11 @@ migratability:
   before_script:
     - chmod +x deploy/db_migratable.sh
   script:
-    - deploy/db_migrate.sh
+    - deploy/db_migratable.sh
+  except:
+    - tags
   allow_failure: true
 
-# Verify a release can be merged into master
 mergability:
   stage: test
   image: debian:jessie
@@ -67,7 +69,7 @@ mergability:
   only:
     - develop
 
-# Create the Release Artifacts
+# RELEASE STAGE
 releasearaptor:
   stage: release
   script: MIX_ENV=prod make release
@@ -76,7 +78,7 @@ releasearaptor:
     paths:
       - rel/$CI_PROJECT_NAME/
 
-# Build and Deploy Docker Image
+# PUSH IMAGE STAGE
 containerize:
   stage: push image
   image: docker:latest
@@ -89,7 +91,7 @@ containerize:
     - docker build -t registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME .
     - docker push registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME
 
-# Run Migrations and Deploy
+# DEPLOY STAGE
 migrate:
   stage: deploy
   dependencies:
