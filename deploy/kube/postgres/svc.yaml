@@ -6,6 +6,7 @@ metadata:
     name: postgres
   name: postgres
 spec:
+  type: NodePort
   ports:
     - port: 5432
       targetPort: 5432
