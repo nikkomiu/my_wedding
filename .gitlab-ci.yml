@@ -41,6 +41,18 @@ coverage:
   script:
     - mix coveralls
 
+migratability:
+  stage: test
+  dependencies:
+    - compile
+  services:
+    - postgres:latest
+  before_script:
+    - chmod +x deploy/db_migratable.sh
+  script:
+    - deploy/db_migrate.sh
+  allow_failure: true
+
 # Verify a release can be merged into master
 mergability:
   stage: test
