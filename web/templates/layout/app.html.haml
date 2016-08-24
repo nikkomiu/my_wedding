@@ -4,6 +4,7 @@
     %meta{charset: "utf-8"}
     %meta{content: "IE=edge", http-equiv: "X-UA-Compatible"}
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
+    %meta{name: "csrf_token", content: "#{Plug.CSRFProtection.get_csrf_token()}"}
 
     %meta{content: "", name: "description"}
     %meta{content: "", name: "author"}
