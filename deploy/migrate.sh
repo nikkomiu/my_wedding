@@ -4,4 +4,5 @@
 sed -i "s/\${DB_HOST}/$DB_HOST/g" config/prod.exs
 sed -i "s/\${DB_PORT}/$DB_PORT/g" config/prod.exs
 sed -i "s/\${DB_PASS}/$DB_PASS/g" config/prod.exs
+sed -i "s/\${DB_PASS}/$DB_BASE/g" config/prod.exs
 MIX_ENV=prod mix ecto.migrate
