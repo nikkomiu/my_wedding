@@ -1,0 +1,35 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: nfs-server
+spec:
+  replicas: 1
+  selector:
+    role: nfs-server
+  template:
+    metadata:
+      labels:
+        role: nfs-server
+    spec:
+      imagePullSecrets:
+      - name: gitlab-key
+      containers:
+      - name: nfs-server
+        image: registry.gitlab.com/nikko.miu/nfs-server:master
+        imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: "0"
+        ports:
+        - name: nfs
+          containerPort: 2049
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /mnt/data
+          name: nfs-data
+      volumes:
+      - name: nfs-data
+        gcePersistentDisk:
+          pdName: kubernetes-data
+          fsType: ext4

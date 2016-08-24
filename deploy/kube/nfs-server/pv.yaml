@@ -1,0 +1,42 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: our-wedding-uploads
+spec:
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 10.75.253.212
+    path: "/uploads"
+
+---
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: our-wedding-nginx
+spec:
+  capacity:
+    storage: 10Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 10.75.253.212
+    path: "/nginx"
+
+---
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: postgres
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 10.75.253.212
+    path: "/postgres"

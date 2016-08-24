@@ -1,0 +1,45 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  labels:
+    role: database
+    name: postgres
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    name: postgres
+  template:
+    metadata:
+      name: postgres
+      labels:
+        role: database
+        name: postgres
+    spec:
+      containers:
+      - name: postgres
+        imagePullPolicy: Always
+        image: postgres
+        resources:
+          limits:
+            cpu: "0"
+        env:
+        - name: POSTGRES_USER
+          value: my_wedding_svc
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: db-pass
+        - name: POSTGRES_DB
+          value: my_wedding_prod
+        ports:
+        - containerPort: 5432
+          name: postgres
+        volumeMounts:
+        - name: kubernetes-disk
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: kubernetes-disk
+        persistentVolumeClaim:
+          claimName: postgres

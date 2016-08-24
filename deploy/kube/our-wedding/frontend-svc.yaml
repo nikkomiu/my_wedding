@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: our-wedding
+    name: our-wedding-frontend
+  name: our-wedding-frontend
+spec:
+  ports:
+    - port: 8080
+      name: app-port
+  selector:
+    name: our-wedding-frontend
