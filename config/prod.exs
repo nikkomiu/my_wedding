@@ -33,4 +33,5 @@ config :my_wedding, MyWedding.Repo,
   username: "my_wedding_svc",
   password: "${DB_PASS}",
   hostname: "${DB_HOST}",
+  port: "${DB_PORT}"
   pool_size: 20
