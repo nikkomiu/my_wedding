@@ -2,6 +2,8 @@
 
 [![build status](https://gitlab.com/nikko.miu/my_wedding/badges/master/build.svg)](https://gitlab.com/nikko.miu/my_wedding/commits/master)
 
+[![coverage report](https://gitlab.com/nikko.miu/my_wedding/badges/master/coverage.svg)](https://gitlab.com/nikko.miu/my_wedding/commits/master)
+
 ## Kubernetes Configuration
 
 Our Wedding application is designed to be run in a Kubernetes environment. The service requirements of running Our Wedding in a Kubernetes cluster are:
