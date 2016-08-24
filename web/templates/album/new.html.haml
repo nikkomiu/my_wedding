@@ -7,6 +7,8 @@
     = render "form.html", f: f
 
     .input-field
-      = link "Back", to: album_path(@conn, :index), class: "btn grey"
+      = link to: album_path(@conn, :index), class: "btn grey" do
+        = svg_image(@conn, "arrow_back")
+      - end
       = submit "Create Album", class: "btn right"
   - end

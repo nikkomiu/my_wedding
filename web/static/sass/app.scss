@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+@import url(https://fonts.googleapis.com/css?family=Raleway:700,300);
 
 $primary-color: lighten(#187bd6, 4%);
 $primary-color-light: #64b5f6;
@@ -10,18 +10,27 @@ $navbar-height-mobile: 38px;
 $navbar-brand-font-size: 1.4rem;
 
 $sidenav-item-height: 42px;
+$input-font-size: 16px;
 
-@import "materialize";
+@import "_materialize";
 
+@import "_color";
+@import "_helpers";
 @import "_footer";
-@import "_svg_icons";
 @import "_form";
 @import "_btn";
 @import "_nav";
+@import "_card";
 @import "_dropzone";
+@import "_svg_icons";
 
 html {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+}
+
+strong {
+  font-weight: 700;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -30,144 +39,47 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-#sidenav-overlay {
-  z-index: 998;
-}
-
-.card-title {
-  margin: 0;
-
-  .material-svgs {
-    position: relative;
-    top: 3px;
-  }
-}
-
-.card-description {
-  margin-bottom: 0;
-}
-
-.side-nav li.sidebar-header {
-  padding-left: 20px;
-  padding-right: 20px;
-
-  color: #777;
-
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-
-.pad-sides {
-  padding-left: 10px;
-  padding-right: 10px;
-
-  &.large {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-
-.mar-sides {
-  margin-left: 10px;
-  margin-right: 10px;
-
-  &.large {
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-}
-
-.small-card-image {
-  @extend .card-image;
-
-  img {
-    object-fit: cover;
-    max-height: 225px;
-  }
+.CodeMirror {
+  font-size: 16px !important;
 }
 
 .parallax-container {
   &.small {
-    height: 200px;
+    height: 250px;
   }
 
   h3 {
     color: white;
-    padding-top: 50px;
+    padding-top: 85px;
     text-shadow: 1px 1px 9px #000;
   }
-
-  .parallax {
-    filter: blur(4px);
-    -webkit-filter: blur(4px);
-  }
-}
-
-.page-nav .brand-logo.left {
-  padding-left: 10px;
-}
-
-.dropzone {
-  border-style: dashed;
-}
-
-.card-action .btn-flat {
-  height: 21px;
-  line-height: 21px;
-
-  padding: 0 5px;
-  margin-left: 5px;
 }
 
 .alert {
   margin: 0;
 }
 
-.google-sign-in {
-  margin-top: 7px;
-  text-transform: none;
+.wedding-login-header h4 {
+  @extend .grey-text;
 
-  line-height: 32px;
-
-  svg {
-    position: relative;
-    top: 4px;
-    right: 10px;
-  }
-}
-
-.blue-text svg {
-  fill: #2196f3;
-}
-
-.card-action a.no-pad {
-  margin: 0 !important;
-}
-
-.card-panel h3 {
-  margin: 0.7rem 0.2rem;
-}
-
-.collection .collection-item.avatar {
-  min-height: 62px;
-}
-
-.card .card-heading {
-  @extend .card-content;
-
-  padding: 10px 20px;
-
-  border-bottom: 1px solid lightgrey;
-
-  h4 {
-    margin: 0.42rem;
-  }
+  margin-top: 20px;
 }
 
 .modal.small {
   max-width: 400px;
 }
 
-.red-outline {
-  border: 1px solid red !important;
+#recaptcha.modal {
+  min-width: 332px;
+
+  .modal-content {
+    padding: 15px;
+  }
+}
+
+.g-recaptcha {
+  display: table;
+
+  margin-left: auto;
+  margin-right: auto;
 }

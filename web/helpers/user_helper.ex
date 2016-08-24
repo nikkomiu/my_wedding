@@ -2,11 +2,7 @@ defmodule MyWedding.UserHelper do
   defmacro __using__(_opts) do
     auth_functions =
       MyWedding.User.permissions
-      |> Enum.map(fn (permission_tuple) ->
-        # Get the permission name from the Tuple
-        permission = tuple_keys(permission_tuple)
-
-        # Generate the function
+      |> Enum.map(fn ({permission, _}) ->
         gen_function(permission)
       end)
 
@@ -25,7 +21,7 @@ defmodule MyWedding.UserHelper do
         unless is_authorized(conn, unquote(perm)) do
           has_unauthorized_fn =
             __info__(:functions) |>
-            Enum.map(fn(tuple) -> tuple_keys(tuple) end)
+            Enum.map(fn({key, _}) -> key end)
             |> Enum.member?(:unauthorized)
 
           if has_unauthorized_fn do
@@ -35,7 +31,9 @@ defmodule MyWedding.UserHelper do
             |> put_flash(:error, "You are not allowed to do that!")
             |> redirect(to: "/")
           end
-          |> send_resp()
+
+          # Throw an exception to stop execution
+          raise MyWedding.UserHelper.UnauthorizedError
         end
 
         conn
@@ -43,10 +41,10 @@ defmodule MyWedding.UserHelper do
     end
   end
 
-  def tuple_keys(tuple) do
-    tuple
-    |> Tuple.to_list()
-    |> List.first()
+  defmodule UnauthorizedError do
+    message = "Not authorized to view this page"
+
+    defexception message: message, plug_status: 403
   end
 
   def is_authorized(conn, auth_level) do
@@ -70,8 +68,8 @@ defmodule MyWedding.UserHelper do
 
   defp get_permission_by_num(permissions, num) do
     permissions
-    |> Enum.filter(fn(x) ->
-      x |> Tuple.to_list() |> List.last() == num
+    |> Enum.filter(fn({_key, value}) ->
+      value == num
     end)
   end
 
@@ -82,9 +80,6 @@ defmodule MyWedding.UserHelper do
   end
 
   defp permissions_to_list(list) do
-    list
-    |> Enum.map(fn(x) ->
-      x |> Tuple.to_list() |> List.first()
-    end)
+    list |> Enum.map(fn({key, _value}) -> key end)
   end
 end

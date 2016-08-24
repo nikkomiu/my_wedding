@@ -7,19 +7,23 @@ defmodule MyWedding.PostController do
   plug :authorize_manager, "user" when action in [:delete]
 
   def index(conn, _params) do
-    posts = Repo.all(
+    post_query =
       from p in Post,
-        where: p.is_active == true,
         order_by: p.order,
-        order_by: p.inserted_at
-    )
+        order_by: p.inserted_at,
+        preload: [:photo]
+
+    posts =
+      post_query
+      |> pub_priv_query(conn)
+      |> Repo.all()
 
     render(conn, :index, posts: posts)
   end
 
   def new(conn, _params) do
     changeset = Post.changeset(%Post{order: 0, is_active: true})
-    render(conn, :new, changeset: changeset)
+    render(conn, :new, changeset: changeset, photo_list: photo_list)
   end
 
   def create(conn, %{"post" => post_params}) do
@@ -31,19 +35,28 @@ defmodule MyWedding.PostController do
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: post_path(conn, :show, post.id))
       {:error, changeset} ->
-        render(conn, :new, changeset: changeset)
+        render(conn, :new, changeset: changeset, photo_list: photo_list)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    post = Repo.get!(Post, id)
+    post_query =
+      from p in Post,
+        where: p.id == ^id,
+        preload: [:photo]
+
+    post =
+      post_query
+      |> pub_priv_query(conn)
+      |> Repo.one!()
+
     render(conn, :show, post: post)
   end
 
   def edit(conn, %{"id" => id}) do
     post = Repo.get!(Post, id)
     changeset = Post.changeset(post)
-    render(conn, :edit, post: post, changeset: changeset)
+    render(conn, :edit, post: post, changeset: changeset, photo_list: photo_list)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
@@ -57,7 +70,7 @@ defmodule MyWedding.PostController do
         |> redirect(to: post_path(conn, :show, post))
       {:error, changeset} ->
         conn
-        |> render(conn, :edit, post: post, changeset: changeset)
+        |> render(conn, :edit, post: post, changeset: changeset, photo_list: photo_list)
     end
   end
 
@@ -71,5 +84,30 @@ defmodule MyWedding.PostController do
     conn
     |> put_flash(:info, "Post deleted successfully.")
     |> redirect(to: post_path(conn, :index))
+  end
+
+  defp photo_list() do
+    album_id =
+      Repo.one(
+        from a in MyWedding.Album,
+          where: a.title == "Post Photos",
+          select: a.id
+      )
+
+    Repo.all(
+      from p in MyWedding.Photo,
+        select: {p.path, p.id},
+        where: p.album_id == ^album_id
+    )
+  end
+
+  defp pub_priv_query(query, conn) do
+    cond do
+      is_authorized(conn, :author) ->
+        query
+      true ->
+        from p in query,
+          where: p.is_active == true
+    end
   end
 end

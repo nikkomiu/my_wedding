@@ -4,15 +4,21 @@
     %meta{charset: "utf-8"}
     %meta{content: "IE=edge", http-equiv: "X-UA-Compatible"}
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
+    %meta{name: "csrf_token", content: "#{Plug.CSRFProtection.get_csrf_token()}"}
 
     %meta{content: "", name: "description"}
     %meta{content: "", name: "author"}
 
-    %title My Wedding
+    %title Our Wedding
 
-    %link{href: "#{static_path(@conn, "/assets/css/app.css")}", rel: "stylesheet"}
+    %link{rel: "icon", href: "#{static_path(@conn, "/favicon.ico?v=1")}"}
+
+    = render_existing(@view_module, "#{template_name(@view_template)}_head.html", assigns)
   %body
-    %script{src: "#{static_path(@conn, "/assets/js/app.js")}", async: "", defer: ""}
+    %link{href: "#{static_path(@conn, "/assets/css/app.css")}", rel: "stylesheet"}
+    = if is_env(:prod) do
+      = render MyWedding.SharedView, "_analytics.html"
+    - end
 
     = render MyWedding.SharedView, "_header.html", conn: @conn
 
@@ -21,3 +27,6 @@
 
     %footer.page-footer
       = render MyWedding.SharedView, "_footer.html", conn: @conn
+
+    %script{src: "#{static_path(@conn, "/assets/js/app.js")}"}
+    = render_existing(@view_module, "#{template_name(@view_template)}_js.html", assigns)

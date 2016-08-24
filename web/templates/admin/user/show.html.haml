@@ -1,40 +1,41 @@
-.container
-  .card
-    .card-heading.grey.lighten-3
-      %img.circle.right{src: "#{@user.avatar}"}
-      %h4
-        = @user.name
-        %small= @user.email
-      .clearfix
-    .card-content
-      = form_for @changeset, user_path(@conn, :update, @user), fn f ->
+.card
+  .card-heading.grey.lighten-3
+    %img.circle.right{src: "#{@user.avatar}"}
+    %h4
+      = @user.name
+      %small= @user.email
+    .clearfix
+  .card-content
+    = form_for @changeset, user_path(@conn, :update, @user), fn f ->
 
-        = render MyWedding.SharedView, "_form_error.html", changeset: @changeset
+      = render MyWedding.SharedView, "_form_error.html", changeset: @changeset
 
-        .input-field
-          = mtl_label f, :name
-          = text_input f, :name
+      .input-field
+        = mtl_label f, :name
+        = text_input f, :name
 
-        .input-field
-          = mtl_label f, :email
-          = email_input f, :email
+      .input-field
+        = mtl_label f, :email
+        = email_input f, :email
 
-        .input-field
-          = select f, :permission_level, permission_options
-          = label f, :permission_level
+      .input-field
+        = select f, :permission_level, permission_options
+        = label f, :permission_level
 
-        .switch{style: "margin-bottom: 30px"}
-          %label
-            Inactive
-            = checkbox f, :can_login
-            %span.lever
-            Active
+      .switch{style: "margin-bottom: 30px"}
+        %label
+          Inactive
+          = checkbox f, :can_login
+          %span.lever
+          Active
 
-        = submit "Update", class: "btn right"
-      - end
+      = submit "Update", class: "btn right mar-bottom"
+    - end
 
-      = link "Cancel", to: user_path(@conn, :index), class: "btn grey left"
-      %a.modal-trigger.btn.red.mar-sides.waves-effect.waves-light{href: "#confirm"} Delete
-      .clearfix
+    = link to: user_path(@conn, :index), class: "btn grey left mar-right mar-bottom pad-sides large" do
+      = svg_image(@conn, "arrow_back")
+    - end
+    %a.modal-trigger.btn.red.waves-effect.waves-light{href: "#confirm"}= svg_image(@conn, "delete")
+    .clearfix
 
 = render MyWedding.SharedView, "_confirm.html", button: button "Delete", to: user_path(@conn, :delete, @user), method: "delete", class: "btn btn-flat red-text red-outline"

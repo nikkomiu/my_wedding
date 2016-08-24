@@ -23,14 +23,28 @@ defmodule MyWedding.AuthController do
         conn
         |> put_flash(:error, "Your account is not active. Please contact the site administrator to activate your account.")
         |> redirect(to: "/")
-      {:error, reason} ->
+      {:error, _reason} ->
         conn
         |> put_flash(:error, "Could not log you in! Please contact the site admin if the problem persists.")
         |> redirect(to: "/")
     end
   end
 
-  def sign_out(conn, _params) do
+  def new(conn, _params) do
+    conn
+    |> render(:sign_in)
+  end
+
+  def create(conn, %{"session" => %{"username" => username, "password" => password}}) do
+    IO.puts username
+    IO.puts password
+
+    conn
+    |> put_flash(:error, "Incorrect username or password.")
+    |> render(:sign_in)
+  end
+
+  def delete(conn, _params) do
     conn
     |> configure_session(drop: true)
     |> redirect(to: "/")

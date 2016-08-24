@@ -1,7 +1,6 @@
 defmodule MyWedding.Admin.UserController do
   use MyWedding.Web, :controller
 
-  alias MyWedding.Repo
   alias MyWedding.User
 
   def index(conn, _params) do

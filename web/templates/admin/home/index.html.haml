@@ -21,6 +21,12 @@
 
   .col.s12.m6
     .card-panel
-      %h3
+      %h3.left
         = @photo_count
         %small photos
+      .right
+        = link to: home_path(@conn, :download_photos), target: "_blank" do
+          .panel-svg
+            = svg_image(@conn, "download", "wedding")
+        - end
+      .clearfix

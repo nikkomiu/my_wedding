@@ -1,0 +1,33 @@
+.container.small
+  .wedding-login-header
+    .left
+      = svg_image(@conn, "id-card", "wedding")
+    %h4.left
+      Sign In
+    .clearfix
+  .wedding-login-content.card-panel.grey.lighten-5.no-pad
+    .section
+      = form_for @conn, auth_path(@conn, :create), [as: :session], fn f ->
+        .input-field
+          = mtl_label f, :username
+          = text_input f, :username, autofocus: ""
+          = error_tag f, :username
+
+        .input-field
+          = mtl_label f, :password
+          = text_input f, :password
+          = error_tag f, :password
+
+        = submit "Sign In", class: "btn right"
+        .clearfix
+
+      - end
+
+    .divider
+
+    .section.center.grey.lighten-3
+      = link to: auth_path(@conn, :request, :google), class: "btn white grey-text google-sign-in waves-effect" do
+        = svg_image @conn, "google"
+        Sign in with Google
+      - end
+      .clearfix

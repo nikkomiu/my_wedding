@@ -7,9 +7,13 @@ defmodule MyWedding.AlbumController do
   plug :authorize_manager, "user" when action in [:delete]
 
   def index(conn, _params) do
+    photo_query =
+      from p in MyWedding.Photo,
+        order_by: [asc: :inserted_at]
+
     album_query =
       from a in Album,
-        preload: [:photos]
+        preload: [photos: ^photo_query]
 
     albums =
       album_query
@@ -22,14 +26,6 @@ defmodule MyWedding.AlbumController do
   def new(conn, _params) do
     changeset = Album.changeset(%Album{})
     render(conn, "new.html", changeset: changeset)
-  end
-
-  def upload(conn, %{"id" => id}) do
-    album = Repo.get!(Album, id)
-
-    changeset = MyWedding.Photo.changeset(%MyWedding.Photo{})
-
-    render(conn, :upload, album: album, changeset: changeset)
   end
 
   def create(conn, %{"album" => album_params}) do
@@ -46,10 +42,14 @@ defmodule MyWedding.AlbumController do
   end
 
   def show(conn, %{"id" => id}) do
+    photo_query =
+      from p in MyWedding.Photo,
+        order_by: [desc: :inserted_at]
+
     album_query =
       from a in Album,
         where: a.id == ^id,
-        preload: [:photos]
+        preload: [photos: ^photo_query]
 
     album =
       album_query
@@ -89,6 +89,47 @@ defmodule MyWedding.AlbumController do
     conn
     |> put_flash(:info, "Album deleted successfully.")
     |> redirect(to: album_path(conn, :index))
+  end
+
+  def upload(conn, %{"id" => id}) do
+    album = Repo.get!(Album, id)
+
+    changeset = MyWedding.Photo.changeset(%MyWedding.Photo{})
+
+    render(conn, :upload, album: album, changeset: changeset, skip_recaptcha: recaptcha_verify(conn))
+  end
+
+  def download(conn, %{"id" => id}) do
+    photos = Repo.all(
+      from p in MyWedding.Photo,
+        where: p.album_id == ^id,
+        select: struct(p, [:path, :inserted_at]),
+        order_by: [desc: :inserted_at]
+    )
+
+    album_name = Repo.one!(
+      from a in Album,
+        where: a.id == ^id,
+        select: a.title
+    )
+
+    newest_inserted =
+      photos
+      |> List.first()
+      |> newest_photo_date()
+
+    base_path = app_base(conn) |> Path.join("priv/static/uploads/")
+    send_filename = "#{album_name} Album.zip"
+
+    case get_photo_archive(base_path, "#{id}-#{newest_inserted}.zip", photos) do
+      {:ok, data} ->
+        conn
+        |> send_binary_file(send_filename, data)
+      {:error, _} ->
+        conn
+        |> put_flash(:error, "Error creating archive of album!")
+        |> redirect(to: album_path(conn, :show, id))
+     end
   end
 
   defp pub_priv_query(query, conn) do

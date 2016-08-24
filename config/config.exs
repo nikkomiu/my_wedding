@@ -4,7 +4,9 @@ use Mix.Config
 
 # General application configuration
 config :my_wedding,
-  ecto_repos: [MyWedding.Repo]
+  ecto_repos: [MyWedding.Repo],
+  recaptcha_key: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
+  recaptcha_secret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
 
 config :phoenix, :template_engines,
   haml: PhoenixHaml.Engine

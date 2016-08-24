@@ -5,6 +5,11 @@ config :my_wedding, MyWedding.Endpoint,
   url: [scheme: "https", host: "wedding.nikkomiu.com", port: 443],
   cache_static_manifest: "priv/static/manifest.json"
 
+config :my_wedding,
+  environment: :prod,
+  recaptcha_key: "${RECAPTCHA_KEY}",
+  recaptcha_secret: "${RECAPTCHA_SECRET}"
+
 # Logging
 config :logger, level: :info
 
@@ -28,4 +33,4 @@ config :my_wedding, MyWedding.Repo,
   username: "my_wedding_svc",
   password: "${DB_PASS}",
   hostname: "${DB_HOST}",
-  pool_size: 25
+  pool_size: 20

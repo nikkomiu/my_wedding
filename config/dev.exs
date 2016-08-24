@@ -1,10 +1,6 @@
 use Mix.Config
 
-# For development, we disable any cache and enable
-# debugging and code reloading.
-#
-# The watchers configuration can be used to run external
-# watchers to your application.
+# Disable any cache and enable debugging and code reloading.
 config :my_wedding, MyWedding.Endpoint,
   http: [port: 4000],
   debug_errors: true,
@@ -13,11 +9,14 @@ config :my_wedding, MyWedding.Endpoint,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     cd: Path.expand("../", __DIR__)]]
 
+config :my_wedding,
+  :environment, :dev
+
 # Watch static and templates for browser reloading.
 config :my_wedding, MyWedding.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|scss|sass|css|png|jpeg|jpg|gif|svg)$},
+      ~r{priv/static/(assets|images|svg).*(js|scss|sass|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{web/views/.*(ex)$},
       ~r{web/templates/.*(eex|haml)$}

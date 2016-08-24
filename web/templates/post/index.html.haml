@@ -1,10 +1,19 @@
 .row
   = for post <- @posts do
     .col.sm12.m4
-      .card
+      .card.hoverable
         .small-card-image
-          %img{src: "#{static_path(@conn, "/images/default.jpg")}"}
-          = link post.title, to: post_path(@conn, :show, post), class: "card-title"
+          - if post.photo_id == nil do
+            %img{src: "#{static_path(@conn, "/images/default.jpg")}"}
+          - else
+            %img{src: "#{static_path(@conn, upload_path(post.photo.path, "800x500"))}"}
+          = link to: post_path(@conn, :show, post), class: "card-title" do
+            = if post.is_active == false do
+              = svg_image(@conn, "visibility_off")
+            - end
+
+            = post.title
+          - end
     - end
 
 - if is_authorized(@conn, :author) do

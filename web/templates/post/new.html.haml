@@ -5,12 +5,12 @@
 
     = render MyWedding.SharedView, "_form_error.html", changeset: @changeset
 
-    = render "form.html", f: f
+    = render "form.html", conn: @conn, photo_list: @photo_list, f: f
 
     .form-group
       = submit "Create Page", class: "btn right"
-      = link "Back", to: post_path(@conn, :index), class: "btn grey"
+      = link to: post_path(@conn, :index), class: "btn grey" do
+        = svg_image(@conn, "arrow_back")
+      - end
 
   - end
-
-= render MyWedding.SharedView, "_simplemde.html", element: "post_body"

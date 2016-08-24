@@ -2,7 +2,7 @@
   .col.s12.m10
     .input-field
       = mtl_label @f, :title
-      = text_input @f, :title
+      = text_input @f, :title, autofocus: ""
       = error_tag @f, :title
 
   .col.s12.m2
@@ -10,6 +10,18 @@
       = mtl_label @f, :order
       = number_input @f, :order
       = error_tag @f, :order
+
+  .col.s12
+    .input-field
+      %select.icons#post_photo_id{name: "post[photo_id]"}
+        %option{disabled: "", selected: ""} Choose a cover photo
+        = for {path, id} <- @photo_list do
+          = if field_value(@f, :photo_id) == id do
+            %option{value: "#{id}", selected: "", data-icon: "#{static_path(@conn, upload_path(path, "800x500"))}", class: "circle"}= path
+          - else
+            %option{value: "#{id}", data-icon: "#{static_path(@conn, upload_path(path, "800x500"))}", class: "circle"}= path
+        - end
+      = label @f, :photo
 
 .input-field
   = textarea @f, :body

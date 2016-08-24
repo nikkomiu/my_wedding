@@ -2,7 +2,7 @@ defmodule MyWedding.Router do
   use MyWedding.Web, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "json"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
@@ -25,16 +25,32 @@ defmodule MyWedding.Router do
 
     get "/", PostController, :index
 
-    get "/sign-out", AuthController, :sign_out
+    get "/terms", PageController, :terms
+    get "/privacy", PageController, :terms
+
+    get "/uploads/:image_id", StaticFallbackController, :upload
 
     resources "/pages", PostController
 
     resources "/albums", AlbumController
     get "/albums/:id/upload", AlbumController, :upload
+    get "/albums/:id/download", AlbumController, :download
+  end
+
+  scope "/", MyWedding do
+    pipe_through :browser
+
+    post "/albums/:id/upload", PhotoController, :upload
+    post "/albums/upload-verify", PhotoController, :verify
+    delete "/photos/:id", PhotoController, :delete
   end
 
   scope "/auth", MyWedding do
     pipe_through :browser
+
+    get "/sign-in", AuthController, :new
+    post "/sign-in", AuthController, :create
+    get "/sign-out", AuthController, :delete
 
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
@@ -45,6 +61,7 @@ defmodule MyWedding.Router do
     pipe_through :admin
 
     get "/", HomeController, :index
+    get "/download-photos", HomeController, :download_photos
 
     resources "/users", UserController, only: [:index, :show, :update, :delete]
   end
@@ -53,7 +70,5 @@ defmodule MyWedding.Router do
     pipe_through :api
 
     get "/health-check", HealthController, :health_check
-
-    resources "/photos", PhotoController, only: [:create, :delete]
   end
 end
