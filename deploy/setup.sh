@@ -1,7 +1,5 @@
 #!/bin/bash
 
-CI_BUILD_TAG="v1.1.1"
-
 # Set ENV variables if version tag or master branch
 if [[ "$CI_BUILD_TAG" == *stage ]]
 then
