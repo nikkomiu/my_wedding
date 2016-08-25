@@ -19,9 +19,6 @@ WORKDIR /usr/my_wedding
 RUN tar -xvf app.tar.gz
 RUN chmod +x bin/my_wedding
 
-COPY deploy/run.sh /usr/my_wedding/bin/
-RUN chmod +x ./bin/run.sh
-
 # Create Symlink for Uploads
 RUN ln -s /usr/my_wedding/lib/my_wedding-$APP_VER/priv/static/uploads /mnt/uploads
 
@@ -48,4 +45,4 @@ EXPOSE $PORT
 VOLUME ["/mnt/uploads"]
 
 # Run startup script
-CMD ["bin/run.sh"]
+CMD ["./bin/my_wedding", "foreground"]
