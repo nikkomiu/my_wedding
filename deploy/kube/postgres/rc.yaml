@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: postgres
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         image: postgres
         resources:
           limits:
