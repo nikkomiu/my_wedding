@@ -22,18 +22,14 @@ kubectl config set-context primary-system \
 
 kubectl config use-context primary-system
 
-if [ "$CLUSTER" = "production" ]
+if [ "$CLUSTER" = "production" ] || [ "$CLUSTER" = "staging" ]
 then
   echo "Starting rolling update of RC..."
   kubectl rolling-update $SERVICE_NAME \
     --image=registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME
 
-elif [ "$CLUSTER" = "staging" ]
-then
-  echo "Starting pod deletion..."
-  # Drop containers one by one for the service
 else
-  echo "ERROR: Cluster not specified!"
+  echo "ERROR: Cluster incorrect or not specified!"
 
   exit 0
 fi

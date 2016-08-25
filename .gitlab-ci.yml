@@ -100,10 +100,10 @@ deploy:
     - apt-get update && apt-get install -y curl
     - MIX_ENV=prod make build
     - chmod +x deploy/setup.sh deploy/deploy.sh
+    - deploy/setup.sh # Output setup (it may have important messages)
     - eval "$(deploy/setup.sh)"
   script:
     - MIX_ENV=prod mix ecto.migrate
     - deploy/deploy.sh
   only:
     - tags
-    - master
