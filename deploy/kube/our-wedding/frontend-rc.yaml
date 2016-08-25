@@ -21,7 +21,7 @@ spec:
       containers:
       - name: our-wedding-frontend
         image: registry.gitlab.com/nikko.miu/my_wedding:master
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
           name: app-port
