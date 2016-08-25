@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo "Downloading kubectl..."
+
+curl -O https://storage.googleapis.com/kubernetes-release/release/v1.3.4/bin/linux/amd64/kubectl
+
 echo "Creating cluster config..."
 
 kubectl config set-cluster primary \
