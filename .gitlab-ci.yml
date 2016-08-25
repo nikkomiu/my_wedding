@@ -98,7 +98,7 @@ deploy:
     - releasearaptor
   before_script:
     - MIX_ENV=prod make build
-    - chmod +x deploy/setup.sh deploy/migrate.sh deploy/deploy.sh
+    - chmod +x deploy/setup.sh deploy/deploy.sh
     - eval "$(deploy/setup.sh)"
   script:
     - MIX_ENV=prod mix ecto.migrate
