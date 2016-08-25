@@ -60,7 +60,7 @@ mergability:
   stage: test
   image: debian:jessie
   before_script:
-    - apt-get update && apt-get install git -y
+    - apt-get update && apt-get install -y git
     - git config --global user.email "admin@nikkomiu.com"
     - git config --global user.name "CI"
   script:
@@ -97,6 +97,7 @@ deploy:
   dependencies:
     - releasearaptor
   before_script:
+    - apt-get update && apt-get install -y curl
     - MIX_ENV=prod make build
     - chmod +x deploy/setup.sh deploy/deploy.sh
     - eval "$(deploy/setup.sh)"
