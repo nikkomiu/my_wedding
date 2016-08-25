@@ -25,7 +25,8 @@ kubectl config use-context primary-system
 if [ "$CLUSTER" = "production" ]
 then
   echo "Starting rolling update of RC..."
-  kubectl rolling-update $SERVICE_NAME --image=$DOCKER_IMAGE
+  kubectl rolling-update $SERVICE_NAME \
+    --image=registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME
 
 elif [ "$CLUSTER" = "staging" ]
 then
