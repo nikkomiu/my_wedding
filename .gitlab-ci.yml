@@ -98,23 +98,11 @@ migrate:
     - releasearaptor
   before_script:
     - MIX_ENV=prod make build
-    - chmod +x deploy/setup.sh deploy/migrate.sh
+    - chmod +x deploy/setup.sh deploy/migrate.sh deploy/deploy.sh
     - eval "$(deploy/setup.sh)"
   script:
-    - deploy/migrate.sh
-  only:
-    - tags
-    - master
-
-deploy:
-  stage: deploy
-  image: debian:latest
-  before_script:
-    - apt-get update && apt-get install curl -y
-    - chmod +x deploy/setup.sh deploy/trigger_build.sh
-    - eval "$(deploy/setup.sh)"
-  script:
-    - deploy/trigger_build.sh
+    - MIX_ENV=prod mix ecto.migrate
+    - deploy/deploy.sh
   only:
     - tags
     - master
