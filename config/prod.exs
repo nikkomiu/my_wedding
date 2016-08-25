@@ -29,9 +29,5 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
 # Database
 config :my_wedding, MyWedding.Repo,
   adapter: Ecto.Adapters.Postgres,
-  database: "${DB_BASE}",
-  username: "my_wedding_svc",
-  password: "${DB_PASS}",
-  hostname: "${DB_HOST}",
-  port: 5432,
+  url: {:system, "DB_URL"}
   pool_size: 20

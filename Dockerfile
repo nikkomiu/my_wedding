@@ -19,6 +19,9 @@ WORKDIR /usr/my_wedding
 RUN tar -xvf app.tar.gz
 RUN chmod +x bin/my_wedding
 
+COPY deploy/run.sh /usr/my_wedding/bin/
+RUN chmod +x ./bin/run.sh
+
 # Create Symlink for Uploads
 RUN ln -s /usr/my_wedding/lib/my_wedding-$APP_VER/priv/static/uploads /mnt/uploads
 
@@ -33,7 +36,7 @@ ENV RECAPTCHA_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
 ENV RECAPTCHA_SECRET=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
 ENV PORT=8080
 ENV DB_HOST=192.168.99.100
-ENV DB_PORT=3306
+ENV DB_PORT=5432
 ENV DB_BASE=my_wedding_prod
 ENV DB_PASS=myweddingpassword
 ENV RELX_REPLACE_OS_VARS=true
@@ -45,4 +48,4 @@ EXPOSE $PORT
 VOLUME ["/mnt/uploads"]
 
 # Run startup script
-CMD ["bin/my_wedding", "foreground"]
+CMD ["bin/run.sh"]

@@ -6,20 +6,8 @@ then
   echo "# PROD Deploy..."
   echo ""
 
-  if [ -n "$PROD_DB_HOST" ]; then
-    echo "export DB_HOST=$PROD_DB_HOST"
-  fi
-
-  if [ -n "$PROD_DB_PORT" ]; then
-    echo "export DB_PORT=$PROD_DB_PORT"
-  fi
-
-  if [ -n "$PROD_DB_PASS" ]; then
-    echo "export DB_PASS=$PROD_DB_PASS"
-  fi
-
-  if [ -n "$PROD_DB_BASE" ]; then
-    echo "export DB_PORT=$PROD_DB_BASE"
+  if [ -n "$PROD_DB_URL" ]; then
+    echo "export DB_URL=$PROD_DB_URL"
   fi
 
   echo "export CLUSTER=\"production\""
@@ -30,10 +18,10 @@ then
   echo "# STAGE Deploy..."
   echo ""
 
-  echo "export DB_HOST=$STAGE_DB_HOST"
-  echo "export DB_PORT=$STAGE_DB_PORT"
-  echo "export DB_PASS=$STAGE_DB_PASS"
-  echo "export DB_PORT=$STAGE_DB_BASE"
+  if [ -n "$STAGE_DB_URL" ]; then
+    echo "export DB_URL=$STAGE_DB_URL"
+  fi
+
   echo "export CLUSTER=\"staging\""
   echo ""
 
