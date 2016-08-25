@@ -13,6 +13,19 @@ Our Wedding application is designed to be run in a Kubernetes environment. The s
 
 There are Kubernetes definitions for both of these services located at `deploy/kube/nfs-server/` and `deploy/kube/postgres/`. However, the recommendation is that these services are run outside of the Kubernetes cluster.
 
+## Gitlab Secrets
+
+To be able to pull images from Gitlab you must create a Docker config secret. You can create it using:
+
+```bash
+kubectl create secret \
+  docker-registry myregistrykey \
+  --docker-server=registry.gitlab.com \
+  --docker-username=DOCKER_USER \
+  --docker-password=DOCKER_PASSWORD \
+  --docker-email=DOCKER_EMAIL
+```
+
 ## NFS Server
 
 In a Kubernetes cluster the NFS server is required to manage storage for all of the application containers. This is due to the Kuberentes spec for attached storage located [here](http://kubernetes.io/docs/user-guide/persistent-volumes/#access-modes). The spec (currently) only allows for multiple read write container access policies on NFS, GlusterFS, CephFS, and AzureFile. Of those the simplest and easiest to implement solution is an NFS server.
