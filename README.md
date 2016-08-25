@@ -1,7 +1,6 @@
 # My Wedding
 
 [![build status](https://gitlab.com/nikko.miu/my_wedding/badges/master/build.svg)](https://gitlab.com/nikko.miu/my_wedding/commits/master)
-
 [![coverage report](https://gitlab.com/nikko.miu/my_wedding/badges/master/coverage.svg)](https://gitlab.com/nikko.miu/my_wedding/commits/master)
 
 ## Kubernetes Configuration
