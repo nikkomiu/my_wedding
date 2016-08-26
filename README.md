@@ -18,7 +18,7 @@ To be able to pull images from Gitlab you must create a Docker config secret. Yo
 
 ```bash
 kubectl create secret \
-  docker-registry myregistrykey \
+  docker-registry gitlab-key \
   --docker-server=registry.gitlab.com \
   --docker-username=DOCKER_USER \
   --docker-password=DOCKER_PASSWORD \
