@@ -11,3 +11,6 @@ node_modules/
 
 deps/
 test/
+
+deploy/kube/
+deploy/ssl/
