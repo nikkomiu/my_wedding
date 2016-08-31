@@ -8,8 +8,8 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: 10.75.253.212
-    path: "/uploads"
+    server: 10.3.254.95
+    path: "/production/uploads"
 
 ---
 
@@ -23,8 +23,8 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: 10.75.253.212
-    path: "/nginx"
+    server: 10.3.254.95
+    path: "/production/nginx"
 
 ---
 
@@ -38,5 +38,5 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: 10.75.253.212
-    path: "/postgres"
+    server: 10.3.254.95
+    path: "/default/postgres"
