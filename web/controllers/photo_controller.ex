@@ -28,7 +28,7 @@ defmodule MyWedding.PhotoController do
       |> copy_temp_file(file_param.path)
 
       # Async Convert Image
-      if Regex.match?(~r/image\/.*/, file_param.content_type do
+      if Regex.match?(~r/image\/.*/, file_param.content_type) do
         Task.async(fn ->
           convert_image(path, "800x500")
         end)
