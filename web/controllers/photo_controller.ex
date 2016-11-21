@@ -6,13 +6,19 @@ defmodule MyWedding.PhotoController do
   plug :authorize_uploader, "user" when action in [:delete]
 
   def upload(conn, %{"file" => file_param, "id" => id}) do
-    if recaptcha_verify(conn) && Regex.match?(~r/image\/.*/, file_param.content_type) do
-      # Get the filename to save to
-      uuid =
-        Ecto.UUID.generate
-        |> String.replace("-", "")
-        |> String.slice(1..10)
+    unless recaptcha_verify(conn) do
+      conn
+      |> put_status(:unprocessable_entity)
+      |> render(MyWedding.ErrorView, "422.json")
+    end
 
+    # Get the filename to save to
+    uuid =
+      Ecto.UUID.generate
+      |> String.replace("-", "")
+      |> String.slice(1..10)
+
+    if Regex.match?(~r/(image|video)\/.*/, file_param.content_type) do
       filename = "#{uuid}.#{List.last(String.split(file_param.filename, "."))}"
 
       path = get_full_image_path(conn, filename)
@@ -22,12 +28,13 @@ defmodule MyWedding.PhotoController do
       |> copy_temp_file(file_param.path)
 
       # Async Convert Image
-      Task.async(fn ->
-        convert_image(path, "800x500")
-      end)
-      # End Convert Image
+      if Regex.match?(~r/image\/.*/, file_param.content_type do
+        Task.async(fn ->
+          convert_image(path, "800x500")
+        end)
+      end
 
-      # Insert Image
+      # Add to Album
       album = Repo.get!(MyWedding.Album, id)
       changeset = Ecto.build_assoc(album, :photos, path: filename)
 
@@ -43,10 +50,6 @@ defmodule MyWedding.PhotoController do
           |> put_status(:unprocessable_entity)
           |> render(MyWedding.ChangesetView, "error.json", changeset: changeset)
       end
-    else
-      conn
-      |> put_status(:unprocessable_entity)
-      |> render(MyWedding.ErrorView, "422.json")
     end
   end
 
