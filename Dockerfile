@@ -5,7 +5,7 @@ FROM debian:jessie
 MAINTAINER Nikko Miu <nikkoamiu@gmail.com>
 
 # Install Dependencies
-RUN apt-get update && apt-get install -y libssl1.0.0 imagemagick ffmpeg
+RUN apt-get update && apt-get install -y libssl1.0.0 imagemagick
 
 # Build Arguments
 ARG APP_VER=0.0.1
