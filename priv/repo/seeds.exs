@@ -2,10 +2,9 @@
 #
 #     mix run priv/repo/seeds.exs
 #
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     MyWedding.Repo.insert!(%MyWedding.SomeModel{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+
+MyWedding.Repo.insert!(%MyWedding.Album{
+  title: "Post Photos",
+  description: "The album for storing post photos.",
+  is_public: false
+})
