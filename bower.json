@@ -16,7 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "Materialize": "materialize#^0.97.6",
+    "Materialize": "materialize#0.97.8",
     "jquery": "^2.2.4"
   }
 }

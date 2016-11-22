@@ -2,6 +2,15 @@
   @extend .material-icons;
 }
 
+.card-image .wedding-svgs svg {
+  width: 180px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  display: block;
+}
+
 .small .wedding-svgs.wedding-exit-svg svg {
   position: relative;
   top: 2px;

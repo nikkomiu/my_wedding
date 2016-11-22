@@ -1,7 +1,7 @@
 $(function() {
   $('.parallax').parallax();
   $('.tooltipped').tooltip({delay: 50});
-  $('.modal-trigger').leanModal();
+  $('.modal-trigger').modal();
   $('select').material_select();
 
   albumBackground()
@@ -25,8 +25,8 @@ function albumBackground() {
     $('html').css('background-color', '#292929')
   }
 
-  // If was on /albums/:id and not still on it
-  //   and the page was not reloaded
+  // If was on /albums/:id, we left the page
+  //   and this new page page was not reloaded
   if (document.referrer.match(path_regex) != null &&
       document.location.pathname.match(path_regex) == null &&
       performance.navigation.type != 1) {
