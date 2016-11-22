@@ -15,6 +15,7 @@
     .input-field
       %select.icons#post_photo_id{name: "post[photo_id]"}
         %option{disabled: "", selected: ""} Choose a cover photo
+        %option None
         = for {path, id} <- @photo_list do
           = if field_value(@f, :photo_id) == id do
             %option{value: "#{id}", selected: "", data-icon: "#{static_path(@conn, upload_path(path, "800x500"))}", class: "circle"}= path

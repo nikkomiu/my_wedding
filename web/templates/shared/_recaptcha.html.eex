@@ -9,7 +9,7 @@
       },
       success: function(data, status, xhr) {
         if (status == "success") {
-          $('#recaptcha').closeModal()
+          $('#recaptcha').modal('close')
         }
       },
       error: function(xhr, status, err) {
@@ -19,7 +19,7 @@
     })
   }
 
-  $('#recaptcha').openModal({
-    dismissible: false
-  })
+  $('#recaptcha')
+    .modal({ dismissible: false })
+    .modal('open')
 </script>

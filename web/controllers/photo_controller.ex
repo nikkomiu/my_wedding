@@ -3,53 +3,66 @@ defmodule MyWedding.PhotoController do
 
   require Logger
 
-  plug :authorize_uploader, "user" when action in [:delete]
+  plug :authorize_uploader, "user" when action in [:upload, :delete]
 
   def upload(conn, %{"file" => file_param, "id" => id}) do
-    unless recaptcha_verify(conn) do
-      conn
-      |> put_status(:unprocessable_entity)
-      |> render(MyWedding.ErrorView, "422.json")
-    end
-
-    # Get the filename to save to
-    uuid =
-      Ecto.UUID.generate
-      |> String.replace("-", "")
-      |> String.slice(1..10)
-
-    if Regex.match?(~r/(image|video)\/.*/, file_param.content_type) do
-      filename = "#{uuid}.#{List.last(String.split(file_param.filename, "."))}"
-
-      path = get_full_image_path(conn, filename)
-
-      # Copy the full size file into place
-      path
-      |> copy_temp_file(file_param.path)
-
-      # Async Convert Image
-      if Regex.match?(~r/image\/.*/, file_param.content_type) do
-        Task.async(fn ->
-          convert_image(path, "800x500")
-        end)
+    # Get the content type base
+    content_type =
+      case Regex.named_captures(~r/(?<base_type>image|video)\/.*/, file_param.content_type) do
+        %{"base_type" => type} ->
+          type
+        nil ->
+          false
       end
 
-      # Add to Album
-      album = Repo.get!(MyWedding.Album, id)
-      changeset = Ecto.build_assoc(album, :photos, path: filename)
+    cond do
+      recaptcha_verify(conn) == false ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(MyWedding.ErrorView, "422.json", %{"message" => "ReCAPTCHA Verification Failed"})
 
-      case Repo.insert(changeset) do
-        {:ok, _} ->
-          conn
-          |> put_status(:created)
-          |> render(MyWedding.ChangesetView, "success.json")
-        {:error, changeset} ->
-          # TODO: Delete files
+      content_type == false ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(MyWedding.ErrorView, "422.json", %{"message" => "File must be an image or video"})
 
-          conn
-          |> put_status(:unprocessable_entity)
-          |> render(MyWedding.ChangesetView, "error.json", changeset: changeset)
-      end
+      true ->
+        uuid =
+          Ecto.UUID.generate
+          |> String.replace("-", "")
+          |> String.slice(1..10)
+
+        filename = "#{uuid}.#{List.last(String.split(file_param.filename, "."))}"
+
+        path = get_full_image_path(conn, filename)
+
+        # Copy the full size file into place
+        path
+        |> copy_temp_file(file_param.path)
+
+        # Async Convert Image
+        if content_type == "image" do
+          Task.async(fn ->
+            convert_image(path, "800x500")
+          end)
+        end
+
+        # Add to Album
+        album = Repo.get!(MyWedding.Album, id)
+        changeset = Ecto.build_assoc(album, :photos, %{path: filename, content_type: content_type})
+
+        case Repo.insert(changeset) do
+          {:ok, _} ->
+            conn
+            |> put_status(:created)
+            |> render(MyWedding.ChangesetView, "success.json")
+          {:error, changeset} ->
+            # TODO: Delete files
+
+            conn
+            |> put_status(:unprocessable_entity)
+            |> render(MyWedding.ChangesetView, "error.json", changeset: changeset)
+        end
     end
   end
 

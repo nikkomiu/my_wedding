@@ -3,6 +3,7 @@ defmodule MyWedding.Photo do
 
   schema "photos" do
     field :path, :string
+    field :content_type, :string
 
     has_many :posts, MyWedding.Post
     belongs_to :album, MyWedding.Album
@@ -15,7 +16,7 @@ defmodule MyWedding.Photo do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:path])
+    |> cast(params, [:path, :content_type])
     |> validate_required([:path])
   end
 end

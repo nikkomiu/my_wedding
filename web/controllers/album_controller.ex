@@ -3,12 +3,14 @@ defmodule MyWedding.AlbumController do
 
   alias MyWedding.Album
 
+  plug :authorize_uploader, "user" when action in [:new, :create]
   plug :authorize_author, "user" when action in [:edit, :update]
   plug :authorize_manager, "user" when action in [:delete]
 
   def index(conn, _params) do
     photo_query =
       from p in MyWedding.Photo,
+        where: p.content_type == "image",
         order_by: [asc: :inserted_at]
 
     album_query =

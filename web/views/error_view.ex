@@ -6,7 +6,7 @@ defmodule MyWedding.ErrorView do
   end
 
   def render("422.json", _assigns) do
-    %{message: "Could not process request"}
+    "Could not process request"
   end
 
   # In case no render clause matches or no
