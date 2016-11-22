@@ -3,6 +3,7 @@ defmodule MyWedding.AlbumController do
 
   alias MyWedding.Album
 
+  plug :authorize_uploader, "user" when action in [:new, :create]
   plug :authorize_author, "user" when action in [:edit, :update]
   plug :authorize_manager, "user" when action in [:delete]
 
