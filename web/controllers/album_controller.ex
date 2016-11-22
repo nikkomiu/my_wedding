@@ -10,6 +10,7 @@ defmodule MyWedding.AlbumController do
   def index(conn, _params) do
     photo_query =
       from p in MyWedding.Photo,
+        where: p.content_type == "image",
         order_by: [asc: :inserted_at]
 
     album_query =
