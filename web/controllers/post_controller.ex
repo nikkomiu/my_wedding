@@ -97,7 +97,7 @@ defmodule MyWedding.PostController do
     Repo.all(
       from p in MyWedding.Photo,
         select: {p.path, p.id},
-        where: p.album_id == ^album_id
+        where: p.album_id == ^album_id and p.content_type == "image"
     )
   end
 

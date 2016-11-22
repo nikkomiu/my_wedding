@@ -3,7 +3,7 @@ defmodule MyWedding.Repo.Migrations.AddContentTypeToUpload do
 
   def change do
     alter table(:photos) do
-      add :content_type, :string, default: "photo"
+      add :content_type, :string, default: "image"
     end
   end
 end
