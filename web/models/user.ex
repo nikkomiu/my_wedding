@@ -47,9 +47,21 @@ defmodule MyWedding.User do
       user != nil ->
         {:ok, user}
       true ->
-        %MyWedding.User{}
-        |> changeset(user_info(auth))
-        |> MyWedding.Repo.insert()
+        new_user =
+          %MyWedding.User{}
+          |> changeset(user_info(auth))
+
+        is_first_user =
+          MyWedding.Repo.one(
+          from u in MyWedding.User,
+          select: count("*")
+          ) == 0
+
+        if is_first_user do
+          new_user = admin_changeset(new_user, %{permission_level: 5})
+        end
+
+        MyWedding.Repo.insert(new_user)
     end
   end
 
