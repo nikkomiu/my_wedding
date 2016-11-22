@@ -57,9 +57,10 @@ defmodule MyWedding.User do
           select: count("*")
           ) == 0
 
-        if is_first_user do
-          new_user = admin_changeset(new_user, %{permission_level: 5})
-        end
+        new_user =
+          if is_first_user do
+            admin_changeset(new_user, %{permission_level: 5})
+          end
 
         MyWedding.Repo.insert(new_user)
     end
