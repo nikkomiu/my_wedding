@@ -3,7 +3,7 @@ defmodule MyWedding.PhotoController do
 
   require Logger
 
-  plug :authorize_uploader, "user" when action in [:delete]
+  plug :authorize_uploader, "user" when action in [:upload, :delete]
 
   def upload(conn, %{"file" => file_param, "id" => id}) do
     # Get the content type base
