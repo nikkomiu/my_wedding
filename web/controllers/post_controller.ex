@@ -5,6 +5,7 @@ defmodule MyWedding.PostController do
 
   plug :authorize_author, "user" when action in [:new, :create, :edit, :update]
   plug :authorize_manager, "user" when action in [:delete]
+  plug :scrub_params, "post" when action in [:update]
 
   def index(conn, _params) do
     post_query =
@@ -70,7 +71,7 @@ defmodule MyWedding.PostController do
         |> redirect(to: post_path(conn, :show, post))
       {:error, changeset} ->
         conn
-        |> render(conn, :edit, post: post, changeset: changeset, photo_list: photo_list)
+        |> render(:edit, post: post, changeset: changeset, photo_list: photo_list)
     end
   end
 
