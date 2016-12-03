@@ -30,13 +30,7 @@ defmodule MyWedding.Album do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :description])
+    |> cast(params, [:title, :description, :is_public, :is_professional])
     |> validate_required([:title])
-  end
-
-  def admin_changeset(struct, params \\ %{}) do
-    struct
-    |> changeset(params)
-    |> cast(params, [:is_public, :is_professional])
   end
 end
