@@ -6,13 +6,6 @@
 
     = render "form.html", f: f
 
-    .switch{style: "margin-bottom: 30px"}
-      %label
-        Private
-        = checkbox f, :is_public
-        %span.lever
-        Public
-
     = submit "Update Album", class: "btn right mar-bottom"
   - end
 

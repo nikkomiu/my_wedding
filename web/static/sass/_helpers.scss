@@ -31,10 +31,8 @@
   padding-right: 15px;
 }
 
-.post-body ul {
-  padding-left: 40px;
-
-  li {
-    list-style-type: disc;
+.post-body {
+  ul, ol {
+    padding-left: 40px;
   }
 }

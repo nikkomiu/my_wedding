@@ -7,3 +7,18 @@
   = mtl_label @f, :description
   = textarea @f, :description, class: "materialize-textarea"
   = error_tag @f, :description
+
+.row
+  .switch.left
+    %label
+      Private
+      = checkbox @f, :is_public
+      %span.lever
+      Public
+
+  .switch.right
+    %label
+      Guest
+      = checkbox @f, :is_professional
+      %span.lever
+      Porfessional

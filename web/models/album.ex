@@ -5,10 +5,27 @@ defmodule MyWedding.Album do
     field :title, :string
     field :description, :string
     field :is_public, :boolean
+    field :is_professional, :boolean
 
     has_many :photos, MyWedding.Photo, on_delete: :delete_all
 
     timestamps()
+  end
+
+  def get_or_create_post_photos do
+    album_query =
+      from a in MyWedding.Album,
+        where: a.title == "Post Photos",
+        select: a.id
+
+    changeset = MyWedding.Album.admin_changeset(%MyWedding.Album{}, %{title: "Post Photos", is_public: false})
+
+    case MyWedding.Repo.one(album_query) || MyWedding.Repo.insert(changeset) do
+      {:ok, album} ->
+        album.id
+      model ->
+        model
+    end
   end
 
   def changeset(struct, params \\ %{}) do
@@ -20,6 +37,6 @@ defmodule MyWedding.Album do
   def admin_changeset(struct, params \\ %{}) do
     struct
     |> changeset(params)
-    |> cast(params, [:is_public])
+    |> cast(params, [:is_public, :is_professional])
   end
 end
