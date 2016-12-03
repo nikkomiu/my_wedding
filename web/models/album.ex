@@ -20,13 +20,12 @@ defmodule MyWedding.Album do
 
     changeset = MyWedding.Album.admin_changeset(%MyWedding.Album{}, %{title: "Post Photos", is_public: false})
 
-    model =
-      case MyWedding.Repo.one(album_query) || MyWedding.Repo.insert(changeset) do
-        {:ok, album} ->
-          album.id
-        model ->
-          model
-      end
+    case MyWedding.Repo.one(album_query) || MyWedding.Repo.insert(changeset) do
+      {:ok, album} ->
+        album.id
+      model ->
+        model
+    end
   end
 
   def changeset(struct, params \\ %{}) do
