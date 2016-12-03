@@ -83,3 +83,19 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: auto;
   margin-right: auto;
 }
+
+ul > li {
+  list-style-type: disc !important;
+}
+
+ol > li {
+  list-style-type: decimal !important;
+}
+
+.post-body {
+  ul, ol {
+    p {
+      margin: 0;
+    }
+  }
+}
