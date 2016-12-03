@@ -69,7 +69,7 @@ defmodule MyWedding.AlbumController do
 
   def update(conn, %{"id" => id, "album" => album_params}) do
     album = Repo.get!(Album, id)
-    changeset = Album.admin_changeset(album, album_params)
+    changeset = Album.changeset(album, album_params)
 
     case Repo.update(changeset) do
       {:ok, album} ->
