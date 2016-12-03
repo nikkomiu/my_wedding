@@ -84,16 +84,18 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: auto;
 }
 
-ul > li {
-  list-style-type: disc;
-}
-
-ol > li {
-  list-style-type: decimal;
-}
-
 .post-body {
-  ul, ol {
+  ul > li {
+    list-style-type: disc;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  ol > li {
+    list-style-type: decimal;
+
     p {
       margin: 0;
     }
