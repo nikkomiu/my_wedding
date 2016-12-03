@@ -1,8 +1,8 @@
 $(function() {
   $('.parallax').parallax();
   $('.tooltipped').tooltip({delay: 50});
-  $('.modal-trigger').modal();
   $('select').material_select();
+  $('.modal').modal();
 
   albumBackground()
 })

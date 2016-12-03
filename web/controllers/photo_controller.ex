@@ -3,9 +3,19 @@ defmodule MyWedding.PhotoController do
 
   require Logger
 
-  plug :authorize_uploader, "user" when action in [:upload, :delete]
+  plug :authorize_uploader, "user" when action in [:delete]
 
   def upload(conn, %{"file" => file_param, "id" => id}) do
+    album = Repo.get!(MyWedding.Album, id)
+
+    if album.is_professional && !is_authorized(conn, :uploader) do
+      conn
+      |> put_status(:unprocessable_entity)
+      |> render(MyWedding.ErrorView, "422.json", %{"message" => "You are not authorized to do that!"})
+
+      raise MyWedding.UserHelper.UnauthorizedError
+    end
+
     # Get the content type base
     content_type =
       case Regex.named_captures(~r/(?<base_type>image|video)\/.*/, file_param.content_type) do
@@ -48,7 +58,6 @@ defmodule MyWedding.PhotoController do
         end
 
         # Add to Album
-        album = Repo.get!(MyWedding.Album, id)
         changeset = Ecto.build_assoc(album, :photos, %{path: filename, content_type: content_type})
 
         case Repo.insert(changeset) do

@@ -86,13 +86,8 @@ defmodule MyWedding.PostController do
     |> redirect(to: post_path(conn, :index))
   end
 
-  defp photo_list() do
-    album_id =
-      Repo.one(
-        from a in MyWedding.Album,
-          where: a.title == "Post Photos",
-          select: a.id
-      )
+  defp photo_list do
+    album_id = MyWedding.Album.get_or_create_post_photos
 
     Repo.all(
       from p in MyWedding.Photo,

@@ -34,7 +34,8 @@
         = link to: album_path(@conn, :edit, @album), class: "btn-floating orange tooltipped", "data-position": "left", "data-tooltip": "Edit Album" do
           = svg_image @conn, "mode_edit"
         - end
-    %li
-      = link to: album_path(@conn, :upload, @album), class: "btn-floating green tooltipped", "data-position": "left", "data-tooltip": "Add Photos" do
-        = svg_image @conn, "add"
-      - end
+    - if !@album.is_professional || is_authorized(@conn, :uploader) do
+      %li
+        = link to: album_path(@conn, :upload, @album), class: "btn-floating green tooltipped", "data-position": "left", "data-tooltip": "Add Photos" do
+          = svg_image @conn, "add"
+        - end

@@ -9,10 +9,15 @@
     .col.s12.m4
       .card.hoverable
         .small-card-image
+
           = if length(album.photos) > 0 do
             %img{src: "#{static_path(@conn, upload_path(List.first(album.photos).path, "800x500"))}"}
           - else
             %img{src: "#{static_path(@conn, "/images/default.jpg")}"}
+
+          = if album.is_professional do
+            %span.new.badge.card-status{data-badge-caption: "Professional"}
+          - end
 
           = link to: album_path(@conn, :show, album), class: "card-title" do
             = unless album.is_public do
@@ -21,10 +26,6 @@
             = album.title
           - end
 
-        = if album.description != "" do
-          .card-content
-            = album.description
-        - end
   - end
 
 - if is_authorized(@conn, :uploader) do

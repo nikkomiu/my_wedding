@@ -96,6 +96,14 @@ defmodule MyWedding.AlbumController do
   def upload(conn, %{"id" => id}) do
     album = Repo.get!(Album, id)
 
+    if album.is_professional && !is_authorized(conn, :uploader) do
+      conn
+      |> put_flash(:error, "You are not authorized to do that!")
+      |> redirect(to: album_path(conn, :show, id))
+
+      raise MyWedding.UserHelper.UnauthorizedError
+    end
+
     changeset = MyWedding.Photo.changeset(%MyWedding.Photo{})
 
     render(conn, :upload, album: album, changeset: changeset, skip_recaptcha: recaptcha_verify(conn))
