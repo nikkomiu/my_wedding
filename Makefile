@@ -9,16 +9,13 @@ install:
 	npm install -g brunch bower
 
 # Compile app
-build: deps
+build:
 	mix compile
 
 # Get and build assets
 assets: fetch-assets
 	brunch b --production
 	mix phoenix.digest
-
-deps:
-	mix deps.get
 
 fetch-assets:
 	npm install
