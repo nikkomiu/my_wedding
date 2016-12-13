@@ -18,6 +18,7 @@ stages:
 compile:
   stage: build
   script:
+    - mix deps.get --only test
     - make build
     - make assets
   artifacts:
@@ -86,7 +87,9 @@ mergability:
 # RELEASE STAGE
 releasearaptor:
   stage: release
-  script: MIX_ENV=prod make release
+  script:
+    - mix deps.get --only prod
+    - MIX_ENV=prod make release
   artifacts:
     name: $CI_PROJECT_NAME
     paths:
