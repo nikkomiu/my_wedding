@@ -33,7 +33,21 @@ test:
   script:
     - mix test
 
-coverage:
+code_analysis:
+  stage: test
+  dependencies:
+    - compile
+  script:
+    - mix credo --strict
+
+doc_analysis:
+  stage: test
+  dependencies:
+    - compile
+  script:
+    - mix inch
+
+test_coverage:
   stage: test
   dependencies:
     - compile
