@@ -40,6 +40,7 @@ code_analysis:
     - compile
   script:
     - mix credo --strict
+  allow_failure: true
 
 doc_analysis:
   stage: test
