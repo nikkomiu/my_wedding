@@ -18,7 +18,7 @@ defmodule MyWedding.Album do
         where: a.title == "Post Photos",
         select: a.id
 
-    changeset = MyWedding.Album.admin_changeset(%MyWedding.Album{}, %{title: "Post Photos", is_public: false})
+    changeset = MyWedding.Album.changeset(%MyWedding.Album{}, %{title: "Post Photos", is_public: false})
 
     case MyWedding.Repo.one(album_query) || MyWedding.Repo.insert(changeset) do
       {:ok, album} ->
