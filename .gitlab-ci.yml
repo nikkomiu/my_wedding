@@ -18,7 +18,8 @@ stages:
 compile:
   stage: build
   script:
-    - make build
+    - mix deps.get --only test
+    - mix compile
     - make assets
   artifacts:
     untracked: true
@@ -33,7 +34,22 @@ test:
   script:
     - mix test
 
-coverage:
+code_analysis:
+  stage: test
+  dependencies:
+    - compile
+  script:
+    - mix credo --strict
+  allow_failure: true
+
+doc_analysis:
+  stage: test
+  dependencies:
+    - compile
+  script:
+    - mix inch
+
+test_coverage:
   stage: test
   dependencies:
     - compile
@@ -72,7 +88,13 @@ mergability:
 # RELEASE STAGE
 releasearaptor:
   stage: release
-  script: MIX_ENV=prod make release
+  before_script:
+    - MIX_ENV=prod
+  script:
+    - make assets
+    - mix deps.get --only prod
+    - mix compile
+    - mix release
   artifacts:
     name: $CI_PROJECT_NAME
     paths:
@@ -90,6 +112,10 @@ containerize:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
     - docker build -t registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME .
     - docker push registry.gitlab.com/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_BUILD_REF_NAME
+    - 'if [ "$CI_BUILD_REF_NAME" = "master" ]; then
+        docker tag "$CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME" "$CI_REGISTRY_IMAGE";
+        docker push "$CI_REGISTRY_IMAGE";
+      fi'
 
 # DEPLOY STAGE
 deploy:
@@ -98,7 +124,7 @@ deploy:
     - releasearaptor
   before_script:
     - apt-get update && apt-get install -y curl
-    - MIX_ENV=prod make build
+    - MIX_ENV=prod mix compile
     - chmod +x deploy/setup.sh deploy/deploy.sh
     - deploy/setup.sh # Output setup (it may have important messages)
     - eval "$(deploy/setup.sh)"

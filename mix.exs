@@ -46,7 +46,9 @@ defmodule MyWedding.Mixfile do
      {:guardian, "~> 0.12"},
      {:ueberauth_google, "~> 0.2"},
      {:phoenix_inline_svg, "~> 0.2"},
-     {:excoveralls, "~> 0.5", only: :test}]
+     {:inch_ex, "~> 0.5", only: [:dev, :test]},     # Improve docs
+     {:credo, "~> 0.5", only: [:dev, :test]},       # Static code analysis
+     {:excoveralls, "~> 0.5", only: [:dev, :test]}] # Test coverage
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
